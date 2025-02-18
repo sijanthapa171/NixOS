@@ -1,0 +1,6 @@
+{ ... }:
+{
+  imports = [
+    ./nix-color.nix
+  ];
+}
