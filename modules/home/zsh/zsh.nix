@@ -163,7 +163,6 @@
       fi
 
       nitch
-      waybar
     '';
   };
 
