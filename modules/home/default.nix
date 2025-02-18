@@ -27,5 +27,6 @@
     ./xdg-mimes.nix # xdg config
     ./yazi.nix # terminal file manager
     ./zsh # shell
+    ./waybar # waybar
   ];
 }
