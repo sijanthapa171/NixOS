@@ -66,6 +66,9 @@
       zenity
       xclip
       lf
+      vesktop
+      ghostty
+      spotify
 
       # Languages
       gcc
