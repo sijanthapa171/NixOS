@@ -16,7 +16,7 @@ let
     cyan = "#689D6A";
     orange = "#D65D0E";
     orange_bright = "#FE8019";
-    indicator_height = "2px";
+    indicator_height = "1px";
     opacity = "9.7";
   };
 in
