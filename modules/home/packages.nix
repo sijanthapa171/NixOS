@@ -68,7 +68,6 @@
       lf
       vesktop
       ghostty
-      spotify
 
       # Languages
       gcc
