@@ -163,6 +163,7 @@
       fi
 
       nitch
+      date
     '';
   };
 
