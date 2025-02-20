@@ -13,6 +13,7 @@
         "hyprctl setcursor bibata 20 &"
         "swww-daemon &"
         "hyprlock"
+        "waybar"
       ];
 
       input = {
