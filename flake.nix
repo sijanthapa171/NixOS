@@ -42,7 +42,7 @@
       url = "github:Misterio77/nix-colors";
     };
     nvim-conf = {
-      url = "github:T0adSage45/nvim";
+      url = "github:thapasijan17/nvim";
       flake = false;
     };
   };
