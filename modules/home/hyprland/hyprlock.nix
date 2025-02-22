@@ -5,7 +5,7 @@
     # BACKGROUND
     background {
       monitor =
-      path = ${../../../Wallpapers/bridge.jpg}
+      path = ${../../../Wallpapers/home.jpg}
       blur_passes = 2
       contrast = 0.8916
       brightness = 0.8172
