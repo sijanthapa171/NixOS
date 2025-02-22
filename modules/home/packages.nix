@@ -68,6 +68,7 @@
       lf
       vesktop
       ghostty
+      figma-linux
 
       # Languages
       gcc
