@@ -3,7 +3,7 @@
   services = {
     xserver = {
       enable = true;
-      xkb.layout = "us,jp";
+      xkb.layout = "us";
       xkb.options = "grp:win_caps_toggle";
     };
 
