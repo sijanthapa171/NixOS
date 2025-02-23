@@ -69,6 +69,7 @@
       vesktop
       ghostty
       figma-linux
+      google-chrome
 
       # Languages
       gcc
