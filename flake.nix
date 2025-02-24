@@ -51,7 +51,7 @@
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
-      wallpaper = "Train.jpg"; # see modules/themes/wallpapers
+      wallpaper = "nix.png"; # see modules/themes/wallpapers
 
       # System configuration
       gpuDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu) THIS IS IMPORTANT
