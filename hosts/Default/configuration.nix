@@ -37,6 +37,7 @@
 
   environment.systemPackages = with pkgs; [
     vscode
+    google-chrome
   ];
 
   networking.hostName = hostname; # Define your hostname.
