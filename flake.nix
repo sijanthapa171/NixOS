@@ -1,85 +1,110 @@
 {
-  description = "Nixos config for nerds and anti-mouse guys";
+  description = "A simple flake for an atomic system";
 
   inputs = {
-    # nixos-unstable channel
-    nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-unstable";
-    };
-    # hhypr-contrib
-    hypr-contrib.url = "github:hyprwm/contrib";
-    hyprmag.url = "github:SIMULATAN/hyprmag";
-    # nur - nix user repository
-    nur = {
-      url = "github:nix-community/NUR";
-    };
-    # code-formatter for nix
-    alejandra = {
-      url = "github:kamadorueda/alejandra/3.1.0";
-    };
-    # hyprland
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland";
-      submodules = true;
-    };
-    # yazi file-manager plugins
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-    # Home-Manager setup for configurations
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # zig
-    zig = {
-      url = "github:mitchellh/zig-overlay";
+    nixvim = {
+      url = "github:Sly-Harvey/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nvf- neovim config manager
-    nix-colors = {
-      url = "github:Misterio77/nix-colors";
+    spicetify-nix = {
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvim-conf = {
-      url = "github:thapasijan17/nvim";
+    nur.url = "github:nix-community/NUR";
+    betterfox = {
+      url = "github:yokoffing/Betterfox";
       flake = false;
+    };
+    thunderbird-catppuccin = {
+      url = "github:catppuccin/thunderbird";
+      flake = false;
+    };
+    zen-browser = {
+      url = "github:maximoffua/zen-browser.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nvchad4nix = {
+      url = "github:nix-community/nix4nvchad";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      ...
-    }@inputs:
-    let
-      user = "sijanthapa";
-      system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-        lib = nixpkgs.lib;
-      };
-    in
-    {
-      nixosConfigurations = {
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            host = "laptop";
-            inherit
-              self
-              inputs
-              user
-              ;
-          };
-          modules = [
-            ./hosts/laptop
-          ];
-        };
+  outputs = {
+    nixpkgs,
+    nixpkgs-stable,
+    ...
+  } @ inputs: let
+    settings = {
+      # User configuration
+      username = "sijanthapa"; # no need to touch this since install.sh uses sed to replace this (otherwise if manually installing then you need to change this yourself)
+      editor = "nixvim"; # nixvim, vscode, emacs, nvchad, neovim
+      browser = "floorp"; # firefox, floorp, zen
+      terminal = "kitty"; # kitty, alacritty, wezterm
+      terminalFileManager = "yazi"; # yazi or lf
+      wallpaper = "Train.jpg"; # see modules/themes/wallpapers
+
+      # System configuration
+      gpuDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu) THIS IS IMPORTANT
+      hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
+      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
+      timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
+      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
+      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+
+      overlays = [
+        inputs.nur.overlays.default
+        (
+          _final: _prev: {
+            stable = import nixpkgs-stable {
+              system = forAllSystems (system: system);
+              config.allowUnfree = true;
+              config.nvidia.acceptLicense = true;
+            };
+          }
+        )
+      ];
+    };
+
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+  in {
+    templates = import ./dev-shells;
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    nixosConfigurations = {
+      Default = nixpkgs.lib.nixosSystem {
+        system = forAllSystems (system: system);
+        specialArgs = (settings // {inherit inputs;}) // inputs;
+        modules = [./hosts/Default/configuration.nix];
       };
     };
+    devShells = forAllSystems (system: let
+      pkgs = import nixpkgs {
+        system = system;
+        config.allowUnfree = true;
+        config.nvidia.acceptLicense = true;
+        # overlays = settings.overlays;
+      };
+    in {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          git
+          nix
+          figlet
+          lolcat
+          nitch
+        ];
+        NIX_CONFIG = "experimental-features = nix-command flakes";
+      };
+    });
+  };
 }
