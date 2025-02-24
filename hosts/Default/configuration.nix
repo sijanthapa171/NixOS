@@ -36,6 +36,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    vscode
   ];
 
   networking.hostName = hostname; # Define your hostname.
