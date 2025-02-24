@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim = {
       url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -101,7 +105,6 @@
           nix
           figlet
           lolcat
-          nitch
         ];
         NIX_CONFIG = "experimental-features = nix-command flakes";
       };

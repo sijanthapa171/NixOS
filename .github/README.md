@@ -9,10 +9,10 @@
    <div align="center">
       <p></p>
       <div align="center">
-         <a href="https://github.com/Sly-Harvey/NixOS/stargazers">
+         <a href="https://github.com/thapasijan17/NixOS/stargazers">
             <img src="https://img.shields.io/github/stars/thapasijan17/NixOS?color=F5BDE6&labelColor=303446&style=for-the-badge&logo=starship&logoColor=F5BDE6">
          </a>
-         <a href="https://github.com/Sly-Harvey/NixOS/">
+         <a href="https://github.com/thapasijan17/NixOS/">
             <img src="https://img.shields.io/github/repo-size/thapasijan17/NixOS?color=C6A0F6&labelColor=303446&style=for-the-badge&logo=github&logoColor=C6A0F6">
          </a>
          <a = href="https://nixos.org">
@@ -40,7 +40,7 @@ cd ~/NixOS
 ```bash
 ./install.sh
 ```
-For a list of keybinds press Super + Shift + K
+For a list of keybinds press Super + ? or Super + Ctrl + K
 <details>
 <summary>How to use the dev-shells</summary>
 
