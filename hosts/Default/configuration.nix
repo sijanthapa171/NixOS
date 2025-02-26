@@ -31,12 +31,14 @@
         # unityhub
         # gparted
         nitch
+        nodejs
       ];
     })
   ];
 
   environment.systemPackages = with pkgs; [
     vscode
+    figma-linux
     google-chrome
   ];
 

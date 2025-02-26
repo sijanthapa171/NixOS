@@ -24,6 +24,20 @@
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
+  systemd.user.services.hyprpolkitagent = {
+    description = "Hyprpolkitagent - Polkit authentication agent";
+    wantedBy = ["graphical-session.target"];
+    wants = ["graphical-session.target"];
+    after = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
   programs.hyprland = {
     enable = true;
     # withUWSM = true;
@@ -475,10 +489,12 @@
           }
 
           # Easily plug in any monitor
+          # monitor=,preferred,auto,1
           # Custom Monitor Configuration (Added)
           monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
           monitor = DP-1, 1920x1080@60, 1280x0, 1
           monitor = eDP-1, 1920x1080@60, 1280x1080, 1
+
           # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
           monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1,bitdepth,8
           monitor=desc:BNQ BenQ EL2870U PCK00489SL0,3840x2160@60,0x0,2,bitdepth,10
