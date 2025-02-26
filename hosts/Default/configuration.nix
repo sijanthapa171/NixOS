@@ -26,7 +26,7 @@
       home.packages = with pkgs; [
         krita
         gimp
-        okular # pdf viwer
+        kdePackages.okular # pdf viwer
         # godot_4
         # unityhub
         # gparted
@@ -50,8 +50,7 @@
     openFirewall = true;
     settings = {
       friendly_name = "NixOS-DLNA";
-      media_dir = [
-        # A = Audio, P = Pictures, V, = Videos, PV = Pictures and Videos.
+      media_dir = [ # A = Audio, P = Pictures, V, = Videos, PV = Pictures and Videos.
         "/mnt/work/Pimsleur"
         # "A,/mnt/work/Pimsleur/Russian"
       ];
