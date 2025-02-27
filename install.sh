@@ -1,3 +1,6 @@
+# Need to requird flake on your config
+
+
 #!/usr/bin/env bash
 
 # Check if running as root. If root, script will exit.
