@@ -5,3 +5,12 @@ result-*
 
 [Bb]ackup
 [Bb]ackup/*
+
+*qcow2
+.wt
+.vscode
+*.log
+*.tmp
+output-*
+.direnv
+.git-hooks
