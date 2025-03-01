@@ -401,13 +401,13 @@
         "lastModified": 1740402921,
         "narHash": "sha256-oyOLUqT9zE8yAgT28gu3kLiwfk4rMKKpC/e5CkCZEwg=",
         "owner": "thapasijan17",
-        "repo": "nixvim",
+        "repo": "nvim",
         "rev": "aaef724edf4043327bfdad770c1567e079912ef6",
         "type": "github"
       },
       "original": {
         "owner": "thapasijan17",
-        "repo": "nixvim",
+        "repo": "nvim",
         "type": "github"
       }
     },

@@ -40,6 +40,7 @@
     vscode
     figma-linux
     google-chrome
+    brave
   ];
 
   networking.hostName = hostname; # Define your hostname.
