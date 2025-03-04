@@ -63,6 +63,6 @@ where NAME is any of the templates defined in dev-shells/default.nix
 sudo nixos-rebuild switch --flake .#Default
 ``` -->
 ### Credits
-auther: https://github.com/Sly-Harvey/NixOS<br>
+https://github.com/Sly-Harvey/NixOS<br>
 https://github.com/JaKooLit/Hyprland-Dots<br>
 https://github.com/prasanthrangan/hyprdots
