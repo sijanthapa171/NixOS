@@ -33,6 +33,8 @@
         nitch
         gcc
         python3
+        brave
+        google-chrome
       ];
     })
   ];
