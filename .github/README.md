@@ -25,7 +25,6 @@
 </h1>
 
 ![Screenshot](assets/preview.png)
-![Screenshot](assets/preview2.png)
 
 # Installation
 > [!Note]
