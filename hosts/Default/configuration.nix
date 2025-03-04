@@ -30,6 +30,9 @@
         # godot_4
         # unityhub
         # gparted
+        nitch
+        gcc
+        python3
       ];
     })
   ];
