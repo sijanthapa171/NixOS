@@ -30,17 +30,11 @@
         # godot_4
         # unityhub
         # gparted
-        nitch
-        nodejs
       ];
     })
   ];
 
   environment.systemPackages = with pkgs; [
-    vscode
-    figma-linux
-    google-chrome
-    brave
   ];
 
   networking.hostName = hostname; # Define your hostname.
