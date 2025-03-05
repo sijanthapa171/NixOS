@@ -30,6 +30,7 @@
         # godot_4
         # unityhub
         # gparted
+        vscode
         nitch
         gcc
         python3
