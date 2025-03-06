@@ -24,7 +24,6 @@
    </div>
 </h1>
 
-![Screenshot](assets/preview.png)
 
 # Installation
 > [!Note]
