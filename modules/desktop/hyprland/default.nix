@@ -489,6 +489,7 @@
 
           # Easily plug in any monitor
           # Easily plug in any monitor
+          # Easily plug in any monitor
           # Custom Monitor Configuration (Added)
           monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
           monitor = DP-1, 1920x1080@60, 1280x0, 1
