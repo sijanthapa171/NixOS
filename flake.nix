@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:thapasijan17/nxvim";
+      url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
@@ -46,8 +46,8 @@
   } @ inputs: let
     settings = {
       # User configuration
-      username = "sijanthapa"; # no need to touch this since install.sh uses sed to replace this (otherwise if manually installing then you need to change this yourself)
-      editor = "nixvim"; # nixvim, vscode, emacs, nvchad, neovim
+      username = "sijanthapa"; # no need to touch this since install.sh uses sed to replace this
+      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
@@ -58,7 +58,7 @@
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
       locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Asia/kathmandu"; # CHOOSE YOUR TIMEZONE
+      timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
       kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
       kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
       consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
