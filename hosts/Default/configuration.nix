@@ -30,13 +30,6 @@
         # godot_4
         # unityhub
         # gparted
-        vscode
-        nitch
-        gcc
-        nodejs
-        python3
-        brave
-        google-chrome
       ];
     })
   ];
