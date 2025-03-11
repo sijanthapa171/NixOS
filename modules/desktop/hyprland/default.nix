@@ -41,7 +41,6 @@
   programs.hyprland = {
     enable = true;
     # withUWSM = true;
-    xwayland.enable = true;
   };
 
   home-manager.sharedModules = let
@@ -80,7 +79,6 @@
       #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
       wayland.windowManager.hyprland = {
         enable = true;
-        xwayland.enable = true;
         plugins = [
           # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
         ];
@@ -234,7 +232,7 @@
             vfr = true; # always keep on
             vrr = 1; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only)
           };
-          xwayland.force_zero_scaling = true;
+          xwayland.force_zero_scaling = false;
           gestures = {
             workspace_swipe = true;
             workspace_swipe_fingers = 3;
@@ -405,8 +403,8 @@
               # ",XF86AudioPause,exec,$hyprScriptsDir/MediaCtrl.sh play-pause" # go to next media
 
               # to switch between windows in a floating workspace
-              "SUPER,Tab,cyclenext"
-              "SUPER,Tab,bringactivetotop"
+              "$mainMod, Tab, cyclenext"
+              "$mainMod, Tab, bringactivetotop"
 
               # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
               "$mainMod CTRL, right, workspace, r+1"
@@ -493,7 +491,7 @@
           monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
           monitor = DP-1, 1920x1080@60, 1280x0, 1
           monitor = eDP-1, 1920x1080@60, 1280x1080, 1
-
+          
           # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
           monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1,bitdepth,8
           monitor=desc:BNQ BenQ EL2870U PCK00489SL0,3840x2160@60,0x0,2,bitdepth,10
