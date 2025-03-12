@@ -48,6 +48,8 @@
           bindkey '^a' beginning-of-line
           bindkey '^e' end-of-line
 
+          nitch
+
           # options
           unsetopt menu_complete
           unsetopt flowcontrol

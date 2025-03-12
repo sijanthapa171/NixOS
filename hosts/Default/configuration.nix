@@ -58,6 +58,7 @@
         python3
         brave
         google-chrome
+        libreoffice
       ];
     })
   ];
