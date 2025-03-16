@@ -29,7 +29,7 @@ yad \
   --title="Hyprland Keybinds" \
   --no-buttons \
   --list \
-  --width=735 \
+  --width=740 \
   --height=920 \
   --column=Key: \
   --column=Description: \
@@ -44,6 +44,7 @@ yad \
   "SUPER SPACE" "Launch application menu" "\$launcher" \
   "SUPER F9" "Enable night mode" "hyprsunset --temperature 2500" \
   "SUPER F10" "Disable night mode" "pkill hyprsunset" \
+  "SUPER CTRL C" "Colour picker" "hyprpicker --autocopy --format=hex" \
   "SUPER, Left Click" "Move window with mouse" "movewindow" \
   "SUPER, Right Click" "Resize window with mouse" "resizewindow" \
   "SUPER SHIFT →" "Resize window right" "resizeactive 30 0" \
@@ -104,3 +105,4 @@ yad \
   "SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10" \
   "SUPER SHIFT 1-0" "Move window to workspace 1-10" "movetoworkspace 1-10" \
   "SUPER SHIFT 1-0" "Silently move window to workspace 1-10" "movetoworkspacesilent 1-10" \
+  
