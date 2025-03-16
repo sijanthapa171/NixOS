@@ -14,6 +14,7 @@
     ../../modules/hardware/drives
 
     ../common.nix
+    ../../modules/scripts
 
     ../../modules/desktop/hyprland # Enable hyprland window manager
 
@@ -69,7 +70,8 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-        jetbrains.webstorm
+    jetbrains.webstorm
+
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
