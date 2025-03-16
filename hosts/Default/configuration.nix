@@ -33,7 +33,7 @@
     ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
     ../../modules/programs/media/thunderbird
-    # ../../modules/programs/media/obs-studio
+    ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
@@ -53,7 +53,10 @@
         # gparted
         vscode
         nitch
-        gcc
+        pnpm
+        neofetch
+        rustup
+        clang
         nodejs
         python3
         brave
