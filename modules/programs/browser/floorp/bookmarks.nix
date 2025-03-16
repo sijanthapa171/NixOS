@@ -84,8 +84,8 @@
             url = "https://nix.dev/";
           }
           {
-             name = "Interactive Nix Lessons";
-             url = "https://nixcloud.io/tour/?id=introduction/nix";
+            name = "Interactive Nix Lessons";
+            url = "https://nixcloud.io/tour/?id=introduction/nix";
           }
           {
             name = "NixOS & Flakes Book";

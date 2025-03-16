@@ -39,6 +39,7 @@
     ../../modules/programs/misc/thunar
     # ../../modules/programs/misc/nix-ld
     # ../../modules/programs/misc/virt-manager
+    # ../../modules/programs/misc/lact # gpu power and fan control (WIP)
   ];
 
   # Home-manager config
@@ -68,7 +69,7 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    jetbrains.webstorm
+        jetbrains.webstorm
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
