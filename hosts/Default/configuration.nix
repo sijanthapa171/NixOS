@@ -58,7 +58,6 @@
         nitch
         pnpm
         neofetch
-        rustup
         clang
         nodejs
         python3
@@ -72,6 +71,8 @@
   # Define system packages here
   environment.systemPackages = with pkgs; [
     jetbrains.webstorm
+    rustup
+    cargo
 
   ];
 
