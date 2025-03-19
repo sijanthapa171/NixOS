@@ -56,7 +56,8 @@
         # gparted
         vscode
         nitch
-        pnpm
+        telegram-desktop
+        pnpm       
         neofetch
         clang
         nodejs
