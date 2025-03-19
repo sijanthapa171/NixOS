@@ -4,7 +4,7 @@
     settings = {
       charger = {
         governor = "ondemand";  # Balanced mode for charger
-        turbo = "auto";
+        turbo = "never";
       };
       battery = {
         governor = "ondemand";  # Balanced mode for battery
