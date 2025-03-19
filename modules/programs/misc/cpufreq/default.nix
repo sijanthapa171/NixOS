@@ -3,11 +3,11 @@
     enable = true;
     settings = {
       charger = {
-        governor = "ondemand";  # Balanced mode for charger
+        governor = "schedutil";  # Balanced mode for charger
         turbo = "never";
       };
       battery = {
-        governor = "ondemand";  # Balanced mode for battery
+        governor = "schedutil";  # Balanced mode for battery
         scaling_max_freq = 3800000;
         turbo = "never";
       };
