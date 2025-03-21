@@ -105,4 +105,3 @@ yad \
   "SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10" \
   "SUPER SHIFT 1-0" "Move window to workspace 1-10" "movetoworkspace 1-10" \
   "SUPER SHIFT 1-0" "Silently move window to workspace 1-10" "movetoworkspacesilent 1-10" \
-  
