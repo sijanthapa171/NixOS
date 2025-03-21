@@ -34,7 +34,7 @@
     ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
     ../../modules/programs/media/thunderbird
-    ../../modules/programs/media/obs-studio
+    # ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
@@ -72,9 +72,6 @@
   # Define system packages here
   environment.systemPackages = with pkgs; [
     jetbrains.webstorm
-    rustup
-    cargo
-
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
