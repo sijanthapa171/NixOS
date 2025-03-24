@@ -9,7 +9,7 @@
       programs.floorp = {
         enable = true;
         policies = import ./policies.nix {inherit lib;};
-        languagePacks = ["en-US"];
+        languagePacks = ["en-GB" "en-US"];
         profiles = {
           default = {
             # choose a profile name; directory is /home/<user>/.mozilla/firefox/profile_0
