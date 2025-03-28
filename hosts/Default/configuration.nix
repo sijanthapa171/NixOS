@@ -56,6 +56,7 @@
         # gparted
         vscode
         nitch
+        hexo-cli
         telegram-desktop
         pnpm       
         neofetch
@@ -65,6 +66,8 @@
         brave
         google-chrome
         libreoffice
+        go 
+        libcap
       ];
     })
   ];
@@ -72,6 +75,8 @@
   # Define system packages here
   environment.systemPackages = with pkgs; [
     jetbrains.webstorm
+    ventoy
+    hugo
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
