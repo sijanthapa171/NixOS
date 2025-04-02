@@ -66,6 +66,8 @@
         libreoffice
         go 
         libcap
+        rustc
+        bun
       ];
     })
   ];
