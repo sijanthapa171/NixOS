@@ -68,6 +68,7 @@
         libcap
         rustc
         bun
+        tgpt
       ];
     })
   ];
