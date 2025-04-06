@@ -78,6 +78,7 @@
     jetbrains.webstorm
     ventoy
     hugo
+    code-cursor
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
