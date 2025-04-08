@@ -24,8 +24,6 @@ cd ~/NixOS
 ./install.sh
 ```
 For a list of keybinds press Super + ? or Super + Ctrl + K
-<details>
-<summary>How to use the dev-shells</summary>
 
 ```bash
 nix flake init -t ~/NixOS#NAME
