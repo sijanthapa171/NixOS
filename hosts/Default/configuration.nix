@@ -79,6 +79,9 @@
     ventoy
     hugo
     code-cursor
+    droidcam
+    gcc
+    flameshot
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
