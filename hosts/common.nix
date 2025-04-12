@@ -62,8 +62,7 @@
       home.packages = with pkgs; [
         # Applications
         #kate
-        fast-cli
-        speedtest-cli
+
         # Terminal
         fzf
         fd

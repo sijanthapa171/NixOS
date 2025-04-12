@@ -52,36 +52,12 @@
         krita
         gimp
         github-desktop
-        vscode
-        nitch
-        hexo-cli
-        telegram-desktop
-        pnpm       
-        neofetch
-        clang
-        nodejs
-        python3
-        brave
-        google-chrome
-        libreoffice
-        go 
-        libcap
-        rustc
-        bun
-        tgpt
       ];
     })
   ];
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    jetbrains.webstorm
-    ventoy
-    hugo
-    code-cursor
-    droidcam
-    gcc
-    flameshot
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix

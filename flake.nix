@@ -48,13 +48,13 @@
     inherit (self) outputs;
     settings = {
       # User configuration
-      username = "sijanthapa"; # automatically set with install.sh and rebuild.sh via the logname command
+      username = "authx"; # automatically set with install.sh and rebuild.sh via the logname command
       editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
-      browser = "floorp"; # firefox, floorp, zen
+      browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "nix.png"; # see modules/themes/wallpapers
+      wallpaper = "Train.jpg"; # see modules/themes/wallpapers
 
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
