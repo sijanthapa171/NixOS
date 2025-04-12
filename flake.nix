@@ -49,7 +49,7 @@
     settings = {
       # User configuration
       username = "authx"; # automatically set with install.sh and rebuild.sh via the logname command
-      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      editor = "vscode"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
