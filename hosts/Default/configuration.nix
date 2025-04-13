@@ -59,6 +59,8 @@
   # Define system packages here
   environment.systemPackages = with pkgs; [
     brave
+    nodejs
+    vscode
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix

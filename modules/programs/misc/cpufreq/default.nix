@@ -1,19 +1,21 @@
-{...}: {
+{ ... }: {
   services.auto-cpufreq = {
     enable = true;
     settings = {
       charger = {
-        governor = "schedutil";  # Balanced mode for charger
+        governor = "schedutil";
+        scaling_max_freq = 2800000;  # Cap to 2.8 GHz when on charger
         turbo = "never";
       };
       battery = {
-        governor = "schedutil";  # Balanced mode for battery
-        scaling_max_freq = 3800000;
+        governor = "schedutil";
+        scaling_max_freq = 2800000;  # Cap to 2.8 GHz when on battery
         turbo = "never";
       };
     };
   };
 }
+
 
 
 # for hyper power
