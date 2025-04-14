@@ -54,7 +54,7 @@
               on-scroll-down = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
             };
             "custom/cava_mviz" = {
-              exec = "${../../scripts/WaybarCava.sh}";
+              exec = "$XDG_CONFIG_HOME/hypr/scripts/WaybarCava.sh";
               format = "{}";
             };
             "cava" = {
@@ -68,7 +68,7 @@
               bar_delimiter = 0;
             };
             "custom/gpuinfo" = {
-              exec = "${../../scripts/gpuinfo.sh}";
+              exec = " ~/.config/hypr/scripts/gpuinfo.sh";
               return-type = "json";
               format = " {}";
               interval = 5; # once every 5 seconds
@@ -109,7 +109,7 @@
             };
             "hyprland/language" = {
               format = "{short}"; # can use {short} and {variant}
-              on-click = "${../../scripts/keyboardswitch.sh}";
+              on-click = "~/.config/hypr/scripts/keyboardswitch.sh";
             };
             "hyprland/workspaces" = {
               disable-scroll = true;
