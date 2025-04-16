@@ -77,7 +77,7 @@ yad \
   "ALT F4" "Close active window" "scripts/dontkillsteam.sh" \
   "SUPER Z" "Launch emoji picker" "scripts/rofi.sh emoji" \
   "SUPER ALT K" "Change keyboard layout" "scripts/keyboardswitch.sh" \
-  "SUPER CTRL ALT KP_Divide" "Rebuild system" "$_terminal -e scripts/rebuild.sh" \
+  "SUPER U" "Rebuild system" "$_terminal -e scripts/rebuild.sh" \
   "SUPER G" "Game launcher" "scripts/rofi.sh games" \
   "SUPER ALT G" "Enable game mode" "scripts/gamemode.sh" \
   "SUPER V" "Clipboard manager" "scripts/ClipManager.sh" \
@@ -105,3 +105,4 @@ yad \
   "SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10" \
   "SUPER SHIFT 1-0" "Move to workspace 1-10" "movetoworkspace 1-10" \
   "SUPER SHIFT 1-0" "Silently move to workspace 1-10" "movetoworkspacesilent 1-10" \
+  
