@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# Interactive NixOS installer for custom flake
-# Run this script as root in the NixOS live environment
+# Interactive NixOS installer for my NixOS flake
+# This script is automatically called from install.sh
+# But you can run it manually too in the NixOS live environment.
 
 set -e
 
@@ -319,7 +320,7 @@ echo -e "\n${GREEN}Generating hardware configuration...${NC}"
 # mkdir -p /mnt/etc/nixos/hosts/Default
 nixos-generate-config --root /mnt --show-hardware-config > ./hosts/Default/hardware-configuration.nix
 
-# replace username variable in flake.nix with $USER
+# replace username variable in flake.nix with chosen username
 sed -i -e "s/username = \".*\"/username = \"$username\"/" ./flake.nix
 git add *
 
@@ -330,7 +331,7 @@ cp -r ./ /mnt/etc/nixos
 
 # Run nixos-install
 echo -e "\n${GREEN}Installing system...${NC}"
-nixos-install --flake /mnt/etc/nixos#Default --no-root-passwd
+nixos-install --flake /mnt/etc/nixos --no-root-passwd
 nixos-enter --root /mnt -c "echo $password | passwd --stdin $username"
 
 # Run cleanup
