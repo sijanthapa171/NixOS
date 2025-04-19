@@ -47,7 +47,7 @@
     inherit (self) outputs;
     settings = {
       # User configuration
-      username = "authhxt"; # automatically set with install.sh and live-install.sh
+      username = "authxt"; # automatically set with install.sh and live-install.sh
       editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
@@ -75,7 +75,7 @@
     overlays = import ./overlays {inherit inputs settings;};
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     nixosConfigurations = {
-      "${settings.hostname}" = nixpkgs.lib.nixosSystem {
+      Default = nixpkgs.lib.nixosSystem {
         system = forAllSystems (system: system);
         specialArgs = {inherit self inputs outputs;} // settings;
         modules = [./hosts/Default/configuration.nix];
