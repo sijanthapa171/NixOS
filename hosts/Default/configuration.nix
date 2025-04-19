@@ -58,6 +58,15 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
+    brave
+    google-chrome
+    nitch
+    libreoffice
+    neovim
+    gcc
+    obsidian
+    vscode
+    google-chrome
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
