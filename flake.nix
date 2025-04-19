@@ -42,13 +42,12 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     ...
   } @ inputs: let
     inherit (self) outputs;
     settings = {
       # User configuration
-      username = "authxt"; # automatically set with install.sh and live-install.sh
+      username = "authhxt"; # automatically set with install.sh and live-install.sh
       editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
@@ -60,7 +59,7 @@
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
       locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
+      timezone = "Asia/Kathamndu"; # CHOOSE YOUR TIMEZONE
       kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
       kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
       consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
