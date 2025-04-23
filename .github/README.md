@@ -31,9 +31,11 @@ cd ~/NixOS
 
 This document lists custom keybindings configured for a Hyprland setup. These bindings cover system control, window management, launching applications, multimedia control, and more.
 
-> [!IMPORTANT]
+> [!TIP]
 > <b>Windows!</b>
 > <p>SUPER key = WindowsKey </p>
+> > <b>For a list of keybinds press Super + ? or Super + Ctrl + K </b>
+
 
 ## Application Launchers
 - **SUPER + Return / T**: Launch terminal
@@ -90,15 +92,14 @@ This document lists custom keybindings configured for a Hyprland setup. These bi
 - **SUPER + ALT + G**: Enable game mode
 
 
+> [!IMPORTANT]
+> # Rebuilding
+> There are 4 ways to rebuild.<br>
+> 1) Press **Super + U**.
+> 2) Run `rebuild` in the terminal
+> 3) Execute the `install.sh` script again.
+> 4) Run `sudo nixos-rebuild switch --flake ~/NixOS#Default` if you installed from the live iso then use /etc/nixos#Default 
 
-# Rebuilding
-There are 4 ways to rebuild.<br>
-1) Press **Super + U**.
-2) Run `rebuild` in the terminal
-3) Execute the `install.sh` script again.
-4) Run `sudo nixos-rebuild switch --flake ~/NixOS#Default` if you installed from the live iso then use /etc/nixos#Default 
-
-For a list of keybinds press **Super + ?** or **Super + Ctrl + K**
 
 <details>
 <summary>How to Use the Development Shells</summary>
