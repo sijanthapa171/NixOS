@@ -63,6 +63,7 @@
         #kate
 
         # Terminal
+        neofetch
         fzf
         fd
         git
