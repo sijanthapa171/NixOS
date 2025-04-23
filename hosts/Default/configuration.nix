@@ -67,6 +67,9 @@
     obsidian
     vscode
     google-chrome
+    tgpt
+    bat
+    cmatrix
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix

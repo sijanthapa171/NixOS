@@ -48,7 +48,7 @@
     settings = {
       # User configuration
       username = "authxt"; # automatically set with install.sh and live-install.sh
-      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      editor = "vscode"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
@@ -58,7 +58,7 @@
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
-      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
+      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
       timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
       kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
       kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
