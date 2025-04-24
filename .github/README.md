@@ -38,58 +38,82 @@ This document lists custom keybindings configured for a Hyprland setup. These bi
 
 
 ## Application Launchers
-- **SUPER + Return / T**: Launch terminal
-- **SUPER + E**: Launch file manager
-- **SUPER + F**: Launch browser
-- **SUPER + A / SPACE**: Launch application menu (Rofi)
-- **SUPER + G**: Game launcher (Rofi)
-- **SUPER + M**: Online music launcher (Rofi)
-- **SUPER + Z**: Emoji picker (Rofi)
-- **SUPER + U**: Rebuild system
+
+| Keybinding         | Action                         |
+| ------------------ | ------------------------------ |
+| SUPER + Return / T | Launch terminal                |
+| SUPER + E          | Launch file manager            |
+| SUPER + F          | Launch browser                 |
+| SUPER + A / SPACE  | Launch application menu (Rofi) |
+| SUPER + G          | Game launcher (Rofi)           |
+| SUPER + M          | Online music launcher (Rofi)   |
+| SUPER + Z          | Emoji picker (Rofi)            |
+| SUPER + U          | Rebuild system                 |
 
 ## System Controls
-- **CTRL + ALT + Delete**: Open system monitor (`btop`)
-- **SUPER + ALT + L**: Lock screen
-- **SUPER + Backspace**: Power menu (`wlogout`)
-- **SUPER + Delete**: Exit Hyprland session
-- **CTRL + Escape**: Toggle Waybar
-- **SUPER + ALT + K**: Change keyboard layout
-- **SUPER + SHIFT + N / Q**: Open notification panel
+
+| Keybinding            | Action                       |
+| --------------------- | ---------------------------- |
+| CTRL + ALT + Delete   | Open system monitor (`btop`) |
+| SUPER + ALT + L       | Lock screen                  |
+| SUPER + Backspace     | Power menu (`wlogout`)       |
+| SUPER + Delete        | Exit Hyprland session        |
+| CTRL + Escape         | Toggle Waybar                |
+| SUPER + ALT + K       | Change keyboard layout       |
+| SUPER + SHIFT + N / Q | Open notification panel      |
 
 ## Night Mode
-- **SUPER + F9**: Enable night mode (`hyprsunset`)
-- **SUPER + F10**: Disable night mode
+
+| Keybinding  | Action                           |
+| ----------- | -------------------------------- |
+| SUPER + F9  | Enable night mode (`hyprsunset`) |
+| SUPER + F10 | Disable night mode               |
 
 ## Clipboard / Picker Tools
-- **SUPER + CTRL + C**: Colour picker (`hyprpicker`)
-- **SUPER + V**: Clipboard manager
+
+| Keybinding       | Action                       |
+| ---------------- | ---------------------------- |
+| SUPER + CTRL + C | Colour picker (`hyprpicker`) |
+| SUPER + V        | Clipboard manager            |
 
 ## Window Management
-- **SUPER + W**: Toggle floating mode
-- **SUPER + SHIFT + G**: Toggle window group
-- **ALT + Return**: Toggle fullscreen
-- **SUPER + Q / ALT + F4**: Close active window (with protection for Steam)
-- **SUPER + SHIFT + (H/J/K/L or arrows)**: Resize window in specified direction
-- **SUPER + CTRL + SHIFT + (Arrow Keys)**: Move window in specified direction
-- **SUPER + Left/Right Click**: Move/Resize window with mouse
-- **SUPER + SHIFT + CTRL + (Arrow Keys)**: Move window in direction (with mouse)
+
+| Keybinding                        | Action                                |
+| --------------------------------- | ------------------------------------- |
+| SUPER + W                         | Toggle floating mode                  |
+| SUPER + SHIFT + G                 | Toggle window group                   |
+| ALT + Return                      | Toggle fullscreen                     |
+| SUPER + Q / ALT + F4              | Close active window (Steam protected) |
+| SUPER + SHIFT + H/J/K/L or arrows | Resize window in direction            |
+| SUPER + CTRL + SHIFT + Arrows     | Move window in direction              |
+| SUPER + Left/Right Click          | Move/Resize window with mouse         |
+| SUPER + SHIFT + CTRL + Arrows     | Move window with mouse                |
 
 ## Workspace Management
-- **SUPER + CTRL + Left/Right**: Switch to previous/next workspace
-- **SUPER + CTRL + Down**: Switch to first empty workspace
-- **SUPER + CTRL + S**: Move window to scratchpad
-- **SUPER + S**: Toggle scratchpad workspace
-- **SUPER + Tab**: Cycle next window / Bring active window to top
-- **SUPER + 1-0**: Switch to workspace 1–10
-- **SUPER + SHIFT + 1-0**: Move to workspace 1–10
-- **SUPER + SHIFT + 1-0**: Silently move to workspace 1–10
+
+| Keybinding                | Action                            |
+| ------------------------- | --------------------------------- |
+| SUPER + CTRL + Left/Right | Switch to previous/next workspace |
+| SUPER + CTRL + Down       | Switch to first empty workspace   |
+| SUPER + CTRL + S          | Move window to scratchpad         |
+| SUPER + S                 | Toggle scratchpad workspace       |
+| SUPER + Tab               | Cycle next window / Bring to top  |
+| SUPER + 1-0               | Switch to workspace 1–10          |
+| SUPER + SHIFT + 1-0       | Move to workspace 1–10            |
+| SUPER + SHIFT + 1-0       | Silently move to workspace 1–10   |
 
 ## Focus Management
-- **SUPER + Arrow Keys / HJKL**: Move focus in direction
-- **ALT + Tab**: Move focus down
+
+| Keybinding            | Action                  |
+| --------------------- | ----------------------- |
+| SUPER + Arrows / HJKL | Move focus in direction |
+| ALT + Tab             | Move focus down         |
 
 ## Game Mode
-- **SUPER + ALT + G**: Enable game mode
+
+| Keybinding      | Action           |
+| --------------- | ---------------- |
+| SUPER + ALT + G | Enable game mode |
 
 
 > [!IMPORTANT]
