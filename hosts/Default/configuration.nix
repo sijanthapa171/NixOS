@@ -63,7 +63,6 @@
     google-chrome
     nitch
     libreoffice
-    neovim
     gcc
     obsidian
     vscode
@@ -71,6 +70,7 @@
     tgpt
     bat
     cmatrix
+    vscode
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix

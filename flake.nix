@@ -48,12 +48,12 @@
     settings = {
       # User configuration
       username = "authxt"; # automatically set with install.sh and live-install.sh
-      editor = "vscode"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
+      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "floorp"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "Kurzgesagt-2.png"; # see modules/themes/wallpapers
+      wallpaper = "moon.png"; # see modules/themes/wallpapers
 
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
