@@ -60,6 +60,7 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
+    warp-terminal
     brave
     google-chrome
     nitch
