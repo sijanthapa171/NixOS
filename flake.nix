@@ -58,7 +58,7 @@
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
-      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
+      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
       timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
       kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
       kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
