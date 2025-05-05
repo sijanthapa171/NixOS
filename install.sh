@@ -19,6 +19,11 @@ if [[ ! "$(grep -i nixos </etc/os-release)" ]]; then
   exit 1
 fi
 
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
+
 currentUser=$(logname)
 
 # Delete dirs that conflict with home-manager (skip symlinks)
@@ -50,15 +55,14 @@ if [ ! -f "./hosts/Default/hardware-configuration.nix" ]; then
   else
     # Generate new config
     clear
-    nix develop --experimental-features 'nix-command flakes' --command bash -c "echo GENERATING CONFIG! | figlet -cklno | lolcat -F 0.3 -p 2.5 -S 300"
     sudo nixos-generate-config --show-hardware-config >"./hosts/Default/hardware-configuration.nix"
   fi
 fi
 
-nix develop --experimental-features 'nix-command flakes' --command bash -c "git -C . add hosts/Default/hardware-configuration.nix"
+sudo git -C . add hosts/Default/hardware-configuration.nix
 
-clear
-nix develop --experimental-features 'nix-command flakes' --command bash -c "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
-nix develop --experimental-features 'nix-command flakes' --command bash -c "sudo nixos-rebuild switch --flake .#Default" || exit 1
-echo "success!"
-echo "Make sure to reboot if this is your first time using this script!"
+# clear
+sudo nixos-rebuild switch --flake .#Default && \
+    echo -e "${GREEN}Success!${NC}" && \
+    echo "Make sure to reboot if this is your first time using this script!" || \
+    exit 1
