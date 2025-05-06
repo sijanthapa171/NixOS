@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
-import { Star, HeartIcon, File } from "lucide-react";
+import { Star,  File } from "lucide-react";
 
 export function Footer() {
   return (
