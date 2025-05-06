@@ -2,11 +2,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { page_routes } from "@/lib/routes-config";
 import {
   MoveUpRightIcon,
-  TerminalSquareIcon,
   PaletteIcon,
   LayersIcon,
-  MonitorIcon,
-  GalleryVerticalEndIcon,
 } from "lucide-react";
 import Link from "next/link";
 
