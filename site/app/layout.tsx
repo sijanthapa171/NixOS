@@ -13,7 +13,7 @@ const InterMono = Inter({
 
 export const metadata: Metadata = {
   title: "Authxt's dotfiles",
-  metadataBase: new URL("https://dotfiles.vercel.app/"),
+  metadataBase: new URL("https://authdots.vercel.app/"),
   description: "documentation for my dotfiles repository",
 };
 

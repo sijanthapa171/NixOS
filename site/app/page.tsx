@@ -44,24 +44,7 @@ export default function Home() {
       description:
         "Modern Wayland compositor configuration with smooth animations and efficient window management.",
     },
-    {
-      icon: TerminalSquareIcon,
-      title: "Custom Shell",
-      description:
-        "Preconfigured shell environment with powerful aliases and productivity tools.",
-    },
-    {
-      icon: MonitorIcon,
-      title: "AGS Widgets",
-      description:
-        "Customizable widgets for system monitoring and control using Advanced GTK System.",
-    },
-    {
-      icon: GalleryVerticalEndIcon,
-      title: "Wallpaper Selector",
-      description:
-        "Easy-to-use wallpaper management system with dynamic switching capabilities.",
-    },
+
     {
       icon: MoveUpRightIcon,
       title: "Keyboard Shortcuts",
@@ -71,7 +54,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex min-h-[85vh] sm:min-h-[85.5vh] flex-col justify-start px-2 py-12 sm:py-8">
+    <div className="flex min-h-[85vh] sm:min-h-[85.5vh] flex-col justify-start px-2 py-12 sm:py-8 ">
       <h1 className="mb-4 text-3xl font-bold sm:text-5xl text-pink-600">
         Authxt <span className="text-gray-500">.dotfiles</span>
       </h1>
