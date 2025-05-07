@@ -26,7 +26,7 @@ export default function Gallery() {
   const screenshots = [
     {
       imageSrc: "/gallery-01.png",
-      caption: "lockscreen (hyprlock)",
+      caption: "Home Screen",
     },
     {
       imageSrc: "/gallery-05.png",
