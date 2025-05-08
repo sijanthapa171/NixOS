@@ -62,6 +62,8 @@
         #kate
 
         # Terminal
+        fast-cli
+        speedtest-cli
         neofetch
         fzf
         fd
