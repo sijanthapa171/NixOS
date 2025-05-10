@@ -45,6 +45,7 @@ yad \
   "SUPER SPACE" "Launch application menu" "scripts/rofi.sh drun" \
   "SUPER F9" "Enable night mode" "hyprsunset --temperature 2500" \
   "SUPER F10" "Disable night mode" "pkill hyprsunset" \
+  "SUPER F8" "Toggle autoclicker" "scripts/autoclicker.nix" \
   "SUPER CTRL C" "Colour picker" "hyprpicker --autocopy" \
   "SUPER, Left Click" "Move window with mouse" "movewindow" \
   "SUPER, Right Click" "Resize window with mouse" "resizewindow" \
@@ -106,3 +107,4 @@ yad \
   "SUPER 1-0" "Switch to workspace 1-10" "workspace 1-10" \
   "SUPER SHIFT 1-0" "Move to workspace 1-10" "movetoworkspace 1-10" \
   "SUPER SHIFT 1-0" "Silently move to workspace 1-10" "movetoworkspacesilent 1-10" \
+  
