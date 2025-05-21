@@ -73,6 +73,7 @@
     bat
     cmatrix
     vscode
+    wireshark
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
