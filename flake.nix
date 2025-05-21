@@ -53,12 +53,12 @@
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "moon.png"; # see modules/themes/wallpapers
+      wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
 
       # System configuration
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia or amdgpu or intel) THIS IS IMPORTANT
+      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
-      locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
+      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
       timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
       kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
       kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)

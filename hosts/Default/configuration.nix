@@ -17,7 +17,7 @@
     ../../modules/scripts
 
     ../../modules/desktop/hyprland # Enable hyprland window manager
-    # ../../modules/desktop/i3-gaps # Enable i3 window manager [WIP]
+    # ../../modules/desktop/i3-gaps # Enable i3 window manager
 
     ../../modules/programs/games
     ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
@@ -59,8 +59,7 @@
   ];
 
   # Define system packages here
-  environment.systemPackages = with pkgs; [
-    warp-terminal
+  environment.systemPackages = with pkgs; [    warp-terminal
     brave
     google-chrome
     nitch
