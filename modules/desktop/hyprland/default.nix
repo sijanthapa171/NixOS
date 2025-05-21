@@ -361,12 +361,14 @@
               "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
               "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
 
+              # Applications/Programs
               "$mainMod, Return, exec, $term"
               "$mainMod, T, exec, $term"
               "$mainMod, E, exec, $fileManager"
               "$mainMod, C, exec, $editor"
               "$mainMod, F, exec, $browser"
               "$mainMod SHIFT, S, exec, spotify"
+              "$mainMod SHIFT, Y, exec, youtube-music"
               "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
               "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
 
@@ -488,7 +490,11 @@
           }
 
           # Easily plug in any monitor
-          monitor=,preferred,auto,1
+          # Custom Monitor Configuration (Added)
+          # monitor=,preferred,auto,1
+          monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
+          monitor = DP-1, 1920x1080@60, 1280x0, 1
+          monitor = eDP-1, 1920x1080@60, 1280x1080, 1
 
           # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
           monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1,bitdepth,8
