@@ -1,5 +1,23 @@
 import Link from "next/link";
 import { HeartIcon } from "lucide-react";
+import { buttonVariants } from "./ui/button";
+
+export function FooterButtons() {
+  return (
+    <div className="flex items-center gap-3">
+      <Link
+        href="https://github.com/authxt/NixOS"
+        target="_blank"
+        className={buttonVariants({
+          variant: "outline",
+          size: "sm",
+        })}
+      >
+        GitHub
+      </Link>
+    </div>
+  );
+}
 
 export function Footer() {
   return (
