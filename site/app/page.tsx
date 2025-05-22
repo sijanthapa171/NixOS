@@ -9,9 +9,11 @@ export default function Home() {
       <Image
         src="/main.png"
         alt="NixOS Logo"
-        width={1080}
-        height={200}
-        className="object-contain mt-4 rounded-lg"
+        width={1920}
+        height={1080}
+        quality={100}
+        priority
+        className="object-contain mt-4 rounded-lg max-w-[90vw] w-[1200px]"
       />
 
       <h1 className="text-3xl font-bold mb-4 sm:text-7xl mt-8">
