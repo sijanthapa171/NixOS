@@ -6,6 +6,7 @@ import {
   MoveUpRightIcon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { buttonVariants } from "./ui/button";
 import Search from "./search";
 import Anchor from "./anchor";
@@ -34,7 +35,8 @@ export const NAVLINKS: NavLink[] = [
   },
   {
     title: "Blog",
-    href: "/blog",
+    // href: "/blog",
+    href: "#",
   },
   {
     title: "Examples",
@@ -73,7 +75,7 @@ export function Navbar() {
             <Search />
             <div className="flex ml-2.5 sm:ml-0">
               <Link
-                href="https://github.com/nisabmohd/NexDocs"
+                href="https://github.com/authxt/NixOS"
                 className={buttonVariants({ variant: "ghost", size: "icon" })}
               >
                 <GithubIcon className="h-[1.1rem] w-[1.1rem]" />
@@ -99,7 +101,13 @@ export function Navbar() {
 export function Logo() {
   return (
     <Link href="/" className="flex items-center gap-2.5">
-      <HexagonIcon className="w-7 h-7 text-muted-foreground fill-current" />
+      <Image
+        src="/logo.png"
+        alt="Auth Logo"
+        width={28}
+        height={28}
+        className="object-contain"
+      />
       <h2 className="text-md font-bold">AuthDots.</h2>
     </Link>
   );
