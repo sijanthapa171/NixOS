@@ -72,6 +72,7 @@
     bat
     cmatrix
     vscode
+    code-cursor
     wireshark
   ];
 
