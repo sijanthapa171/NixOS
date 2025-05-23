@@ -19,12 +19,16 @@ export default function MdxImage({
   className 
 }: MdxImageProps) {
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      className={cn("rounded-lg", className)}
-    />
+    <div className="relative w-full">
+      <Image
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        priority
+        quality={100}
+        className={cn("mx-auto rounded-lg", className)}
+      />
+    </div>
   );
 } 

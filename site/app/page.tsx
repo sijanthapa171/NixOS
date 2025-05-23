@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex sm:min-h-[91vh] min-h-[88vh] flex-col items-center justify-center text-center px-2 py-8">
       <Image
         src="/main.png"
-        alt="NixOS Logo"
+        alt="Home Screen"
         width={1920}
         height={1080}
         quality={100}
