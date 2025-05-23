@@ -13,6 +13,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Pre from "@/components/pre";
 import Note from "@/components/note";
 import { Stepper, StepperItem } from "@/components/ui/stepper";
+import MdxImage from "@/components/mdx-image";
 
 // add custom components
 const components = {
@@ -24,6 +25,7 @@ const components = {
   Note,
   Stepper,
   StepperItem,
+  Image: MdxImage,
 };
 
 // can be used for other pages like blogs, Guides etc
