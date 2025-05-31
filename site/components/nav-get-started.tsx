@@ -1,12 +1,10 @@
 "use client";
 
-import { getRoutesFlatten } from "@/lib/routes-config";
-import { useVersion } from "./context/version";
+import { getRoutesFlatten, currentVersion } from "@/lib/routes-config";
 import Anchor from "./anchor";
 
 export default function NavGetStarted() {
-  const { currentVersion } = useVersion();
-  const routes = getRoutesFlatten(currentVersion);
+  const routes = getRoutesFlatten();
   return (
     <Anchor
       activeClassName="text-primary font-semibold"

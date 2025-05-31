@@ -2,12 +2,10 @@
 
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
-import { getPreviousNext } from "@/lib/routes-config";
-import { useVersion } from "./context/version";
+import { getPreviousNext, currentVersion } from "@/lib/routes-config";
 
 export default function Pagination({ pathname }: { pathname: string }) {
-  const { currentVersion } = useVersion();
-  const res = getPreviousNext(pathname, currentVersion);
+  const res = getPreviousNext(pathname);
 
   return (
     <div className="flex items-center justify-between sm:py-7 py-5">

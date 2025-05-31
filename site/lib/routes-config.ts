@@ -1,3 +1,5 @@
+export const currentVersion = "v3.5.9";
+
 // for page navigation & to sort on leftbar
 
 export type EachRoute = {
@@ -150,5 +152,3 @@ export function getPreviousNext(path: string): { prev: Page | undefined; next: P
     next: routes[index + 1],
   };
 }
-
-export const currentVersion = "v3.5.9";
