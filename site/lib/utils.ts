@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { EachRoute, getRoutesForVersion, Version } from "./routes-config";
+import { EachRoute, ROUTES } from "./routes-config";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,7 +12,7 @@ export function helperSearch(
   prefix: string,
   currenLevel: number,
   maxLevel?: number
-) {
+): EachRoute[] {
   const res: EachRoute[] = [];
   let parentHas = false;
 
@@ -40,11 +40,10 @@ export function helperSearch(
   return res;
 }
 
-export function advanceSearch(query: string, v: Version) {
-  const routes = getRoutesForVersion(v);
-  return routes
+export function advanceSearch(query: string): EachRoute[] {
+  return ROUTES
     .map((node) =>
-      helperSearch(query, node, "", 1, query.length == 0 ? 2 : undefined)
+      helperSearch(query, node, "", 1, query.length === 0 ? 2 : undefined)
     )
     .flat();
 }
@@ -77,7 +76,7 @@ export function formatDate2(dateStr: string): string {
   return date.toLocaleDateString("en-US", options);
 }
 
-export function stringToDate(date: string) {
+export function stringToDate(date: string): Date {
   const [day, month, year] = date.split("-").map(Number);
   return new Date(year, month - 1, day);
 }

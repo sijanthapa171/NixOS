@@ -6,6 +6,7 @@ import { GeistMono } from "geist/font/mono";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 import VersionContextWrapper from "@/components/version-context-wrapper";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "AuthDots - NixOS setup guide",
@@ -37,6 +38,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <Toaster />
           </VersionContextWrapper>
         </ThemeProvider>
       </body>

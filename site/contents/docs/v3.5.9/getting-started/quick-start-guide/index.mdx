@@ -1,71 +1,146 @@
 ---
-title: Quick Start Guide
-description: This section provides an overview of Quick Start Guide.
+title: NixOS Quick Start Guide
+description: A comprehensive guide to get started with NixOS configuration and management.
 ---
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam iste dolorum tempore consectetur explicabo tempora provident quia maxime, molestiae, facilis aperiam et, error illum vel ullam? Quis architecto dolore ullam
 
 ## Overview
 
-Welcome to the `Quick Start Guide` section. Here, you'll find all the information you need to get started with our application.
+Welcome to the NixOS Quick Start Guide. This guide will help you understand the basics of NixOS configuration and system management using the Nix package manager.
 
 ## Content
 
-- **Introduction**: Get to know the basics.
-- **Installation**: Step-by-step guide to set up the application.
-- **Configuration**: Learn how to configure the application.
-- **Examples**: Check out some practical examples.
-- **FAQ**: Frequently Asked Questions.
+- **Introduction**: Understanding NixOS basics
+- **Configuration**: Managing your NixOS configuration
+- **Package Management**: Working with Nix packages
+- **System Management**: Common system operations
+- **Examples**: Practical configuration examples
+- **FAQ**: Common NixOS questions
 
 ## Getting Started
 
-### Step 1: Introduction
+### Step 1: Understanding NixOS Configuration
 
-The `Quick Start Guide` section introduces you to the core concepts and functionalities of our application. It is designed to help you understand the essentials and get started quickly.
+NixOS uses a declarative approach to system configuration. The main configuration file is located at `/etc/nixos/configuration.nix`. This file defines your entire system configuration.
 
-### Step 2: Installation
+### Step 2: Basic Configuration Structure
 
-Follow these steps to install the necessary components:
+Here's a basic example of a NixOS configuration:
 
-1. **Install Node.js**: Ensure you have Node.js installed.
-2. **Clone the Repository**: Clone our GitHub repository to your local machine.
-   ```bash
-   git clone https://github.com/your-repo/your-project.git
-   ```
-3. **Install Dependencies**: Navigate to the project directory and install dependencies.
-   ```bash
-   cd your-project
-   npm install
-   ```
+```nix:configuration.nix showLineNumbers
+{ config, pkgs, ... }:
 
-### Step 3: Configuration
+{
+  # System settings
+  system.stateVersion = "23.11"; # Don't change this without understanding implications
+  
+  # Boot configuration
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-Configure your application by creating a `config.json` file and setting the required parameters.
+  # Networking
+  networking.hostName = "nixos"; # Define your hostname
+  networking.networkmanager.enable = true;
 
-### Step 4: Examples
+  # User account
+  users.users.your-username = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+    packages = with pkgs; [
+      firefox
+      git
+      vim
+    ];
+  };
 
-Here is an code block with line highlight and filename:
-
-```jsx:app.jsx showLineNumbers {8}
-// Basic usage example
-import React from 'react';
-import { ExampleComponent } from 'your-library';
-
-function App() {
-  return (
-    <div>
-      <ExampleComponent />
-    </div>
-  );
+  # System packages
+  environment.systemPackages = with pkgs; [
+    wget
+    curl
+    htop
+  ];
 }
-
-export default App;
 ```
 
-### Step 5: FAQ
+### Step 3: Common Operations
 
-Find answers to common questions in our [FAQ section](#).
+Here are some essential NixOS commands:
+
+```bash
+# Rebuild and switch to new configuration
+sudo nixos-rebuild switch
+
+# Update system and packages
+sudo nixos-rebuild switch --upgrade
+
+# Collect garbage (remove unused packages)
+sudo nix-collect-garbage -d
+
+# Search for packages
+nix search package-name
+```
+
+### Step 4: Package Management
+
+NixOS offers several ways to manage packages:
+
+1. **System-wide packages**: Add to `environment.systemPackages` in configuration.nix
+2. **User packages**: Use `home-manager` or add to `users.users.<name>.packages`
+3. **Temporary packages**: Use `nix-shell` or `nix shell`
+
+### Step 5: Best Practices
+
+1. **Version Control**: Keep your NixOS configuration in a Git repository
+2. **Modular Configuration**: Split your configuration into multiple files
+3. **Testing**: Test changes with `nixos-rebuild test` before switching
+4. **Documentation**: Comment your configuration files
+5. **Generations**: Keep track of system generations for rollback
+
+## Common Tasks
+
+### Adding a New Package
+
+To add a new package system-wide, edit your configuration.nix:
+
+```nix:configuration.nix showLineNumbers {7}
+{ config, pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    # Existing packages...
+    wget
+    your-new-package  # Add new package here
+  ];
+}
+```
+
+### Managing Services
+
+Enable and configure services in your configuration:
+
+```nix:configuration.nix showLineNumbers
+services.openssh.enable = true;
+services.xserver.enable = true;
+services.postgresql.enable = true;
+```
+
+## FAQ
+
+**Q: How do I roll back to a previous configuration?**
+A: Use `sudo nixos-rebuild switch --rollback` or select a previous generation in the boot menu.
+
+**Q: How do I update my system?**
+A: Run `sudo nixos-rebuild switch --upgrade`
+
+**Q: Where can I find available packages?**
+A: Visit [search.nixos.org](https://search.nixos.org) or use `nix search`
+
+## Additional Resources
+
+- [NixOS Manual](https://nixos.org/manual/nixos/stable/)
+- [Nix Package Search](https://search.nixos.org)
+- [NixOS Discourse](https://discourse.nixos.org)
+- [NixOS Wiki](https://nixos.wiki)
 
 ## Conclusion
 
-The `Quick Start Guide` section is your starting point for exploring the application. Follow the steps above to get started quickly and easily.
+This quick start guide covers the basics of NixOS. Remember that NixOS's declarative approach means your entire system configuration is defined in code, making it reproducible and maintainable.
