@@ -214,28 +214,6 @@ in {
                 "privacy.clearOnShutdown.sessions" = lock-true;
                 "privacy.clearOnShutdown.siteSettings" = lock-true;
 
-                # Block telemetry
-                "toolkit.telemetry.enabled" = lock-false;
-                "toolkit.telemetry.unified" = lock-false;
-                "toolkit.telemetry.server" = "data:,";
-                "toolkit.telemetry.archive.enabled" = lock-false;
-                "toolkit.telemetry.newProfilePing.enabled" = lock-false;
-                "toolkit.telemetry.shutdownPingSender.enabled" = lock-false;
-                "toolkit.telemetry.updatePing.enabled" = lock-false;
-                "toolkit.telemetry.bhrPing.enabled" = lock-false;
-                "toolkit.telemetry.coverage.opt-out" = lock-true;
-                "toolkit.telemetry.firstShutdownPing.enabled" = lock-false;
-                "browser.newtabpage.activity-stream.telemetry" = lock-false;
-                "browser.ping-centre.telemetry" = lock-false;
-
-                # Permissions
-                # 0=always ask (default), 1=allow, 2=block
-                "permissions.default.geo" = 2;
-                "permissions.default.camera" = 2;
-                "permissions.default.microphone" = 0;
-                "permissions.default.desktop-notification" = 2;
-                "permissions.default.xr" = 2; # Virtual Reality
-
                 # Block more unwanted stuff
                 "dom.block_multiple_popups" = lock-true;
                 "browser.privatebrowsing.forceMediaMemoryCache" = lock-true;
@@ -255,11 +233,17 @@ in {
                 "layout.word_select.eat_space_to_next_word" = lock-false;
                 "browser.shell.checkDefaultBrowser" = lock-false;
                 "signon.rememberSignons" = lock-false;
+                "toolkit.telemetry.unified" = lock-false;
+                "toolkit.telemetry.enabled" = lock-false;
+                "toolkit.telemetry.server" = "data:,";
+                "toolkit.telemetry.archive.enabled" = lock-false;
+                "toolkit.telemetry.coverage.opt-out" = lock-true;
                 "toolkit.coverage.opt-out" = lock-true;
                 "toolkit.coverage.endpoint.base" = "";
                 "experiments.supported" = lock-false;
                 "experiments.enabled" = lock-false;
                 "experiments.manifest.uri" = "";
+                "browser.ping-centre.telemetry" = lock-false;
                 "datareporting.healthreport.uploadEnabled" = lock-false;
                 "datareporting.healthreport.service.enabled" = lock-false;
                 "datareporting.policy.dataSubmissionEnabled" = lock-false;
@@ -286,6 +270,7 @@ in {
                 "trailhead.firstrun.didSeeAboutWelcome" = true; # Disable welcome splash
                 "browser.newtab.url" = "about:blank";
                 "browser.newtabpage.activity-stream.enabled" = lock-false;
+                "browser.newtabpage.activity-stream.telemetry" = lock-false;
                 "browser.newtabpage.enhanced" = lock-false;
                 "browser.newtabpage.introShown" = lock-true;
                 "browser.newtabpage.pinned" = false;
@@ -308,7 +293,7 @@ in {
                 "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
                 "browser.protections_panel.infoMessage.seen" = true;
                 "browser.ssb.enabled" = true;
-                "browser.toolbars.bookmarks.visibility" = "newtab"; # always, never, newtab
+                "browser.toolbars.bookmarks.visibility" = "newtab";
                 #"browser.urlbar.placeholderName" = "Google";
                 "browser.urlbar.suggest.openpage" = false;
                 "datareporting.policy.dataSubmissionEnable" = false;
@@ -351,28 +336,19 @@ in {
                   newElementCount = 7;
                   placements = {
                     widget-overflow-fixed-list = [];
-                    unified-extensions-area = [
-                      "ublock0_raymondhill_net-browser-action"
-                      "firemonkey_eros_man-browser-action"
-                      "addon_darkreader_org-browser-action"
-                      "queryamoid_kaply_com-browser-action"
-                      # "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
-                    ];
+                    unified-extensions-area = [];
                     nav-bar = [
                       "back-button"
                       "forward-button"
                       "stop-reload-button"
                       "urlbar-container"
-                      # "developer-button"
                       "downloads-button"
-                      "unified-extensions-button"
 
                       # Extensions
                       "ublock0_raymondhill_net-browser-action"
-                      "firemonkey_eros_man-browser-action"
+                      "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
                       "addon_darkreader_org-browser-action"
-                      # "queryamoid_kaply_com-browser-action"
-                      # "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+                      "unified-extensions-button"
                     ];
                     toolbar-menubar = ["menubar-items"];
                     TabsToolbar = [
@@ -383,6 +359,24 @@ in {
                     ];
                     PersonalToolbar = ["personal-bookmarks" "managed-bookmarks"];
                   };
+                  seen = [
+                    "developer-button"
+                    "save-to-pocket-button"
+                    "addon_darkreader_org-browser-action"
+                    "ublock0_raymondhill_net-browser-action"
+                    "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"
+                    "_762f9885-5a13-4abd-9c77-433dcd38b8fd_-browser-action"
+                    "sponsorBlocker@ajay.app-browser-action"
+                    "firefox@betterttv.net-browser-action"
+                  ];
+                  dirtyAreaCache = [
+                    "nav-bar"
+                    "PersonalToolbar"
+                    "toolbar-menubar"
+                    "TabsToolbar"
+                    "unified-extensions-area"
+                    "widget-overflow-fixed-list"
+                  ];
                 };
               };
             };
@@ -400,7 +394,7 @@ in {
               id = 0; # 0 is the default profile; see also option "isDefault"
               name = "default"; # name as listed in about:profiles
               isDefault = true; # can be omitted; true if profile ID is 0
-              extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
+              extensions = with pkgs.nur.repos.rycee.firefox-addons; [
                 ublock-origin
                 violentmonkey
                 darkreader
@@ -423,56 +417,27 @@ in {
                       url = "https://www.twitch.tv";
                     }
                     {
-                      name = "Netflix";
-                      url = "https://www.netflix.com";
-                    }
-                    {
                       name = "Github";
                       url = "https://github.com/";
                     }
                     {
-                      name = "Lloyds Bank";
-                      url = "https://www.lloydsbank.com/";
+                      name = "NixOS pkgs";
+                      url = "https://search.nixos.org/packages";
                     }
                     {
-                      name = "NixOS";
-                      bookmarks = [
-                        {
-                          name = "Search NixOS";
-                          url = "https://mynixos.com/";
-                        }
-                        {
-                          name = "NixOS Wiki";
-                          url = "https://wiki.nixos.org/wiki/NixOS_Wiki";
-                        }
-                        {
-                          name = "NixOS Packages";
-                          url = "https://search.nixos.org/packages";
-                        }
-                        {
-                          name = "NixOS Options";
-                          url = "https://search.nixos.org/options";
-                        }
-                        {
-                          name = "NixOS Configs";
-                          url = "https://wiki.nixos.org/wiki/Configuration_Collection";
-                        }
-                        {
-                          name = "Nix Docs";
-                          url = "https://noogle.dev/";
-                        }
-                        {
-                          name = "Learn Nix";
-                          url = "https://nix.dev/";
-                        }
-                      ];
+                      name = "NixOS Wiki";
+                      url = "https://nixos.wiki";
+                    }
+                    {
+                      name = "NixOS Configs";
+                      url = "https://nixos.wiki/wiki/Configuration_Collection";
                     }
                     {
                       name = "Search Engines";
                       bookmarks = [
                         {
                           name = "Startpage";
-                          url = "https://www.startpage.com/do/mypage.pl?prfe=c602752472dd4a3d8286a7ce441403da08e5c4656092384ed3091a946a5a4a4c99962d0935b509f2866ff1fdeaa3c33a007d4d26e89149869f2f7d0bdfdb1b51aa7ae7f5f17ff4a233ff313d";
+                          url = "https://www.startpage.com/do/mypage.pl?prfe=358f0310b1c47c53e468bbed228d921438352de61d9ea4fcad92c335685a8e4de5118de1f91f06960587d38d76310c444d27766f935be9bb7dfa8fbc7f0b8207fbcd0a23600e2f957b79e6b3";
                         }
                         {
                           name = "SearX";
@@ -485,7 +450,7 @@ in {
               ];
               search = {
                 force = true;
-                default = "Startpage";
+                default = "Google";
                 privateDefault = "Startpage";
                 order = [
                   "Startpage"
@@ -501,7 +466,7 @@ in {
                   "Startpage" = {
                     urls = [
                       {
-                        template = "https://www.startpage.com/sp/search?query={searchTerms}&prfe=c602752472dd4a3d8286a7ce441403da08e5c4656092384ed3091a946a5a4a4c99962d0935b509f2866ff1fdeaa3c33a007d4d26e89149869f2f7d0bdfdb1b51aa7ae7f5f17ff4a233ff313d";
+                        template = "https://www.startpage.com/sp/search?query={searchTerms}&prfe=dea8b8a2e1126185da987128a196ee5c47cdf324dce146f96b3b9157ab1f9e7166ae05d134c935eccc20f54e46222c8f1bb60faece00557b02e7a4e1fe397bc0f6750fbd3f7f580b241188&abp=-1";
                       }
                     ];
                     icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";

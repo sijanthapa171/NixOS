@@ -1,5 +1,11 @@
 #!/usr/bin/env sh
 
+ScrDir=`dirname "$(realpath "$0")"`
+source $ScrDir/globalcontrol.sh
+
+
+# define functions
+
 function print_error
 {
 cat << "EOF"
@@ -17,19 +23,19 @@ EOF
 function notify_vol
 {
     vol=`pamixer $srce --get-volume | cat`
-    angle=$((((vol + 2) / 5) * 5))
+    angle="$(( (($vol+2)/5) * 5 ))"
     ico="${icodir}/vol-${angle}.svg"
     bar=$(seq -s "." $(($vol / 15)) | sed 's/[0-9]//g')
-    notify-send -a "System" -r 91190 -t 800 -i "${ico}" "${vol}${bar}" "$nsink"
+    dunstify "t2" -a "$vol$bar" "$nsink" -i $ico -r 91190 -t 800
 }
 
 function notify_mute
 {
     mute=`pamixer $srce --get-mute | cat`
     if [ "$mute" == "true" ] ; then
-        notify-send -a "System" -r 61190 -t 800 -i "${icodir}/muted-${dvce}.svg" "Muted" "$nsink"
+        dunstify "t2" -a "muted" "$nsink" -i ${icodir}/muted-${dvce}.svg -r 91190 -t 800
     else
-        notify-send -a "System" -r 61190 -t 800 -i "${icodir}/unmuted-${dvce}.svg" "Unmuted" "$nsink"
+        dunstify "t2" -a "unmuted" "$nsink" -i ${icodir}/unmuted-${dvce}.svg -r 91190 -t 800
     fi
 }
 
@@ -52,10 +58,12 @@ if [ $OPTIND -eq 1 ] ; then
     print_error
 fi
 
+
 # set device action
+
 shift $((OPTIND -1))
 step="${2:-1}"
-icodir="$HOME/.config/hypr/icons/notifications/vol"
+icodir="~/.config/dunst/icons/vol"
 
 case $1 in
     i) pamixer $srce -i ${step}

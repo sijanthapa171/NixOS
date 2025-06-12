@@ -1,7 +1,6 @@
-.direnv/
-target
-result
-result-*
-
+# Ignore build outputs from performing a nix-build or `nix build` command
+#system/Default/hardware-configuration.nix
 [Bb]ackup
 [Bb]ackup/*
+result
+result-*

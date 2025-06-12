@@ -1,4 +1,7 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  ...
+}: let
   dreamsofcode-io-catppuccin-tmux =
     pkgs.tmuxPlugins.mkTmuxPlugin
     {
@@ -19,7 +22,7 @@ in {
         clock24 = true;
         keyMode = "vi";
         # terminal = "tmux-256color";
-        # terminal = "screen-256color";
+        terminal = "screen-256color";
         historyLimit = 100000;
         plugins = with pkgs.tmuxPlugins; [
           dreamsofcode-io-catppuccin-tmux
@@ -61,7 +64,7 @@ in {
           bind C-a send-prefix
 
           # Options
-          set -g @catppuccin_flavour 'mocha'
+          set -g @catppuccin_flavour 'macchiato'
           set -g mouse on
           set -g allow-rename off
           set -g status-position top
@@ -91,10 +94,10 @@ in {
           bind j select-pane -D
 
           # Resize panes
-          # bind -n M-h resize-pane -L 2
-          # bind -n M-l resize-pane -R 2
-          # bind -n M-k resize-pane -U 2
-          # bind -n M-j resize-pane -D 2
+          bind -n M-h resize-pane -L 2
+          bind -n M-l resize-pane -R 2
+          bind -n M-k resize-pane -U 2
+          bind -n M-j resize-pane -D 2
           bind -n M-Left resize-pane -L 2
           bind -n M-Right resize-pane -R 2
           bind -n M-Up resize-pane -U 2
@@ -108,9 +111,6 @@ in {
           # Select windows
           bind -n S-Left  previous-window
           bind -n S-Right next-window
-
-          bind -n C-M-h  previous-window
-          bind -n C-M-l next-window
 
           # vi mode
           bind-key -T copy-mode-vi v send-keys -X begin-selection

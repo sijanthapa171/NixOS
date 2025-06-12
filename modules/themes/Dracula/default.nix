@@ -5,8 +5,8 @@
       services.hyprpaper = {
         enable = true;
         settings = {
-          preload = ["${../wallpapers/moon.jxl}"];
-          wallpaper = [",${../wallpapers/moon.jxl}"];
+          preload = ["${../wallpapers/aurora_borealis.png}"];
+          wallpaper = [",${../wallpapers/aurora_borealis.png}"];
         };
       };
 

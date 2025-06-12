@@ -1,6 +1,6 @@
 {...}: {
   imports = [
     ./games.nix
-    ./work.nix
+    ./seagate.nix
   ];
 }

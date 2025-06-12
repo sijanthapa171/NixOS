@@ -9,7 +9,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,window,filebrowser";
+	modi:                       "drun";
     show-icons:                 true;
     display-drun:               " ";
 	drun-display-format:        "{name}";

@@ -1,103 +1,94 @@
 {
   pkgs,
-  videoDriver,
-  hostname,
-  browser,
-  editor,
+  username,
+  locale,
+  timezone,
   terminal,
-  terminalFileManager,
+  hostname,
   ...
 }: {
   imports = [
-    ./hardware-configuration.nix
-    ../../modules/hardware/video/${videoDriver}.nix # Enable gpu drivers defined in flake.nix
-    ../../modules/hardware/drives
-
     ../common.nix
-    ../../modules/scripts
-
     ../../modules/desktop/hyprland # Enable hyprland window manager
-    # ../../modules/desktop/i3-gaps # Enable i3 window manager
-
     ../../modules/programs/games
-    ../../modules/programs/browser/${browser} # Set browser defined in flake.nix
-    ../../modules/programs/terminal/${terminal} # Set terminal defined in flake.nix
-    ../../modules/programs/editor/${editor} # Set editor defined in flake.nix
-    ../../modules/programs/cli/${terminalFileManager} # Set file-manager defined in flake.nix
-    ../../modules/programs/cli/starship
-    ../../modules/programs/cli/tmux
-    ../../modules/programs/cli/direnv
-    ../../modules/programs/cli/lazygit
-    ../../modules/programs/cli/cava
-    ../../modules/programs/cli/btop
-    ../../modules/programs/shell/bash
-    ../../modules/programs/shell/zsh
-    ../../modules/programs/media/discord
-    ../../modules/programs/media/spicetify
-    # ../../modules/programs/media/youtube-music
-    # ../../modules/programs/media/thunderbird
-    # ../../modules/programs/media/obs-studio
-    ../../modules/programs/media/mpv
-    ../../modules/programs/misc/tlp
-    ../../modules/programs/misc/thunar
-    # ../../modules/programs/misc/nix-ld
-    ../../modules/programs/misc/virt-manager
 
+    ../../modules/hardware/video/nvidia.nix # Enable nvidia proprietary drivers
+    # ../../modules/hardware/video/amdgpu.nix # Enable amdgpu drivers
+    ./hardware-configuration.nix
   ];
 
   # Home-manager config
-  home-manager.sharedModules = [
-    (_: {
-      home.packages = with pkgs; [
-        # pokego # Overlayed
-        krita
-        github-desktop
-        # gimp
-      ];
-    })
-  ];
-
-  # Define system packages here
-  environment.systemPackages = with pkgs; [
-    warp-terminal
-    brave
-    google-chrome
-    nitch
-    libreoffice
-    gcc
-    obsidian
-    vscode
-    google-chrome
-    tgpt
-    bat
-    cmatrix
-    vscode
-    code-cursor
-    wireshark
-  ];
-
-  networking.hostName = hostname; # Set hostname defined in flake.nix
-
-  # Stream my media to my devices via the network
-  services.minidlna = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      friendly_name = "NixOS-DLNA";
-      media_dir = [
-        # A = Audio, P = Pictures, V, = Videos, PV = Pictures and Videos.
-        # "A,/mnt/work/Pimsleur/Russian"
-        "/mnt/work/Pimsleur"
-        "/mnt/work/Media/Films"
-        "/mnt/work/Media/Series"
-        "/mnt/work/Media/Videos"
-        "/mnt/work/Media/Music"
-      ];
-      inotify = "yes";
-      log_level = "error";
+  home-manager.users.${username} = {
+    home.packages = with pkgs; [
+      #vim
+      #krita
+      #steam
+    ];
+    home.sessionVariables = {
+      EDITOR = "nvim";
+      BROWSER = "firefox";
+      TERMINAL = terminal;
     };
   };
-  users.users.minidlna = {
-    extraGroups = ["users"]; # so minidlna can access the files.
+
+  environment.systemPackages = with pkgs; [
+  ];
+
+  # Enable networking
+  networking = {
+    hostName = hostname; # Define your hostname.
+    networkmanager.enable = true;
+    # wireless.enable = true; # Enables wireless support via wpa_supplicant.
+    # Configure network proxy if necessary
+    # networking.proxy.default = "http://user:password@proxy:port/";
+    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
+
+  # Timezone and locale
+  time.timeZone = timezone;
+  i18n.defaultLocale = locale;
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = locale;
+    LC_IDENTIFICATION = locale;
+    LC_MEASUREMENT = locale;
+    LC_MONETARY = locale;
+    LC_NAME = locale;
+    LC_NUMERIC = locale;
+    LC_PAPER = locale;
+    LC_TELEPHONE = locale;
+    LC_TIME = locale;
+  };
+
+  # Enable the X11 windowing system.
+  services.xserver = {
+    enable = true;
+    xkb = {
+      layout = "gb";
+      variant = "";
+    };
+  };
+  console.keyMap = "uk"; # Configure console keymap
+  services.printing.enable = true; # Enable CUPS to print documents.
+
+  users.users.${username} = {
+    isNormalUser = true;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "kvm"
+      "input"
+      "disk"
+      "libvirtd"
+      "video"
+      "audio"
+    ];
+  };
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "23.11"; # Did you read the comment?
 }

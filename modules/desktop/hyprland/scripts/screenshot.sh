@@ -1,40 +1,49 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
+if [ -z "$XDG_PICTURES_DIR" ] ; then
+    XDG_PICTURES_DIR="$HOME/Pictures"
+fi
+
+ScrDir=`dirname "$(realpath "$0")"`
+source $ScrDir/globalcontrol.sh
 swpy_dir="${XDG_CONFIG_HOME:-$HOME/.config}/swappy"
-XDG_PICTURES_DIR="${XDG_PICTURES_DIR:-$HOME/Pictures}"
-save_dir="${XDG_PICTURES_DIR}/Screenshots"
-save_file="$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')"
+save_dir="${2:-$XDG_PICTURES_DIR/Screenshots}"
+save_file=$(date +'%y%m%d_%Hh%Mm%Ss_screenshot.png')
+temp_screenshot="/tmp/screenshot.png"
 
 mkdir -p $save_dir
 mkdir -p $swpy_dir
 echo -e "[Default]\nsave_dir=$save_dir\nsave_filename_format=$save_file" > $swpy_dir/config
 
-# Ensure required binaries
-command -v grimblast >/dev/null 2>&1 || { echo "grimblast not found"; exit 1; }
-command -v swappy >/dev/null 2>&1 || { echo "swappy not found"; exit 1; }
-command -v notify-send >/dev/null 2>&1 || { echo "notify-send not found"; exit 1; }
-
-print_error() {
-    cat << EOF
-Usage: $(basename "$0") <action>
-Valid actions:
-  p  : Print all screens
-  s  : Snip current screen
-  sf : Snip current screen (frozen)
-  m  : Print focused monitor
+function print_error
+{
+cat << "EOF"
+    ./screenshot.sh <action>
+    ...valid actions are...
+        p : print all screens
+        s : snip current screen
+        sf : snip current screen (frozen)
+        m : print focused monitor
 EOF
-    exit 1
 }
 
-case "$1" in
-    p)  grimblast save screen - | swappy -f - ;;
-    s)  grimblast save area - | swappy -f - ;;
-    sf) grimblast --freeze save area - | swappy -f - ;;
-    m)  grimblast save output - | swappy -f - ;;
-    *)  print_error ;;
+case $1 in
+p)  # print all outputs
+    grimblast copysave screen $temp_screenshot && swappy -f $temp_screenshot ;;
+s)  # drag to manually snip an area / click on a window to print it
+    grimblast copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
+sf)  # frozen screen, drag to manually snip an area / click on a window to print it
+    grimblast --freeze copysave area $temp_screenshot && swappy -f $temp_screenshot ;;
+m)  # print focused monitor
+    grimblast copysave output $temp_screenshot && swappy -f $temp_screenshot ;;
+*)  # invalid option
+    print_error ;;
 esac
 
-# Notify if saved
-if [ -f "${save_dir}/${save_file}" ]; then
-    notify-send -a Screenshot -r 91190 -t 2200 -i "${save_dir}/${save_file}" "Saved in ${save_dir}"
+rm "$temp_screenshot"
+
+if [ -f "$save_dir/$save_file" ] ; then
+    dunstify -a Sreenshot -r 91190 -t 2200 -i "$save_dir/$save_file" "saved in $save_dir"
+    #dunstify -a "saved in $save_dir" -i "$save_dir/$save_file" -r 91190 -t 2200
 fi
+

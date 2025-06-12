@@ -1,11 +1,8 @@
 {
+  inputs,
   lib,
   pkgs,
-  browser,
   terminal,
-  terminalFileManager,
-  kbdLayout,
-  kbdVariant,
   ...
 }: {
   imports = [
@@ -13,62 +10,53 @@
     ./programs/waybar
     ./programs/wlogout
     ./programs/rofi
-    ./programs/hypridle
+    ./programs/dunst
     ./programs/hyprlock
     ./programs/swaync
-    # ./programs/dunst
   ];
 
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
+    substituters = ["https://hyprland.cachix.org/"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
-  systemd.user.services.hyprpolkitagent = {
-    description = "Hyprpolkitagent - Polkit authentication agent";
-    wantedBy = ["graphical-session.target"];
-    wants = ["graphical-session.target"];
-    after = ["graphical-session.target"];
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = "${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent";
-      Restart = "on-failure";
-      RestartSec = 1;
-      TimeoutStopSec = 10;
-    };
-  };
-  services.displayManager.defaultSession = "hyprland";
-
   programs.hyprland = {
     enable = true;
-    # withUWSM = true;
+    xwayland.enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
 
   home-manager.sharedModules = let
     inherit (lib) getExe getExe';
   in [
     ({...}: {
+      imports = [
+        inputs.hyprland.homeManagerModules.default
+      ];
+
       home.packages = with pkgs; [
+        # blueman
         hyprpaper
-        hyprpicker
         cliphist
         grimblast
-        swappy
         libnotify
-        brightnessctl
+        light
         networkmanagerapplet
         pamixer
         pavucontrol
         playerctl
+        slurp
+        swappy
+        swaynotificationcenter
         waybar
         wtype
         wl-clipboard
-        xdotool
-        yad
-        # socat # for and autowaybar.sh
-        # jq # for and autowaybar.sh
       ];
 
+      xdg.configFile."hypr/scripts" = {
+        source = ./scripts;
+        recursive = true;
+      };
       xdg.configFile."hypr/icons" = {
         source = ./icons;
         recursive = true;
@@ -77,7 +65,9 @@
       #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
       wayland.windowManager.hyprland = {
         enable = true;
+        xwayland.enable = true;
         plugins = [
+          # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
           # inputs.hyprland-plugins.packages.${pkgs.system}.hyprwinwrap
         ];
         systemd = {
@@ -85,11 +75,16 @@
           variables = ["--all"];
         };
         settings = {
+          "$scriptsDir" = "XDG_BIN_HOME";
+          "$hyprScriptsDir" = "$XDG_CONFIG_HOME/hypr/scripts";
           "$mainMod" = "SUPER";
+          # "$launcher" = "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window -theme $XDG_CONFIG_HOME/rofi/launchers/type-4/style-7.rasi";
+          # "$launcher" = "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window -theme $XDG_CONFIG_HOME/rofi/launchers/type-4/style-3.rasi";
+          "$launcher" = "pkill rofi || rofi -show drun -modi drun,filebrowser,run,window -theme $XDG_CONFIG_HOME/rofi/launchers/type-2/style-2.rasi";
           "$term" = "${getExe pkgs.${terminal}}";
           "$editor" = "code --disable-gpu";
-          "$fileManager" = "$term --class \"terminalFileManager\" -e ${terminalFileManager}";
-          "$browser" = browser;
+          "$file" = "$term -e lf";
+          "$browser" = "firefox";
 
           env = [
             "XDG_CURRENT_DESKTOP,Hyprland"
@@ -98,11 +93,8 @@
             "GDK_BACKEND,wayland,x11,*"
             "NIXOS_OZONE_WL,1"
             "ELECTRON_OZONE_PLATFORM_HINT,auto"
-            "MOZ_ENABLE_WAYLAND,1"
+            "MOZ_ENABLE_WAYLAND,1" # disable if You're having issues with firefox
             "OZONE_PLATFORM,wayland"
-            "EGL_PLATFORM,wayland"
-            "CLUTTER_BACKEND,wayland"
-            "SDL_VIDEODRIVER,wayland"
             "QT_QPA_PLATFORM,wayland;xcb"
             "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
             "QT_QPA_PLATFORMTHEME,qt6ct"
@@ -111,35 +103,38 @@
             "NIXPKGS_ALLOW_UNFREE,1"
           ];
           exec-once = [
-            #"[workspace 1 silent] ${terminal}"
-            #"[workspace 5 silent] ${browser}"
-            #"[workspace 6 silent] spotify"
-            #"[workspace special silent] ${browser} --private-window"
-            #"[workspace special silent] ${terminal}"
+            #"[workspace 1 silent] firefox"
+            #"[workspace 2 silent] alacritty"
+            #"[workspace 5 silent] spotify"
+            #"[workspace special silent] firefox --new-instance -P private"
+            #"[workspace special silent] alacritty"
+            #"[workspace 8 silent] alacritty -e cava"
+            #"[workspace 9 silent] alacritty -e cava"
 
-            "waybar"
+            "hyprpaper"
+            "sleep 1 && waybar"
             "swaync"
+            "pamixer --set-volume 50"
+            # "dunst"
+            # "blueman-applet"
             "nm-applet --indicator"
             "wl-clipboard-history -t"
             "${getExe' pkgs.wl-clipboard "wl-paste"} --type text --watch cliphist store" # clipboard store text data
             "${getExe' pkgs.wl-clipboard "wl-paste"} --type image --watch cliphist store" # clipboard store image data
             "rm '$XDG_CACHE_HOME/cliphist/db'" # Clear clipboard
-            "${./scripts/batterynotify.sh}" # battery notification
-            # "${./scripts/autowaybar.sh}" # uncomment packages at the top
+            "$hyprScriptsDir/batterynotify.sh" # battery notification
             "polkit-agent-helper-1"
-            "pamixer --set-volume 50"
+            #"systemctl start --user polkit-kde-authentication-agent-1"
           ];
           input = {
-            kb_layout = "${kbdLayout},ru";
-            kb_variant = "${kbdVariant},";
+            kb_layout = "gb,gb,de,fr";
+            kb_variant = "extd,dvorak,,";
             repeat_delay = 300; # or 212
             repeat_rate = 30;
 
             follow_mouse = 1;
 
-            touchpad.natural_scroll = false;
-
-            tablet.output = "current";
+            touchpad = {natural_scroll = false;};
 
             sensitivity = 0; # -1.0 - 1.0, 0 means no modification.
             force_no_accel = true;
@@ -151,7 +146,7 @@
             "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
             "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
             resize_on_border = true;
-            layout = "dwindle"; # dwindle or master
+            layout = "master"; # dwindle or master
             # allow_tearing = true; # Allow tearing for games (use immediate window rules for specific games or all titles)
           };
           decoration = {
@@ -161,8 +156,8 @@
             blur = {
               enabled = true;
               special = true;
-              size = 6; # 6
-              passes = 2; # 3
+              size = 6;
+              passes = 3;
               new_optimizations = true;
               ignore_opacity = true;
               xray = false;
@@ -216,21 +211,14 @@
           render = {
             explicit_sync = 2; # 0 = off, 1 = on, 2 = auto based on gpu driver.
             explicit_sync_kms = 2; # 0 = off, 1 = on, 2 = auto based on gpu driver.
-            direct_scanout = 2; # 0 = off, 1 = on, 2 = auto (on with content type ‘game’) 
-          };
-          ecosystem = {
-            no_update_news = true;
-            no_donation_nag = true;
+            direct_scanout = true; # Set to true for improved Fullscreen performance.
           };
           misc = {
             disable_hyprland_logo = true;
             mouse_move_focuses_monitor = true;
-            swallow_regex = "^(Alacritty|kitty)$";
-            enable_swallow = true;
             vfr = true; # always keep on
-            vrr = 1; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only)
+            vrr = true; # enable variable refresh rate (effective depending on hardware)
           };
-          xwayland.force_zero_scaling = false;
           gestures = {
             workspace_swipe = true;
             workspace_swipe_fingers = 3;
@@ -244,24 +232,32 @@
             new_on_top = true;
             mfact = 0.5;
           };
-          windowrule = [
+          windowrulev2 = [
             #"noanim, class:^(Rofi)$
             "tile,title:(.*)(Godot)(.*)$"
-            # "workspace 1, class:^(kitty|Alacritty|org.wezfurlong.wezterm)$"
-            # "workspace 2, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
-            # "workspace 3, class:^(krita)$"
-            # "workspace 3, title:(.*)(Godot)(.*)$"
-            # "workspace 3, title:(GNU Image Manipulation Program)(.*)$"
-            # "workspace 3, class:^(factorio)$"
-            # "workspace 3, class:^(steam)$"
-            # "workspace 5, class:^(firefox|floorp|zen)$"
-            # "workspace 6, class:^(Spotify)$"
-            # "workspace 6, title:(.*)(Spotify)(.*)$"
+            "workspace 2, class:^(firefox)$"
+            "workspace 1, class:^(Alacritty)$"
+            "workspace 1, class:^(kitty)$"
+            "workspace 3, class:^(VSCodium)$"
+            "workspace 3, class:^(codium-url-handler)$"
+            "workspace 3, class:^(Code)$"
+            "workspace 3, class:^(code-url-handler)$"
+            "workspace 4, class:^(krita)$"
+            "workspace 4, title:(.*)(Godot)(.*)$"
+            "workspace 4, title:(GNU Image Manipulation Program)(.*)$"
+            "workspace 9, class:^(Spotify)$"
+            "workspace 9, title:(.*)(Spotify)(.*)$"
+            "workspace 5, class:^(steam)$"
+            "workspace 10, class:^(factorio)$"
 
-            # Can use FLOAT FLOAT for active and inactive or just FLOAT
-            "opacity 0.80 0.80,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
-            "opacity 0.90 0.90,class:^(gcr-prompter)$" # keyring prompt
-            "opacity 0.90 0.90,title:^(Hyprland Polkit Agent)$" # polkit prompt
+            # Allow screen tearing for reduced input latency on some games.
+            #"immediate, class:^(cs2)$"
+            #"immediate, class:^(steam_app_0)$"
+            #"immediate, class:^(steam_app_1)$"
+            #"immediate, class:^(steam_app_2)$"
+            #"immediate, class:^(.*)(.exe)$"
+
+            "opacity 0.80 0.80,class:^(alacritty)$"
             "opacity 1.00 1.00,class:^(firefox)$"
             "opacity 0.90 0.90,class:^(Brave-browser)$"
             "opacity 0.80 0.80,class:^(Steam)$"
@@ -269,52 +265,35 @@
             "opacity 0.80 0.80,class:^(steamwebhelper)$"
             "opacity 0.80 0.80,class:^(Spotify)$"
             "opacity 0.80 0.80,title:(.*)(Spotify)(.*)$"
-            "opacity 0.80 0.80,class:^(VSCodium)$"
-            "opacity 0.80 0.80,class:^(codium-url-handler)$"
-            "opacity 0.80 0.80,class:^(code)$"
+            # "opacity 0.80 0.80,class:^(VSCodium)$"
+            # "opacity 0.80 0.80,class:^(codium-url-handler)$"
+            "opacity 0.80 0.80,class:^(Code)$"
             "opacity 0.80 0.80,class:^(code-url-handler)$"
-            "opacity 0.80 0.80,class:^(terminalFileManager)$"
+            "opacity 0.80 0.80,class:^(kitty)$"
             "opacity 0.80 0.80,class:^(org.kde.dolphin)$"
             "opacity 0.80 0.80,class:^(org.kde.ark)$"
             "opacity 0.80 0.80,class:^(nwg-look)$"
             "opacity 0.80 0.80,class:^(qt5ct)$"
             "opacity 0.80 0.80,class:^(qt6ct)$"
-            "opacity 0.80 0.80,class:^(yad)$"
 
             "opacity 0.90 0.90,class:^(com.github.rafostar.Clapper)$" #Clapper-Gtk
             "opacity 0.80 0.80,class:^(com.github.tchx84.Flatseal)$" #Flatseal-Gtk
             "opacity 0.80 0.80,class:^(hu.kramo.Cartridges)$" #Cartridges-Gtk
             "opacity 0.80 0.80,class:^(com.obsproject.Studio)$" #Obs-Qt
             "opacity 0.80 0.80,class:^(gnome-boxes)$" #Boxes-Gtk
-            "opacity 0.90 0.90,class:^(discord)$" #Discord-Electron
-            "opacity 0.90 0.90,class:^(WebCord)$" #WebCord-Electron
+            "opacity 0.80 0.80,class:^(discord)$" #Discord-Electron
+            "opacity 0.80 0.80,class:^(WebCord)$" #WebCord-Electron
             "opacity 0.80 0.80,class:^(app.drey.Warp)$" #Warp-Gtk
             "opacity 0.80 0.80,class:^(net.davidotek.pupgui2)$" #ProtonUp-Qt
+            "opacity 0.80 0.80,class:^(yad)$" #Protontricks-Gtk
             "opacity 0.80 0.80,class:^(Signal)$" #Signal-Gtk
             "opacity 0.80 0.80,class:^(io.gitlab.theevilskeleton.Upscaler)$" #Upscaler-Gtk
 
             "opacity 0.80 0.70,class:^(pavucontrol)$"
-            "opacity 0.80 0.70,class:^(org.pulseaudio.pavucontrol)$"
             "opacity 0.80 0.70,class:^(blueman-manager)$"
-            "opacity 0.80 0.70,class:^(.blueman-manager-wrapped)$"
             "opacity 0.80 0.70,class:^(nm-applet)$"
             "opacity 0.80 0.70,class:^(nm-connection-editor)$"
             "opacity 0.80 0.70,class:^(org.kde.polkit-kde-authentication-agent-1)$"
-
-            "content game, tag:games"
-            "tag +games, content:game"
-            "tag +games, class:^(steam_app.*|steam_app_\d+)$"
-            "tag +games, class:^(gamescope)$"
-            "tag +games, class:(Waydroid)"
-            "tag +games, class:(osu!)"
-
-            # Games
-            "syncfullscreen,tag:games"
-            "fullscreen,tag:games"
-            "noborder 1,tag:games"
-            "noshadow,tag:games"
-            "noblur,tag:games"
-            "noanim,tag:games"
 
             "float,class:^(qt5ct)$"
             "float,class:^(nwg-look)$"
@@ -323,12 +302,11 @@
             "float,class:^(com.github.rafostar.Clapper)$" #Clapper-Gtk
             "float,class:^(app.drey.Warp)$" #Warp-Gtk
             "float,class:^(net.davidotek.pupgui2)$" #ProtonUp-Qt
+            "float,class:^(yad)$" #Protontricks-Gtk
             "float,class:^(eog)$" #Imageviewer-Gtk
             "float,class:^(io.gitlab.theevilskeleton.Upscaler)$" #Upscaler-Gtk
-            "float,class:^(yad)$"
             "float,class:^(pavucontrol)$"
             "float,class:^(blueman-manager)$"
-            "float,class:^(.blueman-manager-wrapped)$"
             "float,class:^(nm-applet)$"
             "float,class:^(nm-connection-editor)$"
             "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
@@ -347,67 +325,61 @@
             "$mainMod SHIFT, j, resizeactive, 0 30"
 
             # Functional keybinds
-            ",XF86MonBrightnessDown,exec,brightnessctl set 2%-"
-            ",XF86MonBrightnessUp,exec,brightnessctl set +2%"
+            ",XF86MonBrightnessDown,exec,light -U 20"
+            ",XF86MonBrightnessUp,exec,light -A 20"
             ",XF86AudioLowerVolume,exec,pamixer -d 2"
             ",XF86AudioRaiseVolume,exec,pamixer -i 2"
           ];
-          bind = let
-            autoclicker = pkgs.callPackage ./scripts/autoclicker.nix {};
-          in
+          bind =
             [
-              # Keybinds help menu
-              "$mainMod, question, exec, ${./scripts/keybinds.sh}"
-              "$mainMod, slash, exec, ${./scripts/keybinds.sh}"
-              "$mainMod CTRL, K, exec, ${./scripts/keybinds.sh}"
-
-              "$mainMod, F8, exec, kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 40"
-              # "$mainMod ALT, mouse:276, exec, kill $(cat /tmp/auto-clicker.pid) 2>/dev/null || ${lib.getExe autoclicker} --cps 60"
-
               # Night Mode (lower value means warmer temp)
-              "$mainMod, F9, exec, ${getExe pkgs.hyprsunset} --temperature 3500" # good values: 3500, 3000, 2500
-              "$mainMod, F10, exec, pkill hyprsunset"
+              "$mainMod, F9, exec, ${getExe pkgs.wlsunset} -t 3000 -T 3900"
+              "$mainMod, F10, exec, pkill wlsunset"
+
+              # Overview plugin
+              # "$mainMod, tab, overview:toggle"
 
               # Window/Session actions
-              "$mainMod, Q, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
-              "ALT, F4, exec, ${./scripts/dontkillsteam.sh}" # killactive, kill the window on focus
+              "$mainMod, Q, exec, $hyprScriptsDir/dontkillsteam.sh" # killactive, kill the window on focus
+              "ALT, F4, exec, $hyprScriptsDir/dontkillsteam.sh" # killactive, kill the window on focus
               "$mainMod, delete, exit" # kill hyperland session
               "$mainMod, W, togglefloating" # toggle the window on focus to float
               "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
               "ALT, return, fullscreen" # toggle the window on focus to fullscreen
               "$mainMod ALT, L, exec, hyprlock" # lock screen
-              "$mainMod, backspace, exec, pkill -x wlogout || wlogout -b 4" # logout menu
-              "$CONTROL, ESCAPE, exec, pkill waybar || waybar" # toggle waybar
+              "$mainMod, backspace, exec, wlogout -b 4" # logout menu
+              "$CONTROL, ESCAPE, exec, killall waybar || waybar" # toggle waybar
 
-              # Applications/Programs
               "$mainMod, Return, exec, $term"
               "$mainMod, T, exec, $term"
-              "$mainMod, E, exec, $fileManager"
+              "$mainMod, E, exec, $file"
               "$mainMod, C, exec, $editor"
               "$mainMod, F, exec, $browser"
-              "$mainMod SHIFT, S, exec, spotify"
-              "$mainMod SHIFT, Y, exec, youtube-music"
-              "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # System Monitor
-              "$mainMod CTRL, C, exec, hyprpicker --autocopy --format=hex" # Colour Picker
+              "$CONTROL ALT, DELETE, exec, $term -e '${getExe pkgs.btop}'" # system monitor
 
-              "$mainMod, A, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
-              "$mainMod, SPACE, exec, pkill -x rofi || ${./scripts/rofi.sh} drun" # launch desktop applications
-              "$mainMod, Z, exec, pkill -x rofi || ${./scripts/rofi.sh} emoji" # launch emoji picker
-              # "$mainMod, tab, exec, pkill -x rofi || ${./scripts/rofi.sh} window" # switch between desktop applications
-              # "$mainMod, R, exec, pkill -x rofi || ${./scripts/rofi.sh} file" # brrwse system files
-              "$mainMod ALT, K, exec, ${./scripts/keyboardswitch.sh}" # change keyboard layout
+              "$mainMod, A, exec, pkill -x rofi || $launcher" # launch desktop applications
+              "$mainMod, Z, exec, pkill -x rofi || $hyprScriptsDir/emoji.sh" # launch emoji picker
+              #"$mainMod, tab, exec, pkill -x rofi || $hyprScriptsDir/rofilaunch.sh w" # switch between desktop applications
+              # "$mainMod, R, exec, pkill -x rofi || $hyprScriptsDir/rofilaunch.sh f" # browse system files
+              "$mainMod ALT, K, exec, $hyprScriptsDir/keyboardswitch.sh" # change keyboard layout
               "$mainMod SHIFT, N, exec, swaync-client -t -sw" # swayNC panel
               "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
-              "$mainMod, G, exec, ${./scripts/rofi.sh} games" # game launcher
-              "$mainMod ALT, G, exec, ${./scripts/gamemode.sh}" # disable hypr effects for gamemode
-              "$mainMod, V, exec, ${./scripts/ClipManager.sh}" # Clipboard Manager
-              "$mainMod, M, exec, pkill -x rofi || ${./scripts/rofimusic.sh}" # online music
+              "$mainMod, G, exec, $hyprScriptsDir/gamelauncher.sh" # game launcher
+              "$mainMod ALT, G, exec, $hyprScriptsDir/gamemode.sh" # disable hypr effects for gamemode
+              "$mainMod, V, exec, $hyprScriptsDir/ClipManager.sh" # Clipboard Manager
+              "$mainMod, M, exec, pkill -x rofi || $hyprScriptsDir/rofimusic.sh" # online music
+              "$mainMod SHIFT, M, exec, pkill -x rofi || $hyprScriptsDir/rofimusic.sh" # online music
+
+              # Waybar
+              "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle hide/show waybar
+              "$mainMod CTRL, B, exec, $hyprScriptsDir/WaybarStyles.sh" # Waybar Styles Menu
+              "$mainMod ALT, B, exec, $hyprScriptsDir/WaybarLayout.sh" # Waybar Layout Menu
 
               # Screenshot/Screencapture
-              "$mainMod, P, exec, ${./scripts/screenshot.sh} s" # drag to snip an area / click on a window to print it
-              "$mainMod CTRL, P, exec, ${./scripts/screenshot.sh} sf" # frozen screen, drag to snip an area / click on a window to print it
-              "$mainMod, print, exec, ${./scripts/screenshot.sh} m" # print focused monitor
-              "$mainMod ALT, P, exec, ${./scripts/screenshot.sh} p" # print all monitor outputs
+              "$mainMod, P, exec, $hyprScriptsDir/screenshot.sh s" # drag to snip an area / click on a window to print it
+              "$mainMod CTRL, P, exec, $hyprScriptsDir/screenshot.sh sf" # frozen screen, drag to snip an area / click on a window to print it
+              "$mainMod, print, exec, $hyprScriptsDir/screenshot.sh m" # print focused monitor
+              "$mainMod ALT, P, exec, $hyprScriptsDir/screenshot.sh p" # print all monitor outputs
 
               # Functional keybinds
               ",xf86Sleep, exec, systemctl suspend" # Put computer into sleep mode
@@ -417,15 +389,26 @@
               ",XF86AudioPause,exec,playerctl play-pause" # Play/Pause media
               ",xf86AudioNext,exec,playerctl next" # go to next media
               ",xf86AudioPrev,exec,playerctl previous" # go to previous media
-
-              # ",xf86AudioNext,exec,${./scripts/MediaCtrl.sh} next" # go to next media
-              # ",xf86AudioPrev,exec,${./scripts/MediaCtrl.sh} previous" # go to previous media
-              # ",XF86AudioPlay,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
-              # ",XF86AudioPause,exec,${./scripts/MediaCtrl.sh} play-pause" # go to next media
+              # ",xf86AudioNext,exec,$hyprScriptsDir/MediaCtrl.sh --nxt" # go to next media
+              # ",xf86AudioPrev,exec,$hyprScriptsDir/MediaCtrl.sh --prv" # go to previous media
 
               # to switch between windows in a floating workspace
-              "$mainMod, Tab, cyclenext"
-              "$mainMod, Tab, bringactivetotop"
+              # "SUPER,Tab,cyclenext,
+              # "SUPER,Tab,bringactivetotop,
+
+              # Switch workspaces with mainMod + [0-9]
+              /*
+                 "$mainMod, 1, workspace, 1"
+              "$mainMod, 2, workspace, 2"
+              "$mainMod, 3, workspace, 3"
+              "$mainMod, 4, workspace, 4"
+              "$mainMod, 5, workspace, 5"
+              "$mainMod, 6, workspace, 6"
+              "$mainMod, 7, workspace, 7"
+              "$mainMod, 8, workspace, 8"
+              "$mainMod, 9, workspace, 9"
+              "$mainMod, 0, workspace, 10"
+              */
 
               # Switch workspaces relative to the active workspace with mainMod + CTRL + [←→]
               "$mainMod CTRL, right, workspace, r+1"
@@ -447,16 +430,9 @@
               "$mainMod, k, movefocus, u"
               "$mainMod, j, movefocus, d"
 
-              # Go to workspace 6 and 7 with mouse side buttons
+              # Go to workspace 9 (Spotify) and 5 with mouse side buttons
+              "$mainMod, mouse:275, workspace, 9"
               "$mainMod, mouse:276, workspace, 5"
-              "$mainMod, mouse:275, workspace, 6"
-              "$mainMod SHIFT, mouse:276, movetoworkspace, 5"
-              "$mainMod SHIFT, mouse:275, movetoworkspace, 6"
-              "$mainMod CTRL, mouse:276, movetoworkspacesilent, 5"
-              "$mainMod CTRL, mouse:275, movetoworkspacesilent, 6"
-
-              # Rebuild NixOS with a KeyBind
-              "$mainMod, U, exec, $term -e ${./scripts/rebuild.sh}"
 
               # Scroll through existing workspaces with mainMod + scroll
               "$mainMod, mouse_down, workspace, e+1"
@@ -479,21 +455,15 @@
               "$mainMod SHIFT $CONTROL, J, movewindow, d"
 
               # Special workspaces (scratchpad)
-              "$mainMod CTRL, S, movetoworkspacesilent, special"
               "$mainMod ALT, S, movetoworkspacesilent, special"
               "$mainMod, S, togglespecialworkspace,"
             ]
-            ++ (builtins.concatLists (builtins.genList (x: let
-                ws = let
-                  c = (x + 1) / 10;
-                in
-                  builtins.toString (x + 1 - (c * 10));
-              in [
-                "$mainMod, ${ws}, workspace, ${toString (x + 1)}"
-                "$mainMod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-                "$mainMod CTRL, ${ws}, movetoworkspacesilent, ${toString (x + 1)}"
+            ++ (builtins.concatLists (builtins.genList (x: [
+                "$mainMod, ${toString (x + 1)}, workspace, ${toString (x + 1)}"
+                "$mainMod SHIFT, ${toString (x + 1)}, movetoworkspace, ${toString (x + 1)}"
+                "$mainMod ALT, ${toString (x + 1)}, movetoworkspacesilent, ${toString (x + 1)}"
               ])
-              10));
+              9));
           bindm = [
             # Move/Resize windows with mainMod + LMB/RMB and dragging
             "$mainMod, mouse:272, movewindow"
@@ -501,6 +471,16 @@
           ];
         };
         extraConfig = ''
+          # plugin {
+          #   overview {
+          #     showEmptyWorkspace = true
+          #     panelHeight = 200
+          #     overrideGaps = true
+          #     gapsIn = 6
+          #     gapsOut = 13
+          #   }
+          # }
+
           binds {
             workspace_back_and_forth = 1
             #allow_workspace_cycles=1
@@ -508,28 +488,22 @@
           }
 
           # Easily plug in any monitor
-          # Custom Monitor Configuration (Added)
-          #  monitor=,preferred,auto,1
-          monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
-          monitor = DP-1, 1920x1080@60, 1280x0, 1
-          monitor = eDP-1, 1920x1080@60, 1280x1080, 1
+          monitor=,preferred,auto,1
 
           # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
           monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1,bitdepth,8
           monitor=desc:BNQ BenQ EL2870U PCK00489SL0,3840x2160@60,0x0,2,bitdepth,10
           monitor=desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x0,1,transform,1 # 5 for fipped
 
-          # Binds workspaces to my monitors only (find desc with: hyprctl monitors)
-          workspace=1,monitor:desc:BNQ BenQ EL2870U PCK00489SL0,default:true
-          workspace=2,monitor:desc:BNQ BenQ EL2870U PCK00489SL0
-          workspace=3,monitor:desc:BNQ BenQ EL2870U PCK00489SL0
-          workspace=4,monitor:desc:BNQ BenQ EL2870U PCK00489SL0
-          workspace=5,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0,default:true
-          workspace=6,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0
-          workspace=7,monitor:desc:BNQ BenQ EW277HDR 99J01861SL0
-          workspace=8,monitor:desc:BNQ BenQ xl2420t 99D06760SL0,default:true
-          workspace=9,monitor:desc:BNQ BenQ xl2420t 99D06760SL0
-          workspace=10,monitor:desc:BNQ BenQ EL2870U PCK00489SL0
+          workspace=1,monitor:DP-1,default:true
+          workspace=2,monitor:HDMI-A-1,default:true
+          workspace=3,monitor:HDMI-A-2,default:true
+          workspace=4,monitor:DP-1
+          workspace=5,monitor:DP-1
+          workspace=7,monitor:HDMI-A-1
+          workspace=8,monitor:HDMI-A-1
+          workspace=9,monitor:HDMI-A-1
+          workspace=10,monitor:DP-1
         '';
       };
     })

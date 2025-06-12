@@ -3,82 +3,111 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-waybar-fix.url = "github:nixos/nixpkgs/c7b821ba2e1e635ba5a76d299af62821cbcb09f3";
+    nur.url = "github:nix-community/NUR";
+    nixvim.url = "github:Sly-Harvey/nixvim";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    /* Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+      inputs.hyprland.follows = "hyprland";
+    }; */
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixvim = {
-      url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nur.url = "github:nix-community/NUR";
-    betterfox = {
-      url = "github:yokoffing/Betterfox";
-      flake = false;
-    };
-    thunderbird-catppuccin = {
-      url = "github:catppuccin/thunderbird";
-      flake = false;
-    };
-    zen-browser = {
-      url = "github:maximoffua/zen-browser.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nvchad4nix = {
-      url = "github:nix-community/nix4nvchad";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
-    self,
     nixpkgs,
+    nixpkgs-stable,
     ...
   } @ inputs: let
-    inherit (self) outputs;
-    settings = {
-      # User configuration
-      username = "authxt"; # automatically set with install.sh and live-install.sh
-      editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
-      browser = "floorp"; # firefox, floorp, zen
-      terminal = "kitty"; # kitty, alacritty, wezterm
-      terminalFileManager = "yazi"; # yazi or lf
-      sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
+    # User configuration
+    username = "kepler"; # WARNING REPLACE THIS WITH YOUR USERNAME IF YOU ARE MANUALLY INSTALLING WITHOUT THE SCRIPT
+    terminal = "alacritty"; # or kitty
 
-      # System configuration
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
-      hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
-      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
-      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+    # System configuration
+    locale = "en_US.UTF-8"; # REPLACE THIS WITH YOUR LOCALE
+    timezone = "Asia/Kathmandu"; # REPLACE THIS WITH YOUR TIMEZONE
+    hostname = "nixos"; # CHOOSE A HOSTNAME HERE (default is fine)
+
+    arguments = {
+      inherit
+        pkgs-stable
+        username
+        terminal
+        system
+        locale
+        timezone
+        hostname
+        ;
     };
 
-    systems = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    system = "x86_64-linux"; # most users will be on 64 bit pcs (unless yours is ancient)
+    lib = nixpkgs.lib;
+    pkgs-stable = _final: _prev: {
+      stable = import nixpkgs-stable {
+        inherit system;
+        config.allowUnfree = true;
+        config.nvidia.acceptLicense = true;
+      };
+    };
   in {
-    templates = import ./dev-shells;
-    overlays = import ./overlays {inherit inputs settings;};
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     nixosConfigurations = {
-      Default = nixpkgs.lib.nixosSystem {
-        system = forAllSystems (system: system);
-        specialArgs = {inherit self inputs outputs;} // settings;
-        modules = [./hosts/Default/configuration.nix];
+      Default = lib.nixosSystem {
+        inherit system;
+        specialArgs =
+          (arguments
+            // {inherit inputs;})
+          // inputs; # Expose all inputs and arguments
+        modules = [
+          ./hosts/Default/configuration.nix
+        ];
+      };
+      Desktop = lib.nixosSystem {
+        inherit system;
+        specialArgs =
+          (arguments
+            // {
+              inherit inputs;
+              hostname = "NixOS-Desktop";
+            })
+          // inputs; # Expose all inputs and arguments
+        modules = [
+          ./hosts/Desktop/configuration.nix
+        ];
+      };
+      Laptop = lib.nixosSystem {
+        inherit system;
+        specialArgs =
+          (arguments
+            // {
+              inherit inputs;
+              hostname = "NixOS-Laptop";
+            })
+          // inputs; # Expose all inputs and arguments
+        modules = [
+          ./hosts/Laptop/configuration.nix
+        ];
+      };
+      Iso = lib.nixosSystem {
+        # Build with: nix build .#nixosConfigurations.Iso.config.system.build.isoImage. (cpu intensive)
+        inherit system;
+        specialArgs =
+          (arguments
+            // {
+              inherit inputs;
+              hostname = "NixOS-Installer";
+            })
+          // inputs; # Expose all inputs and arguments
+        modules = [
+            ./hosts/LIVE-CD.nix
+        ];
       };
     };
   };

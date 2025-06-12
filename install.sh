@@ -1,68 +1,54 @@
 #!/usr/bin/env bash
 
-# If in the live environment then start the live-install.sh script
-if [ -d "/iso" ] || [ "$(findmnt -o FSTYPE -n /)" = "tmpfs" ]; then
-  sudo ./live-install.sh
-  exit 0
-fi
-
 # Check if running as root. If root, script will exit.
 if [[ $EUID -eq 0 ]]; then
-  echo "This script should not be executed as root! Exiting..."
-  exit 1
+	echo "This script should not be executed as root! Exiting..."
+	exit 1
 fi
 
 # Check if using NixOS. If not using NixOS, script will exit.
-if [[ ! "$(grep -i nixos </etc/os-release)" ]]; then
-  echo "This installation script only works on NixOS! Download an iso at https://nixos.org/download/"
-  echo "You can either use this script in the live environment or booted into a system."
-  exit 1
+if [[ ! "$(grep -i nixos < /etc/os-release)" ]]; then
+	echo "This installation script only works on NixOS! Download an iso at https://nixos.org/download/"
+  echo "Keep in mind that this script is not intended for use while in the live environment."
+	exit 1
 fi
 
-# Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-NC='\033[0m' # No Color
-
+scriptdir=$(realpath "$(dirname "$0")")
 currentUser=$(logname)
 
-# Delete dirs that conflict with home-manager (skip symlinks)
-paths=(
-  ~/.mozilla/firefox/profiles.ini
-  ~/.zen/profiles.ini
-  ~/.gtkrc-*
-  ~/.config/gtk-*
-  ~/.config/cava
-)
-for file in "${paths[@]}"; do
-  for expanded in $file; do
-    if [ -e "$expanded" ] && [ ! -L "$expanded" ]; then
-      # echo "Removing: $expanded"
-      sudo rm -rf "$expanded"
-    fi
-  done
-done
+pushd "$scriptdir"&> /dev/null || exit
+
+# Delete dirs that conflict with home-manager
+sudo rm -f ~/.mozilla/firefox/profiles.ini
+sudo rm -rf ~/.gtkrc-*
+sudo rm -rf ~/.config/gtk-*
+sudo rm -rf ~/.config/cava
 
 # replace username variable in flake.nix with $USER
-sudo sed -i -e "s/username = \".*\"/username = \"$currentUser\"/" "./flake.nix"
+sed -i -e 's/username = \".*\"/username = \"'$currentUser'\"/' "$scriptdir/flake.nix"
 
-# rm -f ./hosts/Default/hardware-configuration.nix &>/dev/null
-if [ ! -f "./hosts/Default/hardware-configuration.nix" ]; then
-  if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
-    cat "/etc/nixos/hardware-configuration.nix" | sudo tee "./hosts/Default/hardware-configuration.nix" >/dev/null
-  elif [ -f "/etc/nixos/hosts/Default/hardware-configuration.nix" ]; then
-    cat "/etc/nixos/hosts/Default/hardware-configuration.nix" | sudo tee "./hosts/Default/hardware-configuration.nix" >/dev/null
-  else
-    # Generate new config
-    clear
-    sudo nixos-generate-config --show-hardware-config >"./hosts/Default/hardware-configuration.nix"
-  fi
+# rm -f $scriptdir/hosts/Default/hardware-configuration.nix &>/dev/null
+if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
+  for host in "$scriptdir"/hosts/*/ ; do
+    host=${host%*/}
+    cat "/etc/nixos/hardware-configuration.nix" > "$host/hardware-configuration.nix"
+  done
+else
+	# Generate new config
+	clear
+  nix-shell --command "echo GENERATING CONFIG! | figlet -cklno | lolcat -F 0.3 -p 2.5 -S 300"	
+  for host in "$scriptdir"/hosts/*/ ; do
+    host=${host%*/}
+    sudo nixos-generate-config --show-hardware-config > "$host/hardware-configuration.nix"
+  done
 fi
 
-sudo git -C . add hosts/Default/hardware-configuration.nix
+nix-shell --command "git -C $scriptdir add *"
 
-# clear
-sudo nixos-rebuild switch --flake .#Default && \
-    echo -e "${GREEN}Success!${NC}" && \
-    echo "Make sure to reboot if this is your first time using this script!" || \
-    exit 1
+clear
+nix-shell --command "echo BUILDING! | figlet -cklnoW | lolcat -F 0.3 -p 2.5 -S 300"
+nix-shell --command "sudo nixos-rebuild switch --flake "$scriptdir#Default" || exit 1"
+echo "success!"
+echo "Make sure to reboot if this is your first time using this script!"
+
+popd "$scriptdir" &> /dev/null || exit

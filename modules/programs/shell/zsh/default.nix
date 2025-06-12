@@ -1,13 +1,13 @@
 {
-  self,
   pkgs,
-  terminalFileManager,
   ...
 }: {
   home-manager.sharedModules = [
     (_: {
-      xdg.configFile."zsh/.p10k.zsh".source = ./.p10k.zsh;
-      xdg.configFile."zsh/templates" = {
+      home.file.".config/zsh/.p10k.zsh" = {
+        source = ./.p10k.zsh;
+      };
+      home.file.".config/zsh/templates" = {
         source = ./templates;
         recursive = true;
       };
@@ -19,22 +19,19 @@
         history.size = 100000;
         history.path = "\${XDG_DATA_HOME}/zsh/history";
         dotDir = ".config/zsh";
-        # plugins = [
-        #   {
-        #     name = "powerlevel10k";
-        #     file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-        #     src = pkgs.zsh-powerlevel10k;
-        #   }
-        # ];
+        #plugins = [
+        #  {
+        #    name = "romkatv/powerlevel10k";
+        #    src = pkgs.zsh-powerlevel10k;
+        #    file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+        #  }
+        #];
         oh-my-zsh = {
+          # Plug-ins
           enable = true;
-          plugins = [
-            "git"
-            "gitignore"
-            "z"
-          ];
+          plugins = ["git" "gitignore" "aliases" "z"];
         };
-        initContent = ''
+        initExtra = ''
           # Powerlevel10k Zsh theme
           source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
           test -f ~/.config/zsh/.p10k.zsh && source ~/.config/zsh/.p10k.zsh
@@ -44,8 +41,7 @@
 
           # Key Bindings
           # bindkey -s ^t "tmux-sessionizer\n"
-          # bindkey '^f' "cd $(${pkgs.fd}/bin/fd . /mnt/work /mnt/work/Projects/ /run/current-system ~/ --max-depth 1 | fzf)\n"
-          bindkey '^l' "${terminalFileManager}\r"
+          bindkey -s ^l "lf\n"
           bindkey '^a' beginning-of-line
           bindkey '^e' end-of-line
 
@@ -116,52 +112,53 @@
               done
            fi
           }
-
-          function fnew {
-            if [ -d "$1" ]; then
-              echo "Directory \"$1\" already exists!"
-              return 1
-            fi
-            nix flake new $1 --template ${self}/dev-shells#$2
-            cd $1
-            direnv allow
-          }
-
-          function finit {
-            nix flake init --template ${self}/dev-shells#$1
-            direnv allow
-          }
-
           function cgen {
             if [ -d "$1" ]; then
               echo "Directory \"$1\" already exists!"
               return 1
             fi
-            nix flake new $1 --template ${self}/dev-shells#c-cpp
-            cd $1
+            mkdir $1 && cd $1
             cat ~/.config/zsh/templates/ListTemplate.txt >> CMakeLists.txt
             mkdir src
             mkdir include
             cat ~/.config/zsh/templates/HelloWorldTemplate.txt >> src/main.cpp
+            cat ~/.config/zsh/templates/shell.txt >> shell.nix
+            cat ~/.config/zsh/templates/envrc-nix.txt >> .envrc
             direnv allow
+            #echo "Created the following Directories and files."
+            ${pkgs.eza}/bin/eza --icons=auto --tree .
           }
 
           function crun {
             #VAR=''${1:-.}
             mkdir build 2> /dev/null
-            cmake -B build
-            cmake --build build
+            nix-shell --run "cmake -B build"
+            nix-shell --run "cmake --build build"
             build/main
+          }
+
+          function crun-mingw {
+            #VAR=''${1:-.}
+            mkdir build-mingw 2> /dev/null
+            nix-shell --run "x86_64-w64-mingw32-cmake -B build-mingw"
+            nix-shell --run "make -C build-mingw"
+            build-mingw/main.exe
           }
 
           function cbuild {
             mkdir build 2> /dev/null
-            cmake -B build
-            cmake --build build
+            nix-shell --run "cmake -B build"
+            nix-shell --run "cmake --build build"
+          }
+
+          function cbuild-mingw {
+            mkdir build-mingw 2> /dev/null
+            nix-shell --run "x86_64-w64-mingw32-cmake -B build-mingw"
+            nix-shell --run "make -C build-mingw"
           }
         '';
         envExtra = ''
-          # Defaults
+                # Defaults
           export XMONAD_CONFIG_DIR="''${XDG_CONFIG_HOME:-$HOME/.config}/xmonad" # xmonad.hs is expected to stay here
           export XMONAD_DATA_DIR="''${XDG_DATA_HOME:-$HOME/.local/share}/xmonad"
           export XMONAD_CACHE_DIR="''${XDG_CACHE_HOME:-$HOME/.cache}/xmonad"
@@ -170,6 +167,44 @@
           --color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
           --color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
           --color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+
+          if [ -z "$XDG_CONFIG_HOME" ] ; then
+              export XDG_CONFIG_HOME="$HOME/.config"
+          fi
+          if [ -z "$XDG_DATA_HOME" ] ; then
+              export XDG_DATA_HOME="$HOME/.local/share"
+          fi
+          if [ -z "$XDG_CACHE_HOME" ] ; then
+              export XDG_CACHE_HOME="$HOME/.cache"
+          fi
+
+          # path+=("$HOME/.local/bin")
+          # export PATH="$PATH:''${$(find $HOME/.local/bin -maxdepth 1 -type d -printf %p:)%%:}"
+
+          ### PATH
+          if [ -d "$HOME/.bin" ] ;
+            then PATH="$HOME/.bin:$PATH"
+          fi
+
+          if [ -d "$HOME/.local/bin" ] ;
+            then PATH="$HOME/.local/bin:$PATH"
+          fi
+
+          if [ -d "$HOME/.emacs.d/bin" ] ;
+            then PATH="$HOME/.emacs.d/bin:$PATH"
+          fi
+
+          if [ -d "$HOME/Applications" ] ;
+            then PATH="$HOME/Applications:$PATH"
+          fi
+
+          if [ -d "/var/lib/flatpak/exports/bin/" ] ;
+            then PATH="/var/lib/flatpak/exports/bin/:$PATH"
+          fi
+
+          if [ -d "$HOME/.config/emacs/bin/" ] ;
+            then PATH="$HOME/.config/emacs/bin/:$PATH"
+          fi
         '';
         shellGlobalAliases = {
           UUID = "$(uuidgen | tr -d \\n)";
@@ -187,7 +222,7 @@
           tree = "${pkgs.eza}/bin/eza --icons=auto --tree"; # dir tree
           vc = "code --disable-gpu"; # gui code editor
           nv = "nvim";
-          nf = "${pkgs.microfetch}/bin/microfetch";
+          nf = "${pkgs.neofetch}/bin/neofetch";
           cp = "cp -iv";
           mv = "mv -iv";
           rm = "rm -vI";
@@ -196,33 +231,31 @@
           tp = "${pkgs.trash-cli}/bin/trash-put";
           tpr = "${pkgs.trash-cli}/bin/trash-restore";
           grep = "grep --color=always";
-          pokemon = "pokego --random 1-8 --no-title";
 
           # Nixos
           list-gens = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system/";
-          find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';
-          update-input = "nix flake update $@";
-          rebuild = "${../../../desktop/hyprland/scripts/rebuild.sh}";
-          sysup = "sudo nixos-rebuild switch --flake ~/NixOS#Default --upgrade-all --show-trace";
+          find-store-path = ''function { nix-shell -p $1 --command "nix eval -f "<nixpkgs>" --raw $1" }'';
+          update-input = "nix flake lock --update-input $@";
+          rebuild = "~/NixOS/install.sh";
+          rebuild-desktop = "sudo nixos-rebuild switch --flake ~/NixOS#Desktop";
+          rebuild-laptop = "sudo nixos-rebuild switch --flake ~/NixOS#Laptop";
+          build-iso = "nix build .#nixosConfigurations.Iso.config.system.build.isoImage";
 
           # Directory Shortcuts.
-          dots = "cd ~/NixOS/";
+          dev = "cd /mnt/seagate/dev/";
+          dots = "cd ~/.dotfiles/";
+          nixdir = "cd /mnt/seagate/dev/nix/";
+          cppdir = "cd /mnt/seagate/dev/C++/";
+          zigdir = "cd /mnt/seagate/dev/Zig/";
+          csdir = "cd /mnt/seagate/dev/C#/";
+          rustdir = "cd /mnt/seagate/dev/Rust/";
+          pydir = "cd /mnt/seagate/dev/Python/";
+          javadir = "cd /mnt/seagate/dev/Java/";
+          luadir = "cd /mnt/seagate/dev/lua/";
+          webdir = "cd /mnt/seagate/dev/Website/";
+          seagate = "cd /mnt/seagate/";
+          media = "cd /mnt/seagate/media/";
           games = "cd /mnt/games/";
-          work = "cd /mnt/work/";
-          media = "cd /mnt/work/media/";
-          projects = "cd /mnt/work/Projects/";
-          proj = "cd /mnt/work/Projects/";
-          dev = "cd /mnt/work/Projects/";
-          # dev = "cd /mnt/work/dev/";
-          # nixdir = "cd /mnt/work/dev/nix/";
-          # cppdir = "cd /mnt/work/dev/C++/";
-          # zigdir = "cd /mnt/work/dev/Zig/";
-          # csdir = "cd /mnt/work/dev/C#/";
-          # rustdir = "cd /mnt/work/dev/Rust/";
-          # pydir = "cd /mnt/work/dev/Python/";
-          # javadir = "cd /mnt/work/dev/Java/";
-          # luadir = "cd /mnt/work/dev/lua/";
-          # webdir = "cd /mnt/work/dev/Website/";
         };
       };
     })

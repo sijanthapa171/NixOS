@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
+{
+  ...
+}: {
   home-manager.sharedModules = [
     (_: {
       programs.waybar = {
@@ -12,44 +13,19 @@
           {
             layer = "top";
             position = "top";
-            mode = "dock"; # Fixes fullscreen issues
-            height = 32; # 35
+            height = 15;
             exclusive = true;
-            passthrough = false;
             gtk-layer-shell = true;
             ipc = true;
             fixed-center = true;
-            margin-top = 10;
-            margin-left = 10;
-            margin-right = 10;
-            margin-bottom = 0;
+            margin-top = 3;
+            margin-left = 8;
+            margin-right = 8;
 
-            modules-left = ["hyprland/workspaces" "cava"];
-            # modules-center = ["clock" "custom/notification"];
-            modules-center = ["idle_inhibitor" "clock"];
-            modules-right = ["custom/gpuinfo" "cpu" "memory" "backlight" "pulseaudio" "bluetooth" "network" "tray" "battery"];
-
-            "custom/notification" = {
-              tooltip = false;
-              format = "{icon}";
-              format-icons = {
-                notification = "<span foreground='red'><sup></sup></span>";
-                none = "";
-                dnd-notification = "<span foreground='red'><sup></sup></span>";
-                dnd-none = "";
-                inhibited-notification = "<span foreground='red'><sup></sup></span>";
-                inhibited-none = "";
-                dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
-                dnd-inhibited-none = "";
-              };
-              return-type = "json";
-              exec-if = "which swaync-client";
-              exec = "swaync-client -swb";
-              on-click = "swaync-client -t -sw";
-              on-click-right = "swaync-client -d -sw";
-              escape = true;
-            };
-
+            modules-left = ["hyprland/workspaces" "cava" "custom/r_end"];
+            modules-center = ["custom/l_end" "idle_inhibitor" "clock" "custom/r_end"];
+            modules-right = ["custom/l_end" "custom/gpuinfo" "cpu" "memory" "network" "bluetooth" "pulseaudio" "custom/r_end" "hyprland/language" "custom/r_end" "tray" "battery" "custom/l_end" "custom/power" "custom/padd"];
+            #"modules-right" = ["custom/l_end" "temperature" "cpu" "memory" "network" "bluetooth" "pulseaudio" "custom/r_end" "hyprland/language" "custom/r_end" "tray" "battery" "custom/l_end" "custom/power" "custom/r_end" "custom/padd" ];
             "custom/colour-temperature" = {
               format = "{} ";
               exec = "wl-gammarelay-rs watch {t}";
@@ -57,7 +33,7 @@
               on-scroll-down = "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100";
             };
             "custom/cava_mviz" = {
-              exec = "${../../scripts/WaybarCava.sh}";
+              exec = "$XDG_CONFIG_HOME/hypr/scripts/WaybarCava.sh";
               format = "{}";
             };
             "cava" = {
@@ -69,20 +45,22 @@
               # "noise_reduction" = 0.77;
               sleep_timer = 5;
               bar_delimiter = 0;
-              on-click = "playerctl play-pause";
             };
             "custom/gpuinfo" = {
-              exec = "${../../scripts/gpuinfo.sh}";
+              exec = " ~/.config/hypr/scripts/gpuinfo.sh";
               return-type = "json";
               format = " {}";
               interval = 5; # once every 5 seconds
               tooltip = true;
               max-length = 1000;
             };
-            "custom/icon" = {
-              # format = " ";
-              exec = "echo ' '";
-              format = "{}";
+            "custom/updates" = {
+              exec = "~/.config/hypr/scripts/systemupdate.sh";
+              return-type = "json";
+              format = "󰮯 {}";
+              on-click = "~/.config/hypr/scripts/systemupdate.sh up";
+              interval = 86400; # once every day
+              tooltip = true;
             };
             "mpris" = {
               format = "{player_icon} {title} - {artist}";
@@ -105,15 +83,15 @@
               max-length = 30;
             };
             "temperature" = {
-              hwmon-path = "/sys/class/hwmon/hwmon1/temp1_input";
-              critical-threshold = 83;
+              hwmon-path = "/sys/class/hwmon/hwmon2/temp1_input";
+              critical-threshold = 80;
               format = "{icon} {temperatureC}°C";
               format-icons = ["" "" ""];
-              interval = 10;
+              interval = 2;
             };
             "hyprland/language" = {
-              format = "{short}"; # can use {short} and {variant}
-              on-click = "${../../scripts/keyboardswitch.sh}";
+              format = "{short} {variant}";
+              on-click = "~/.config/hypr/scripts/keyboardswitch.sh";
             };
             "hyprland/workspaces" = {
               disable-scroll = true;
@@ -151,8 +129,7 @@
             };
 
             "clock" = {
-              format = "{:%a %d %b %R}";
-              # format = "{:%R 󰃭 %d·%m·%y}";
+              format = "{:%R 󰃭 %d·%m·%y}";
               format-alt = "{:%I:%M %p}";
               tooltip-format = "<tt>{calendar}</tt>";
               calendar = {
@@ -188,47 +165,44 @@
               format-alt = "󰾅 {used}GB";
               max-length = 10;
               tooltip = true;
-              tooltip-format = " {used:.1f}GB/{total:.1f}GB";
+              tooltip-format = " {used =0.1f}GB/{total =0.1f}GB";
             };
 
             "backlight" = {
+              device = "intel_backlight";
               format = "{icon} {percent}%";
               format-icons = ["" "" "" "" "" "" "" "" ""];
-              on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 2%+";
-              on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 2%-";
+              on-scroll-up = "brightnessctl set 1%+";
+              on-scroll-down = "brightnessctl set 1%-";
+              min-length = 6;
             };
 
             "network" = {
-              # on-click = "nm-connection-editor";
               # "interface" = "wlp2*"; # (Optional) To force the use of this interface
-              format-wifi = "󰤨 Wi-Fi";
-              # format-wifi = " {bandwidthDownBits}  {bandwidthUpBits}";
-              # format-wifi = "󰤨 {essid}";
+              format-wifi = "󰤨 {essid}";
               format-ethernet = "󱘖 Wired";
-              # format-ethernet = " {bandwidthDownBits}  {bandwidthUpBits}";
-              format-linked = "󱘖 {ifname} (No IP)";
-              format-disconnected = "󰤮 Off";
-              # format-disconnected = "󰤮 Disconnected";
-              format-alt = "󰤨 {signalStrength}%";
               tooltip-format = "󱘖 {ipaddr}  {bandwidthUpBytes}  {bandwidthDownBytes}";
+              format-linked = "󱘖 {ifname} (No IP)";
+              format-disconnected = " Disconnected";
+              format-alt = "󰤨 {signalStrength}%";
+              interval = 5;
             };
 
             "bluetooth" = {
-              format = "";
-              # format-disabled = ""; # an empty format will hide the module
-              format-connected = " {num_connections}";
-              tooltip-format = " {device_alias}";
+              format = "";
+              format-disabled = ""; # an empty format will hide the module
+              format-connected = " {num_connections}";
+              tooltip-format = " {device_alias}";
               tooltip-format-connected = "{device_enumerate}";
-              tooltip-format-enumerate-connected = " {device_alias}";
-              on-click = "blueman-manager";
+              tooltip-format-enumerate-connected = " {device_alias}";
             };
 
             "pulseaudio" = {
               format = "{icon} {volume}";
-              format-muted = " ";
+              format-muted = "🔇";
               on-click = "pavucontrol -t 3";
               tooltip-format = "{icon} {desc} // {volume}%";
-              scroll-step = 4;
+              scroll-step = 5;
               format-icons = {
                 headphone = "";
                 hands-free = "";
@@ -242,7 +216,7 @@
 
             "pulseaudio#microphone" = {
               format = "{format_source}";
-              format-source = " {volume}%";
+              format-source = "";
               format-source-muted = "";
               on-click = "pavucontrol -t 4";
               tooltip-format = "{format_source} {source_desc} // {source_volume}%";
@@ -261,8 +235,7 @@
                 critical = 20;
               };
               format = "{icon} {capacity}%";
-              # format-charging = " {capacity}%";
-              format-charging = " {capacity}%";
+              format-charging = " {capacity}%";
               format-plugged = " {capacity}%";
               format-alt = "{time} {icon}";
               format-icons = ["󰂎" "󰁺" "󰁻" "󰁼" "󰁽" "󰁾" "󰁿" "󰂀" "󰂁" "󰂂" "󰁹"];
@@ -274,15 +247,61 @@
               interval = 86400; # once every day
               tooltip = true;
             };
+
+            # modules for padding
+
+            "custom/l_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/r_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/sl_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/sr_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/rl_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/rr_end" = {
+              format = " ";
+              interval = "once";
+              tooltip = false;
+            };
+
+            "custom/padd" = {
+              format = "  ";
+              interval = "once";
+              tooltip = false;
+            };
           }
         ];
         style = ''
-          * {
-            font-family: "JetBrainsMono Nerd Font";
-            font-size: 14px;
-            font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
-            margin: 0px;
-            padding: 0px;
+                          * {
+          font-family: "JetBrainsMono Nerd Font";
+          font-weight: bold;
+          min-height: 0;
+          /* set font-size to 100% if font scaling is set to 1.00 using nwg-look */
+          font-size: 97%;
+          font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+          padding: 1px;
           }
 
           @define-color base   #1e1e2e;
@@ -329,38 +348,28 @@
             opacity: 0.2;
           }
 
-          tooltip {
-            background: #1e1e2e;
-            border-radius: 8px;
-          }
-
-          tooltip label {
-            color: #cad3f5;
-            margin-right: 5px;
-            margin-left: 5px;
+          #waybar.empty #window {
+            background: none;
           }
 
           /* This section can be use if you want to separate waybar modules */
-          .modules-left {
+          .modules-left, .modules-center, .modules-right {
           	background: @theme_base_color;
-           	border: 1px solid @blue;
-          	padding-right: 15px;
-          	padding-left: 2px;
+           	border: 0.5px solid @overlay0;
+          	padding-top: 2px;
+          	padding-bottom: 2px;
+          	padding-right: 4px;
+          	padding-left: 4px;
           	border-radius: 10px;
+
           }
-          .modules-center {
-          	background: @theme_base_color;
-            border: 0.5px solid @overlay0;
-          	padding-right: 5px;
-          	padding-left: 5px;
-          	border-radius: 10px;
-          }
-          .modules-right {
-          	background: @theme_base_color;
-           	border: 1px solid @blue;
-          	padding-right: 15px;
-          	padding-left: 15px;
-          	border-radius: 10px;
+
+          .modules-left, .modules-right {
+            	border: 1px solid @blue;
+          	padding-top: 2px;
+          	padding-bottom: 2px;
+          	padding-right: 4px;
+          	padding-left: 4px;
           }
 
           #backlight,
@@ -447,12 +456,6 @@
             color: @blue
           }
 
-          #custom-notification {
-            color: #dfdfdf;
-            padding: 0px 5px;
-            border-radius: 5px;
-          }
-
           #language {
             color: @blue
           }
@@ -461,22 +464,17 @@
             color: @yellow;
           }
 
-          #custom-icon {
-            font-size: 15px;
-            color: #cba6f7;
-          }
-
           #custom-gpuinfo {
-            color: @maroon;
+            color: @green;
           }
 
           #cpu {
-            color: @yellow;
+            color: @teal;
           }
 
           #custom-keyboard,
           #memory {
-            color: @green;
+            color: @sky;
           }
 
           #disk {
@@ -593,7 +591,7 @@
           }
 
           #pulseaudio {
-            color: @lavender;
+            color: @sapphire;
           }
 
           #pulseaudio.bluetooth {
@@ -612,7 +610,7 @@
           }
 
           #network {
-            color: @blue;
+            color: @teal;
           }
           #network.disconnected,
           #network.disabled {

@@ -1,38 +1,35 @@
 {
   pkgs,
-  lib,
-  terminal,
   ...
 }: {
   home-manager.sharedModules = [
     (_: {
-      programs.rofi = let
-        inherit (lib) getExe;
-      in {
+      programs.rofi = {
         enable = true;
         package = pkgs.rofi-wayland;
-        terminal = "${getExe pkgs.${terminal}}";
-        plugins = with pkgs; [
-          rofi-emoji-wayland # https://github.com/Mange/rofi-emoji 🤯
-          rofi-games # https://github.com/Rolv-Apneseth/rofi-games 🎮
-        ];
+        terminal = "${pkgs.alacritty}/bin/alacritty";
       };
-      xdg.configFile."rofi/config-music.rasi".source = ./config-music.rasi;
-      xdg.configFile."rofi/config-long.rasi".source = ./config-long.rasi;
-      xdg.configFile."rofi/config-wallpaper.rasi".source = ./config-wallpaper.rasi;
-      xdg.configFile."rofi/launchers" = {
+      home.file.".config/rofi/config-music.rasi".source = ./config-music.rasi;
+      home.file.".config/rofi/config-long.rasi".source = ./config-long.rasi;
+      home.file.".config/rofi/config-wallpaper.rasi".source = ./config-wallpaper.rasi;
+      home.file.".config/rofi/launchers" = {
         source = ./launchers;
         recursive = true;
       };
-      xdg.configFile."rofi/colors" = {
+      home.file.".config/rofi/colors" = {
         source = ./colors;
         recursive = true;
       };
-      xdg.configFile."rofi/assets" = {
+      home.file.".config/rofi/pywal-color" = {
+        source = ./pywal-color;
+        recursive = true;
+      };
+
+      home.file.".config/rofi/assets" = {
         source = ./assets;
         recursive = true;
       };
-      xdg.configFile."rofi/resolution" = {
+      home.file.".config/rofi/resolution" = {
         source = ./resolution;
         recursive = true;
       };

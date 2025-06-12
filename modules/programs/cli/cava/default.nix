@@ -1,4 +1,4 @@
-{...}: {
+{ ...}: {
   home-manager.sharedModules = [
     (_: {
       programs.cava = {
@@ -6,7 +6,7 @@
         settings = {
           general = {
             framerate = 60;
-            sensitivity = 100; # Default
+            sensitivity = 90;
             autosens = 1;
           };
           color = {

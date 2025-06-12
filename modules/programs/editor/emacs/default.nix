@@ -1,4 +1,7 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  ...
+}: {
   home-manager.sharedModules = [
     (_: {
       programs.emacs = {

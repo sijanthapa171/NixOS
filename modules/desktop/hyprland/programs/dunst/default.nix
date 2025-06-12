@@ -1,9 +1,7 @@
 {
   pkgs,
-  browser,
   ...
 }: {
-  fonts.packages = with pkgs.nerd-fonts; [jetbrains-mono];
   home-manager.sharedModules = [
     (_: {
       services.dunst = {
@@ -14,11 +12,9 @@
         };
         settings = {
           global = {
-            frame_color = "#89b4fa";
-            separator_color = "frame";
-            highlight = "#89b4fa";
             rounded = "yes";
             origin = "top-right";
+            monitor = "0";
             alignment = "left";
             vertical_alignment = "center";
             width = "400";
@@ -26,8 +22,9 @@
             scale = 0;
             gap_size = 0;
             progress_bar = true;
-            transparency = 5;
+            transparency = 0;
             text_icon_padding = 0;
+            separator_color = "frame";
             sort = "yes";
             idle_threshold = 120;
             line_height = 0;
@@ -41,8 +38,9 @@
             always_run_script = true;
             corner_radius = 10;
             follow = "mouse";
-            font = "jetbrainsmono nerd font 10";
+            font = "Source Sans Pro 10";
             format = "<b>%s</b>\\n%b"; #format = "<span foreground='#f3f4f5'><b>%s %p</b></span>\n%b"
+            frame_color = "#232323";
             frame_width = 1;
             offset = "15x15";
             horizontal_padding = 10;
@@ -59,26 +57,22 @@
             show_indicators = "yes";
             shrink = "no";
             word_wrap = "yes";
-            browser = "${browser} --new-tab";
+            browser = "/usr/bin/env librewolf -new-tab";
           };
 
           fullscreen_delay_everything = {fullscreen = "delay";};
 
           urgency_critical = {
-            background = "#1e1e2e";
-            foreground = "#cdd6f4";
-            frame_color = "#fab387";
-            timeout = "0";
+            background = "#d64e4e";
+            foreground = "#f0e0e0";
           };
           urgency_low = {
-            background = "#1e1e2e";
-            foreground = "#cdd6f4";
-            timeout = "4";
+            background = "#232323";
+            foreground = "#2596be";
           };
           urgency_normal = {
-            background = "#1e1e2e";
-            foreground = "#cdd6f4";
-            timeout = "8";
+            background = "#1e1e2a";
+            foreground = "#2596be";
           };
         };
       };
