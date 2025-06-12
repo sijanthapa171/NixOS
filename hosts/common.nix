@@ -13,8 +13,7 @@ in
   imports = [
     inputs.home-manager.nixosModules.home-manager
 
-    ../modules/hardware/drives # Will still boot if these these drives are not found
-
+    ../modules/hardware/drives
     ../modules/programs/terminal/${terminal}
     ../modules/programs/shell/bash
     ../modules/programs/shell/zsh
@@ -33,6 +32,7 @@ in
     ../modules/programs/misc/spicetify
     ../modules/programs/misc/obs
     ../modules/programs/misc/swww
+    ../modules/programs/misc/discord
   ];
 
   # Common home-manager options that are shared between all systems.
@@ -41,7 +41,7 @@ in
     home = {
       inherit username;
       homeDirectory = "/home/${username}";
-      stateVersion = "23.11";
+      stateVersion = "24.05";
       packages = with pkgs; [
         # Applications
         #kate
@@ -55,7 +55,6 @@ in
         git
         gh
         bc
-        github-desktop
         htop
         nix-prefetch-scripts
         ripgrep
@@ -204,6 +203,9 @@ in
   users.defaultUserShell = pkgs.zsh;
 
   fonts.packages = with pkgs; [
+    # for 24.11 future version
+    # nerd-fonts.jetbrains-mono
+    # nerd-fonts.fira-code
     (nerdfonts.override {
       fonts = [
         "JetBrainsMono"
@@ -214,7 +216,6 @@ in
 
   nixpkgs = {
     config.allowUnfree = true;
-    # config.allowUnfreePredicate = _: true;
     overlays = [
       inputs.nur.overlay
       pkgs-stable
@@ -239,6 +240,8 @@ in
     scripts.collect-garbage
     scripts.driverinfo
     scripts.underwatt
+
+    discord
 
     # System
     killall
