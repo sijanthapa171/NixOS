@@ -1,19 +1,20 @@
-{
-  pkgs,
-  ...
+{ pkgs
+, ...
 }:
 {
   imports = [
     ./dconf.nix
   ];
-  services.xserver = {
-    enable = true;
-    desktopManager.gnome.enable = true;
-    #layout = "gb";
-    #libinput = { touchpad.tapping = true; };
+  services = {
+    xserver = {
+      enable = true;
+      desktopManager.gnome.enable = true;
+    };
+    gnome = {
+      gnome-initial-setup.enable = true;
+      games.enable = true;
+    };
   };
-  services.gnome.gnome-initial-setup.enable = false;
-  services.gnome.games.enable = true;
 
   environment.gnome.excludePackages = with pkgs.gnome; [
     #gnome-backgrounds

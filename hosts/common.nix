@@ -1,14 +1,15 @@
+{ inputs
+, pkgs
+, pkgs-stable
+, username
+, terminal
+, ...
+}:
+let
+  sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix { };
+  scripts = pkgs.callPackage ../modules/scripts { };
+in
 {
-  inputs,
-  pkgs,
-  pkgs-stable,
-  username,
-  terminal,
-  ...
-}: let
-  sddm-themes = pkgs.callPackage ../modules/themes/sddm/themes.nix {};
-  scripts = pkgs.callPackage ../modules/scripts {};
-in {
   imports = [
     inputs.home-manager.nixosModules.home-manager
 
@@ -19,7 +20,6 @@ in {
     ../modules/programs/shell/zsh
     ../modules/programs/browser/firefox
     ../modules/programs/editor/nixvim
-    #../modules/programs/editor/vscode
     ../modules/programs/cli/starship
     ../modules/programs/cli/tmux
     ../modules/programs/cli/direnv
@@ -27,51 +27,85 @@ in {
     ../modules/programs/cli/lazygit
     ../modules/programs/cli/cava
     ../modules/programs/cli/btop
+    ../modules/programs/cli/bat
+    ../modules/programs/cli/eza
     ../modules/programs/misc/mpv
     ../modules/programs/misc/spicetify
     ../modules/programs/misc/obs
+    ../modules/programs/misc/swww
   ];
 
   # Common home-manager options that are shared between all systems.
-  home-manager.users.${username} = {pkgs, ...}: {
+  home-manager.users.${username} = { pkgs, ... }: {
     xdg.enable = true;
-    home.username = username;
-    home.homeDirectory = "/home/${username}";
+    home = {
+      inherit username;
+      homeDirectory = "/home/${username}";
+      stateVersion = "23.11";
+      packages = with pkgs; [
+        # Applications
+        #kate
+        xfce.thunar
 
-    home.stateVersion = "23.11"; # Please read the comment before changing.
+        # Terminal
+        bat
+        eza
+        fzf
+        fd
+        git
+        gh
+        bc
+        github-desktop
+        htop
+        nix-prefetch-scripts
+        ripgrep
+        tldr
+        unzip
 
-    # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
-    home.packages = with pkgs; [
-      # Applications
-      #kate
-      xfce.thunar
+        # fun
+        starfetch
+        fastfetch
+        microfetch
+        cmatrix
+        kittysay
+        cowsay
+        uwuify
+        nitch
+        ipfetch
+        lolcat
 
-      # Terminal
-      eza
-      fzf
-      fd
-      git
-      gh
-      github-desktop
-      htop
-      nix-prefetch-scripts
-      neofetch
-      ripgrep
-      tldr
-      unzip
-      (pkgs.writeShellScriptBin "hello" ''
-        echo "Hello ${username}!"
-      '')
-    ];
+        # useful
+        evtest
+        libinput
+        usbutils
+        webcamoid
+        wev
+
+        # languages
+        python3
+        gcc
+        gnumake
+        lua
+        rustc
+        cargo
+
+        (pkgs.writeShellScriptBin "hello" ''
+          echo "Hello ${username}!"
+        '')
+      ];
+    };
     # Let Home Manager install and manage itself.
     programs.home-manager.enable = true;
   };
 
   # Filesystems support
-  boot.supportedFilesystems = ["ntfs" "exfat" "ext4" "fat32" "btrfs"];
-  services.devmon.enable = true;
-  services.gvfs.enable = true;
-  services.udisks2.enable = true;
+  boot.supportedFilesystems = [ "ntfs" "exfat" "ext4" "fat32" "btrfs" ];
+
+  services = {
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
+  };
 
   # Bootloader.
   boot = {
@@ -110,11 +144,18 @@ in {
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
-  # Enable dconf for home-manager
-  programs.dconf.enable = true;
+  programs = {
+    # Enable dconf for home-manager
+    dconf.enable = true;
+    zsh.enable = true;
+    gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+  };
 
   # Enable sddm login manager
   services.displayManager.sddm = {
@@ -129,9 +170,9 @@ in {
   systemd = {
     user.services.polkit-kde-authentication-agent-1 = {
       description = "polkit-kde-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.libsForQt5.polkit-kde-agent}/libexec/polkit-kde-authentication-agent-1";
@@ -160,7 +201,6 @@ in {
   services.libinput.enable = true;
 
   # Default shell
-  programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
   fonts.packages = with pkgs; [
@@ -209,18 +249,14 @@ in {
     # sddm-themes.sugar-dark
     # sddm-themes.tokyo-night
 
+    # preview image
+    qimgv
+
     # Development
     devbox # faster nix-shells
     shellify # faster nix-shells
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  programs.gnupg.agent = {
-    enable = true;
-    enableSSHSupport = true;
-  };
 
   # List services that you want to enable:
 
@@ -247,7 +283,7 @@ in {
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       ];
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
       use-xdg-base-directories = false;
       warn-dirty = false;
       keep-outputs = true;

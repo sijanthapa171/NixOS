@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   catppuccin-gtk = pkgs.catppuccin-gtk.overrideAttrs {
     src = pkgs.fetchFromGitHub {
       owner = "catppuccin";
@@ -10,15 +11,16 @@
 
     postUnpack = "";
   };
-in {
+in
+{
   home-manager.sharedModules = [
-    ({config, ...}: {
+    ({ config, ... }: {
       # Set wallpaper
       services.hyprpaper = {
         enable = true;
         settings = {
-          preload = ["${../wallpapers/moon.png}"];
-          wallpaper = [",${../wallpapers/moon.png}"];
+          preload = [ "${../wallpapers/cyberpunk.png}" ];
+          wallpaper = [ ",${../wallpapers/cyberpunk.png}" ];
         };
       };
 
@@ -46,7 +48,7 @@ in {
         theme = {
           name = "catppuccin-mocha-mauve-compact";
           package = catppuccin-gtk.override {
-            accents = ["mauve"];
+            accents = [ "mauve" ];
             variant = "mocha";
             size = "compact";
           };

@@ -1,6 +1,5 @@
-{
-  pkgs,
-  ...
+{ pkgs
+, ...
 }: {
   home-manager.sharedModules = [
     (_: {
@@ -29,7 +28,7 @@
         oh-my-zsh = {
           # Plug-ins
           enable = true;
-          plugins = ["git" "gitignore" "aliases" "z"];
+          plugins = [ "git" "gitignore" "aliases" "z" ];
         };
         initExtra = ''
           # Powerlevel10k Zsh theme
@@ -211,51 +210,19 @@
           G = "| grep";
         };
         shellAliases = {
+          neofetch = "microfetch";
           cls = "clear";
-          tml = "tmux list-sessions";
-          attach = "tmux attach";
-          att = "tmux attach";
-          l = "${pkgs.eza}/bin/eza -lh  --icons=auto"; # long list
-          ls = "${pkgs.eza}/bin/eza -1   --icons=auto"; # short list
-          ll = "${pkgs.eza}/bin/eza -lha --icons=auto --sort=name --group-directories-first"; # long list all
-          ld = "${pkgs.eza}/bin/eza -lhD --icons=auto"; # long list dirs
-          tree = "${pkgs.eza}/bin/eza --icons=auto --tree"; # dir tree
-          vc = "code --disable-gpu"; # gui code editor
-          nv = "nvim";
-          nf = "${pkgs.neofetch}/bin/neofetch";
           cp = "cp -iv";
           mv = "mv -iv";
           rm = "rm -vI";
-          bc = "bc -ql";
-          mkd = "mkdir -pv";
-          tp = "${pkgs.trash-cli}/bin/trash-put";
-          tpr = "${pkgs.trash-cli}/bin/trash-restore";
+          mkdir = "mkdir -pv";
           grep = "grep --color=always";
 
           # Nixos
           list-gens = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system/";
           find-store-path = ''function { nix-shell -p $1 --command "nix eval -f "<nixpkgs>" --raw $1" }'';
           update-input = "nix flake lock --update-input $@";
-          rebuild = "~/NixOS/install.sh";
-          rebuild-desktop = "sudo nixos-rebuild switch --flake ~/NixOS#Desktop";
-          rebuild-laptop = "sudo nixos-rebuild switch --flake ~/NixOS#Laptop";
-          build-iso = "nix build .#nixosConfigurations.Iso.config.system.build.isoImage";
-
-          # Directory Shortcuts.
-          dev = "cd /mnt/seagate/dev/";
-          dots = "cd ~/.dotfiles/";
-          nixdir = "cd /mnt/seagate/dev/nix/";
-          cppdir = "cd /mnt/seagate/dev/C++/";
-          zigdir = "cd /mnt/seagate/dev/Zig/";
-          csdir = "cd /mnt/seagate/dev/C#/";
-          rustdir = "cd /mnt/seagate/dev/Rust/";
-          pydir = "cd /mnt/seagate/dev/Python/";
-          javadir = "cd /mnt/seagate/dev/Java/";
-          luadir = "cd /mnt/seagate/dev/lua/";
-          webdir = "cd /mnt/seagate/dev/Website/";
-          seagate = "cd /mnt/seagate/";
-          media = "cd /mnt/seagate/media/";
-          games = "cd /mnt/games/";
+          rebuild = "~/NixOS/install.sh --rebuild";
         };
       };
     })

@@ -1,29 +1,21 @@
-{
-  pkgs,
-  username,
-  locale,
-  timezone,
-  terminal,
-  hostname,
-  ...
+{ username
+, hostname
+, locale
+, timezone
+, terminal
+, layout
+, variant
+, ...
 }: {
   imports = [
     ../common.nix
-    ../../modules/desktop/hyprland # Enable hyprland window manager
+    ../../modules/desktop/hyprland
     ../../modules/programs/games
-
-    ../../modules/hardware/video/nvidia.nix # Enable nvidia proprietary drivers
-    # ../../modules/hardware/video/amdgpu.nix # Enable amdgpu drivers
+    ../../modules/hardware/video/amdgpu.nix
     ./hardware-configuration.nix
   ];
 
-  # Home-manager config
   home-manager.users.${username} = {
-    home.packages = with pkgs; [
-      #vim
-      #krita
-      #steam
-    ];
     home.sessionVariables = {
       EDITOR = "nvim";
       BROWSER = "firefox";
@@ -31,22 +23,15 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-  ];
-
-  # Enable networking
   networking = {
-    hostName = hostname; # Define your hostname.
+    hostName = hostname;
     networkmanager.enable = true;
-    # wireless.enable = true; # Enables wireless support via wpa_supplicant.
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   };
 
-  # Timezone and locale
   time.timeZone = timezone;
-  i18n.defaultLocale = locale;
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = locale;
     LC_IDENTIFICATION = locale;
@@ -59,16 +44,17 @@
     LC_TIME = locale;
   };
 
-  # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     xkb = {
-      layout = "gb";
-      variant = "";
+      inherit layout;
+      inherit variant;
     };
   };
-  console.keyMap = "uk"; # Configure console keymap
-  services.printing.enable = true; # Enable CUPS to print documents.
+
+  console.keyMap = layout;
+
+  services.printing.enable = true;
 
   users.users.${username} = {
     isNormalUser = true;

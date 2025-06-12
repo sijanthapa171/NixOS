@@ -1,6 +1,6 @@
-{...}: {
+{ ... }: {
   imports = [
-    ./games.nix
-    ./seagate.nix
+    #./games.nix
+    #./seagate.nix
   ];
 }

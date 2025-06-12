@@ -1,7 +1,7 @@
+{ pkgs
+, ...
+}:
 {
-  pkgs,
-  ...
-}: {
   home-manager.sharedModules = [
     (_: {
       programs.rofi = {
@@ -9,29 +9,35 @@
         package = pkgs.rofi-wayland;
         terminal = "${pkgs.alacritty}/bin/alacritty";
       };
-      home.file.".config/rofi/config-music.rasi".source = ./config-music.rasi;
-      home.file.".config/rofi/config-long.rasi".source = ./config-long.rasi;
-      home.file.".config/rofi/config-wallpaper.rasi".source = ./config-wallpaper.rasi;
-      home.file.".config/rofi/launchers" = {
-        source = ./launchers;
-        recursive = true;
-      };
-      home.file.".config/rofi/colors" = {
-        source = ./colors;
-        recursive = true;
-      };
-      home.file.".config/rofi/pywal-color" = {
-        source = ./pywal-color;
-        recursive = true;
-      };
+      home = {
+        file = {
+          ".config/rofi/config-music.rasi".source = ./config-music.scss;
+          ".config/rofi/config-long.rasi".source = ./config-long.scss;
+          ".config/rofi/config-wallpaper.rasi".source = ./config-wallpaper.scss;
+          ".config/rofi/launchers" = {
+            source = ./launchers;
+            recursive = true;
+          };
 
-      home.file.".config/rofi/assets" = {
-        source = ./assets;
-        recursive = true;
-      };
-      home.file.".config/rofi/resolution" = {
-        source = ./resolution;
-        recursive = true;
+          "config/rofi/colors" = {
+            source = ./colors;
+            recursive = true;
+          };
+          ".config/rofi/pywal-color" = {
+            source = ./pywal-color;
+            recursive = true;
+          };
+
+          ".config/rofi/assets" = {
+            source = ./assets;
+            recursive = true;
+          };
+          ".config/rofi/resolution" = {
+            source = ./resolution;
+            recursive = true;
+          };
+          ".config/rofi/wall-selector.rasi".source = ./config-wall-selector.scss;
+        };
       };
     })
   ];

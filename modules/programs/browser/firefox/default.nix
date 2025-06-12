@@ -1,8 +1,8 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib
+, pkgs
+, ...
+}:
+let
   lock-false = {
     Value = false;
     Status = "locked";
@@ -11,7 +11,8 @@
     Value = true;
     Status = "locked";
   };
-in {
+in
+{
   home-manager.sharedModules = [
     (_: {
       programs = {
@@ -43,33 +44,8 @@ in {
                 SkipOnboarding = true;
                 WhatsNew = false;
               };
-              # SanitizeOnShutdown = {
-              #   Cache = true;
-              #   Cookies = false;
-              #   Downloads = true;
-              #   FormData = true;
-              #   History = false;
-              #   Sessions = false;
-              #   SiteSettings = false;
-              #   OfflineApps = true;
-              #   Locked = true;
-              # };
 
               "3rdparty".Extensions = {
-                "addon@darkreader.org" = {
-                  enabled = true;
-                  automation = {
-                    enabled = true;
-                    behavior = "OnOff";
-                    mode = "system";
-                  };
-                  detectDarkTheme = true;
-                  enabledByDefault = true;
-                  changeBrowserTheme = false;
-                  enableForProtectedPages = true;
-                  fetchNews = false;
-                  previewNewDesign = true;
-                };
                 "uBlock0@raymondhill.net" = {
                   advancedSettings = [
                     [
@@ -185,7 +161,7 @@ in {
                 "privacy.webrtc.legacyGlobalIndicator" = false;
 
                 # Use cloudflare for better security/privacy
-                "network.trr.mode" = 3; # 2 if your havng DNS problems
+                "network.trr.mode" = 2; # 2 if your havng DNS problems
                 "network.trr.custom_uri" = "https://cloudflare-dns.com/dns-query";
                 "network.trr.uri" = "https://cloudflare-dns.com/dns-query";
 
@@ -335,8 +311,8 @@ in {
                   currentVersion = 20;
                   newElementCount = 7;
                   placements = {
-                    widget-overflow-fixed-list = [];
-                    unified-extensions-area = [];
+                    widget-overflow-fixed-list = [ ];
+                    unified-extensions-area = [ ];
                     nav-bar = [
                       "back-button"
                       "forward-button"
@@ -350,14 +326,14 @@ in {
                       "addon_darkreader_org-browser-action"
                       "unified-extensions-button"
                     ];
-                    toolbar-menubar = ["menubar-items"];
+                    toolbar-menubar = [ "menubar-items" ];
                     TabsToolbar = [
                       "firefox-view-button"
                       "tabbrowser-tabs"
                       "new-tab-button"
                       "alltabs-button"
                     ];
-                    PersonalToolbar = ["personal-bookmarks" "managed-bookmarks"];
+                    PersonalToolbar = [ "personal-bookmarks" "managed-bookmarks" ];
                   };
                   seen = [
                     "developer-button"
@@ -396,13 +372,10 @@ in {
               isDefault = true; # can be omitted; true if profile ID is 0
               extensions = with pkgs.nur.repos.rycee.firefox-addons; [
                 ublock-origin
-                violentmonkey
-                darkreader
-                betterttv
                 sponsorblock
                 return-youtube-dislikes
               ];
-              settings = {};
+              settings = { };
               bookmarks = [
                 {
                   name = "Bookmarks Toolbar";
@@ -411,10 +384,6 @@ in {
                     {
                       name = "Youtube";
                       url = "https://www.youtube.com";
-                    }
-                    {
-                      name = "Twitch";
-                      url = "https://www.twitch.tv";
                     }
                     {
                       name = "Github";
@@ -470,7 +439,7 @@ in {
                       }
                     ];
                     icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                    definedAliases = ["@sp"];
+                    definedAliases = [ "@sp" ];
                   };
                   "Brave" = {
                     urls = [
@@ -484,13 +453,13 @@ in {
                         ];
                       }
                     ];
-                    definedAliases = ["@br"];
+                    definedAliases = [ "@br" ];
                   };
                   "Searx" = {
-                    urls = [{template = "https://searx.aicampground.com/?q={searchTerms}";}];
+                    urls = [{ template = "https://searx.aicampground.com/?q={searchTerms}"; }];
                     iconUpdateURL = "https://nixos.wiki/favicon.png";
                     updateInterval = 24 * 60 * 60 * 1000; # every day
-                    definedAliases = ["@sx"];
+                    definedAliases = [ "@sx" ];
                   };
                   "NixOS Packages" = {
                     urls = [
@@ -509,7 +478,7 @@ in {
                       }
                     ];
                     icon = "''${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                    definedAliases = ["@np"];
+                    definedAliases = [ "@np" ];
                   };
                   "NixOS Options" = {
                     urls = [
@@ -528,16 +497,16 @@ in {
                       }
                     ];
                     icon = "${pkgs.nixos-icons}/share/icons/hicolor/scalable/apps/nix-snowflake.svg";
-                    definedAliases = ["@no"];
+                    definedAliases = [ "@no" ];
                   };
                   "NixOS Wiki" = {
-                    urls = [{template = "https://nixos.wiki/index.php?search={searchTerms}";}];
+                    urls = [{ template = "https://nixos.wiki/index.php?search={searchTerms}"; }];
                     iconUpdateURL = "https://nixos.wiki/favicon.png";
                     updateInterval = 24 * 60 * 60 * 1000; # every day
-                    definedAliases = ["@nw"];
+                    definedAliases = [ "@nw" ];
                   };
                   "Home Manager Options" = {
-                    urls = [{template = "https://home-manager-options.extranix.com/?query={searchTerms}";}];
+                    urls = [{ template = "https://home-manager-options.extranix.com/?query={searchTerms}"; }];
                     # urls = [
                     #   {
                     #     template = "https://mipmip.github.io/home-manager-option-search";
@@ -551,7 +520,7 @@ in {
                     # ];
                     iconUpdateURL = "https://avatars.githubusercontent.com/u/33221035";
                     updateInterval = 24 * 60 * 60 * 1000; # Update every day.
-                    definedAliases = ["@hm"];
+                    definedAliases = [ "@hm" ];
                   };
                   "Bing".metaData.hidden = true;
                   "Ebay".metaData.hidden = true;

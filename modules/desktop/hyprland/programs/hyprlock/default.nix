@@ -1,4 +1,4 @@
-{ ...}: {
+{ ... }: {
   home-manager.sharedModules = [
     (_: {
       programs.hyprlock = {
@@ -12,7 +12,7 @@
             {
               monitor = "";
               color = "rgb(36, 39, 58)";
-              path = "${../../../../themes/wallpapers/Train.jpg}";
+              path = "${../../../../themes/wallpapers/cyberpunk.png}";
 
               blur_size = 3;
               blur_passes = 2;
