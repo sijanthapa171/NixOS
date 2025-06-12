@@ -66,6 +66,7 @@ function nix_rebuild_dots()
     catppuccin_prompt "🚧" "BUILDING (this may take a while)"
     nix-shell --command "sudo nixos-rebuild switch --flake '$script_dir#Default' --show-trace" || show_error "an error occured... see logs for additional details "
     show_success "SUCCESS"
+    exit 0
 }
 
 cd $script_dir || show_error "cannot move to directory $script_dir"
@@ -101,8 +102,6 @@ echo -e "done"
 show_success "Running install.sh from $script_dir"
 show_success "Found user name: $current_user"
 show_success "Found host name: $current_host"
-
-exit 84
 
 catppuccin_prompt "💻" "Hello $current_user !"
 locale=$(prompt_with_default "Enter your local" "fr_FR.UTF-8")
