@@ -1,4 +1,4 @@
-{ ...}: {
+{
   home-manager.sharedModules = [
     (_: {
       programs.starship = {
@@ -8,15 +8,6 @@
           scan_timeout = 10;
           format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$python$nix_shell$character";
           directory.style = "blue";
-          /*
-             username = {
-            style_user = "green bold";
-            style_root = "red bold";
-            format = "[$user]($style)";
-            disabled = false;
-            show_always = true;
-          };
-          */
           character = {
             success_symbol = "[❯](purple)";
             error_symbol = "[❯](red)";
@@ -71,11 +62,6 @@
           golang = {
             symbol = "go ";
           };
-          # hostname = {
-          #   ssh_only = false;
-          #   format = " on [$hostname](bold red)\n";
-          #   disabled = false;
-          # };
           lua = {
             symbol = "lua ";
           };
