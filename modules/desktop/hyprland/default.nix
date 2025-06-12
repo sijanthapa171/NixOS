@@ -60,10 +60,6 @@
           source = ./scripts;
           recursive = true;
         };
-        # xdg.configFile."hypr/icons" = {
-        # source = ./icons;
-        # recursive = true;
-        # };
 
         #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
         wayland.windowManager.hyprland = {
@@ -141,7 +137,6 @@
             general = {
               gaps_in = 4;
               gaps_out = 9;
-              # TODO modify active color it is too bright :(
               border_size = 2;
               "col.active_border" = "rgba(ca9ee6ff) rgba(f2d5cfff) 45deg";
               "col.inactive_border" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
@@ -312,6 +307,7 @@
 
               # Window/Session actions
               "$mainMod, Q, exec, killactive"
+              "$mainMod, Q, killactive"
 
               "$mainMod, delete, exit" # kill hyperland session
               "$mainMod, W, togglefloating" # toggle the window on focus to float
@@ -360,6 +356,8 @@
               "$mainMod, underscore, workspace, 8"
               "$mainMod, Ccedilla, workspace, 9"
               "$mainMod, agrave, workspace, 10"
+
+              "$mainMod, D, exec, discord"
 
               # move to the first empty workspace instantly with mainMod + CTRL + [↓]
               "$mainMod CTRL, down, workspace, empty"
