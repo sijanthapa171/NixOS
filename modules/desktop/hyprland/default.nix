@@ -311,8 +311,8 @@
               "$mainMod, F10, exec, pkill wlsunset"
 
               # Window/Session actions
-              "$mainMod, Q, exec, $hyprScriptsDir/dontkillsteam.sh" # killactive, kill the window on focus
-              "ALT, F4, exec, $hyprScriptsDir/dontkillsteam.sh" # killactive, kill the window on focus
+              "$mainMod, Q, exec, killactive"
+
               "$mainMod, delete, exit" # kill hyperland session
               "$mainMod, W, togglefloating" # toggle the window on focus to float
               "$mainMod SHIFT, G, togglegroup" # toggle the window on focus to float
@@ -330,20 +330,10 @@
 
               "$mainMod, A, exec, pkill -x rofi || $launcher" # launch desktop applications
               "$mainMod, Z, exec, pkill -x rofi || $hyprScriptsDir/emoji.sh" # launch emoji picker
-              #"$mainMod, tab, exec, pkill -x rofi || $hyprScriptsDir/rofilaunch.sh w" # switch between desktop applications
-              # "$mainMod, R, exec, pkill -x rofi || $hyprScriptsDir/rofilaunch.sh f" # browse system files
-              "$mainMod ALT, K, exec, $hyprScriptsDir/keyboardswitch.sh" # change keyboard layout
               "$mainMod SHIFT, Q, exec, swaync-client -t -sw" # swayNC panel
-              "$mainMod, G, exec, $hyprScriptsDir/gamelauncher.sh" # game launcher
-              "$mainMod ALT, G, exec, $hyprScriptsDir/gamemode.sh" # disable hypr effects for gamemode
-              "$mainMod, V, exec, $hyprScriptsDir/ClipManager.sh" # Clipboard Manager
-              "$mainMod, M, exec, pkill -x rofi || $hyprScriptsDir/rofimusic.sh" # online music
-              "$mainMod SHIFT, M, exec, pkill -x rofi || $hyprScriptsDir/rofimusic.sh" # online music
 
               # Waybar
-              "$mainMod, B, exec, killall -SIGUSR1 waybar" # Toggle hide/show waybar
-              "$mainMod CTRL, B, exec, $hyprScriptsDir/WaybarStyles.sh" # Waybar Styles Menu
-              "$mainMod ALT, B, exec, $hyprScriptsDir/WaybarLayout.sh" # Waybar Layout Menu
+              "$mainMod, B, exec, pkill -SIGUSR1 waybar" # Toggle hide/show waybar
 
               # Screenshot/Screencapture
               "$mainMod, P, exec, $hyprScriptsDir/screenshot.sh s" # drag to snip an area / click on a window to print it
