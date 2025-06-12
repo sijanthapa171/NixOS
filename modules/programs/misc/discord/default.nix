@@ -1,5 +1,5 @@
 {
-  home-manager.sharedModules = [Add commentMore actions
+  home-manager.sharedModules = [
     (_: {
       home.file.".config/discord/settings.json".text = ''
         {

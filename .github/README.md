@@ -58,6 +58,4 @@ cd ~/NixOS
 
 ### Credits/Inspiration
 
-https://github.com/JaKooLit/Hyprland-Dots<br>
-https://github.com/prasanthrangan/hyprdots<br>
 https://github.com/Sly-Harvey/NixOS/

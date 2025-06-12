@@ -8,3 +8,4 @@ case $window_class in
   *) echo "$window_class" ;;
 esac
 
+
