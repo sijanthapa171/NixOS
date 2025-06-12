@@ -60,10 +60,10 @@
           source = ./scripts;
           recursive = true;
         };
-        xdg.configFile."hypr/icons" = {
-          source = ./icons;
-          recursive = true;
-        };
+        # xdg.configFile."hypr/icons" = {
+        # source = ./icons;
+        # recursive = true;
+        # };
 
         #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
         wayland.windowManager.hyprland = {
