@@ -4,11 +4,11 @@
   <h2>🚀 A Modern, Customizable NixOS Configuration</h2>
 
   [![NixOS](https://img.shields.io/badge/NixOS-24.11-blue.svg?logo=nixos&logoColor=white)](https://nixos.org)
-  [![License](https://img.shields.io/github/license/authxt/NixOS)](./LICENSE)
-  [![Last Commit](https://img.shields.io/github/last-commit/authxt/NixOS/main)](https://github.com/authxt/NixOS/commits/main)
-  [![Stars](https://img.shields.io/github/stars/authxt/NixOS?style=social)](https://github.com/authxt/NixOS/stargazers)
-  [![Issues](https://img.shields.io/github/issues/authxt/NixOS)](https://github.com/authxt/NixOS/issues)
-  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/authxt/NixOS/pulls)
+  [![License](https://img.shields.io/github/license/sijanthapa171/NixOS)](./LICENSE)
+  [![Last Commit](https://img.shields.io/github/last-commit/sijanthapa171/NixOS/main)](https://github.com/sijanthapa171/NixOS/commits/main)
+  [![Stars](https://img.shields.io/github/stars/sijanthapa171/NixOS?style=social)](https://github.com/sijanthapa171/NixOS/stargazers)
+  [![Issues](https://img.shields.io/github/issues/sijanthapa171/NixOS)](https://github.com/sijanthapa171/NixOS/issues)
+  [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/sijanthapa171/NixOS/pulls)
   [![Flakes](https://img.shields.io/badge/Nix-Flakes-blue.svg?logo=nixos&logoColor=white)](https://nixos.wiki/wiki/Flakes)
 
   <img src="https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nixos-white.png" width="200" alt="NixOS Logo">
@@ -90,7 +90,7 @@ Before you begin, ensure you have:
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/authxt/NixOS.git
+   git clone https://github.com/sijanthapa171/NixOS.git
    cd NixOS
    ```
 
@@ -216,7 +216,7 @@ Please read our [Contributing Guidelines](./CONTRIBUTING.md) for more details.
 ## ⚠️ Notes
 
 - Regular updates are released - check the [changelog](./CHANGELOG.md)
-- Report bugs through [GitHub Issues](https://github.com/authxt/NixOS/issues)
+- Report bugs through [GitHub Issues](https://github.com/sijanthapa171/NixOS/issues)
 - Join our [Discord Community](https://discord.gg/nixos) for support
 
 ## 🔄 Update Policy
