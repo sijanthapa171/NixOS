@@ -63,7 +63,6 @@
     google-chrome
     nitch
     libreoffice
-    gcc
     obsidian
     vscode
     google-chrome
@@ -72,6 +71,30 @@
     cmatrix
     vscode
     code-cursor
+  
+    #<-- temp
+    # for NoteCLI
+    # Build tools
+    gcc
+    gnumake
+    cmake
+    pkg-config
+
+    # Testing tools
+    cunit
+    gtest
+    lcov
+
+    # Development tools
+    clang-tools
+    codespell
+    conan
+    cppcheck
+    doxygen
+    vcpkg
+    vcpkg-tool
+
+    # --> Temp
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
