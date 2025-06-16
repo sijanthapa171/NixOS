@@ -17,7 +17,7 @@ export default function Home() {
       />
 
       <h1 className="text-3xl font-bold mb-4 sm:text-7xl mt-8">
-        A guide to build <Link href="https://github.com/authxt/" className="text-pink-600 underline hover:text-pink-500">Auth X</Link> nixos configuration
+        A guide to build <Link href="https://github.com/authxt/" className="text-pink-600 underline hover:text-pink-500">SIJANツ</Link> nixos configuration
       </h1>
 
       <div className="flex flex-row items-center gap-5 mt-6">

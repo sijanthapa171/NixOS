@@ -29,14 +29,14 @@ export function Footer() {
             Build by{" "}
             <Link
               className="px-1 underline underline-offset-2 text-pink-500"
-              href="https://github.com/authxt"
+              href="https://github.com/sijanthapa171"
             >
-              auth
+              sijan
             </Link>
             . The source code is available on{" "}
             <Link
               className="px-1 underline underline-offset-2"
-              href="https://github.com/authxt/NixOS"
+              href="https://github.com/sijanthapa171/NixOS"
             >
               GitHub
             </Link>

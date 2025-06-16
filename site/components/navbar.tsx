@@ -103,12 +103,12 @@ export function Logo() {
     <Link href="/" className="flex items-center gap-2.5">
       <Image
         src="/logo.png"
-        alt="Auth Logo"
+        alt="Sijan Logo"
         width={28}
         height={28}
         className="object-contain"
       />
-      <h2 className="text-md font-bold">AuthDots.</h2>
+      <h2 className="text-md font-bold">myHyprDots.</h2>
     </Link>
   );
 }
