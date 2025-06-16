@@ -40,9 +40,9 @@
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
+    ../../modules/programs/misc/lact # GPU fan, clock and power configuration
     # ../../modules/programs/misc/nix-ld
-    ../../modules/programs/misc/virt-manager
-
+    # ../../modules/programs/misc/virt-manager
   ];
 
   # Home-manager config
@@ -50,7 +50,7 @@
     (_: {
       home.packages = with pkgs; [
         # pokego # Overlayed
-        krita
+        # krita
         github-desktop
         # gimp
       ];
@@ -59,7 +59,6 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    warp-terminal
     brave
     google-chrome
     nitch
@@ -73,7 +72,6 @@
     cmatrix
     vscode
     code-cursor
-    wireshark
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
