@@ -47,32 +47,8 @@ This NixOS configuration system leverages the power of Nix Flakes to create a fu
 - 🎨 **Desktop Environments** - Multiple pre-configured options:
   - Hyprland
   - GNOME
-  - KDE Plasma
+  - i3
   - Custom WM setups
-- 🛠️ **Development Tools**
-  - Multiple editor configurations (NixVim, VSCode, NvChad)
-  - Language-specific development environments
-  - Docker and container support
-  - Git configuration and tools
-
-### System Features
-
-- 📱 **Modern UI/UX**
-  - Beautiful SDDM themes
-  - Custom wallpaper collection
-  - Consistent theming across applications
-- 🔊 **Audio Setup**
-  - PipeWire configuration
-  - Audio control utilities
-  - Bluetooth audio support
-- 🎮 **Gaming Support**
-  - Steam integration
-  - Wine/Proton configuration
-  - Gaming peripheral support
-- 🔐 **Security Features**
-  - Secure boot support
-  - Firewall configuration
-  - Security-focused browser settings
 
 ## 🚀 Installation
 
@@ -97,7 +73,7 @@ Before you begin, ensure you have:
 2. **Review Configuration**
    ```bash
    # Edit flake.nix to set your preferences
-   nano flake.nix
+   nvim flake.nix
    ```
 
 3. **Installation Options**
