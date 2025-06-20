@@ -93,7 +93,7 @@
     doxygen
     vcpkg
     vcpkg-tool
-
+    nodejs
     # --> Temp
   ];
 
