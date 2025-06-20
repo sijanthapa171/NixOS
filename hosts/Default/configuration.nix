@@ -45,6 +45,15 @@
     ../../modules/programs/misc/virt-manager
   ];
 
+  # Enable Docker support
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = true;
+  };
+
+  # Add your user to the docker group to run docker commands without sudo
+  users.users.sijanthapa.extraGroups = [ "docker" ];
+
   # Home-manager config
   home-manager.sharedModules = [
     (_: {
