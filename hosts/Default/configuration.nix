@@ -80,6 +80,11 @@
     cmatrix
     vscode
     code-cursor
+    
+    # Wine and related packages
+    wine
+    winetricks
+    wineWowPackages.stable
   
     #<-- temp
     # for NoteCLI
