@@ -43,17 +43,9 @@
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
     # ../../modules/programs/misc/nix-ld
     ../../modules/programs/misc/virt-manager
-    ../../modules/programs/wine 
+    ../../modules/programs/wine
+    ../../modules/programs/docker
   ];
-
-  # Enable Docker support
-  virtualisation.docker = {
-    enable = true;
-    enableOnBoot = true;
-  };
-
-  # Add your user to the docker group to run docker commands without sudo
-  users.users.sijanthapa.extraGroups = [ "docker" ];
 
   # Home-manager config
   home-manager.sharedModules = [
