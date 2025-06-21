@@ -43,6 +43,7 @@
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
     # ../../modules/programs/misc/nix-ld
     ../../modules/programs/misc/virt-manager
+    ../../modules/programs/wine 
   ];
 
   # Enable Docker support
@@ -81,10 +82,6 @@
     vscode
     code-cursor
     
-    # Wine and related packages
-    wine
-    winetricks
-    wineWowPackages.stable
   
     #<-- temp
     # for NoteCLI
