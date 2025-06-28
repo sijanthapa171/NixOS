@@ -49,19 +49,19 @@
   ];
 
   # Enable our modular package configurations
-  # modules.programs.pkg = {
-  #   brave.enable = true;
-  #   google-chrome.enable = true;
-  #   libreoffice.enable = true;
-  #   obsidian.enable = true;
-  #   vscode = {
-  #     enable = true;
-  #     enableCursor = true;
-  #   };
-  #   tgpt.enable = true;
-  #   bat.enable = true;
-  #   cmatrix.enable = true;
-  # };
+  modules.programs.pkg = {
+    brave.enable = true;
+    google-chrome.enable = true;
+    libreoffice.enable = true;
+    obsidian.enable = true;
+    vscode = {
+      enable = true;
+      enableCursor = true;
+    };
+    tgpt.enable = true;
+    bat.enable = true;
+    cmatrix.enable = true;
+  };
 
   # Home-manager config
   home-manager.sharedModules = [
