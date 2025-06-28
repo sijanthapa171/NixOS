@@ -15,6 +15,7 @@
 
     ../common.nix
     ../../modules/scripts
+    ../../modules/programs/pkg # Import our new package configurations
 
     ../../modules/desktop/hyprland # Enable hyprland window manager
     # ../../modules/desktop/i3-gaps # Enable i3 window manager
@@ -47,6 +48,21 @@
     ../../modules/programs/docker
   ];
 
+  # Enable our modular package configurations
+  # modules.programs.pkg = {
+  #   brave.enable = true;
+  #   google-chrome.enable = true;
+  #   libreoffice.enable = true;
+  #   obsidian.enable = true;
+  #   vscode = {
+  #     enable = true;
+  #     enableCursor = true;
+  #   };
+  #   tgpt.enable = true;
+  #   bat.enable = true;
+  #   cmatrix.enable = true;
+  # };
+
   # Home-manager config
   home-manager.sharedModules = [
     (_: {
@@ -61,22 +77,9 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    brave
-    google-chrome
     nitch
-    libreoffice
-    obsidian
-    vscode
-    google-chrome
-    tgpt
-    bat
-    cmatrix
-    vscode
-    code-cursor
     
-  
-    #<-- temp
-    # for NoteCLI
+    #<-- Temp for NoteCLI
     # Build tools
     gcc
     gnumake
