@@ -77,7 +77,6 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    nitch
     
     #<-- Temp for NoteCLI
     # Build tools

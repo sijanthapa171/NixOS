@@ -70,6 +70,7 @@
         fast-cli
         speedtest-cli
         neofetch
+        nitch
         fzf
         fd
         git
