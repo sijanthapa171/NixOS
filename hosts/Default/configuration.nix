@@ -61,6 +61,18 @@
     tgpt.enable = true;
     bat.enable = true;
     cmatrix.enable = true;
+    trok = {
+      enable = true;
+      # Uncomment and adjust these if you want to run a trok server
+      # server = {
+      #   enable = true;
+      #   host = "0.0.0.0";
+      #   port = 1337;
+      #   openFirewall = true;
+      #   user = "trok";
+      #   group = "trok";
+      # };
+    };
   };
 
   # Home-manager config

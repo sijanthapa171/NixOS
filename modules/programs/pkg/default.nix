@@ -10,5 +10,6 @@
     ./tgpt
     ./bat
     ./cmatrix
+    ./trok
   ];
 } 
