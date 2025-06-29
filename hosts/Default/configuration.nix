@@ -73,6 +73,7 @@
       #   group = "trok";
       # };
     };
+    figma.enable = true;
   };
 
   # Home-manager config

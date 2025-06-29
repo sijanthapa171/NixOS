@@ -11,5 +11,6 @@
     ./bat
     ./cmatrix
     ./trok
+    ./figma
   ];
 } 
