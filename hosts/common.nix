@@ -82,6 +82,7 @@
         ripgrep
         tldr
         unzip
+        unrar
       ];
     };
   };
