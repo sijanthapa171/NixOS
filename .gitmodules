@@ -1,0 +1,3 @@
+[submodule "modules/programs/editor/nixvim-repo"]
+    path = modules/programs/editor/nixvim-repo
+    url = https://github.com/nix-community/nixvim.git 
