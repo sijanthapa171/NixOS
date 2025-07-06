@@ -94,14 +94,8 @@
 
       iso = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit self inputs outputs;} // settings;
         modules = [
-          ./hosts/Default/configuration.nix
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          {
-            isoImage.makeEfiBootable = true;
-            isoImage.makeUsbBootable = true;
-          }
+          ./hosts/iso/configuration.nix
         ];
       };
     };
