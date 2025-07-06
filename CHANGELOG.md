@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/sijanthapa171/NixOS/compare/v1.2.1...v1.2.2) (2025-07-06)
+
+
+### Bug Fixes
+
+* create dedicated ISO configuration ([22afcbf](https://github.com/sijanthapa171/NixOS/commit/22afcbf98622806a9548e9d14fd48cf56f51b040))
+
 ## [1.2.1](https://github.com/sijanthapa171/NixOS/compare/v1.2.0...v1.2.1) (2025-07-06)
 
 
