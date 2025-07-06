@@ -1,3 +1,10 @@
+## [1.2.4](https://github.com/sijanthapa171/NixOS/compare/v1.2.3...v1.2.4) (2025-07-06)
+
+
+### Bug Fixes
+
+* update ISO configuration to use gzip compression ([3cc2e41](https://github.com/sijanthapa171/NixOS/commit/3cc2e41a6746df47605678cd68a16a23c569cecc))
+
 ## [1.2.3](https://github.com/sijanthapa171/NixOS/compare/v1.2.2...v1.2.3) (2025-07-06)
 
 
