@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/sijanthapa171/NixOS/compare/v1.1.0...v1.1.1) (2025-07-06)
+
+
+### Bug Fixes
+
+* flake cheek yml file ([e5fa3d0](https://github.com/sijanthapa171/NixOS/commit/e5fa3d0bfa04e188a956c514ecea7d156e34f585))
+
 # [1.1.0](https://github.com/sijanthapa171/NixOS/compare/v1.0.0...v1.1.0) (2025-07-06)
 
 
