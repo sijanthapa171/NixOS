@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/sijanthapa171/NixOS/compare/v1.0.0...v1.1.0) (2025-07-06)
+
+
+### Features
+
+* add dependabot yml file ([4ed9dae](https://github.com/sijanthapa171/NixOS/commit/4ed9daecaed7586ed2bff6d78383624573af2761))
+
 # 1.0.0 (2025-07-04)
 
 
