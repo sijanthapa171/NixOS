@@ -27,8 +27,8 @@ jobs:
 
       - name: Build ISO
         run: |
-          nix run .#iso
-          ISO_PATH=$(find ./result -name "*.iso" -type f)
+          nix build .#nixosConfigurations.iso.config.system.build.isoImage
+          ISO_PATH=$(find result/iso -name "*.iso" -type f)
           echo "ISO_PATH=$ISO_PATH" >> $GITHUB_ENV
           echo "ISO_NAME=$(basename $ISO_PATH)" >> $GITHUB_ENV
 

@@ -74,11 +74,35 @@
     templates = import ./dev-shells;
     overlays = import ./overlays {inherit inputs settings;};
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+    
+    packages = forAllSystems (system: {
+      iso = let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+        pkgs.writeShellScriptBin "build-iso" ''
+          nix build .#nixosConfigurations.iso.config.system.build.isoImage
+          cp result/iso/*.iso .
+        '';
+    });
+
     nixosConfigurations = {
       Default = nixpkgs.lib.nixosSystem {
         system = forAllSystems (system: system);
         specialArgs = {inherit self inputs outputs;} // settings;
         modules = [./hosts/Default/configuration.nix];
+      };
+
+      iso = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = {inherit self inputs outputs;} // settings;
+        modules = [
+          ./hosts/Default/configuration.nix
+          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+          {
+            isoImage.makeEfiBootable = true;
+            isoImage.makeUsbBootable = true;
+          }
+        ];
       };
     };
   };
