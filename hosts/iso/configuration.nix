@@ -15,7 +15,7 @@
   # Enable copying the NixOS configuration to the installed system
   isoImage.makeEfiBootable = true;
   isoImage.makeUsbBootable = true;
-  isoImage.squashfsCompression = "zstd -19";
+  isoImage.squashfsCompression = "gzip -Xcompression-level 9";
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -46,6 +46,12 @@
     pciutils
     usbutils
   ];
+
+  # Allow unfree packages in the ISO
+  nixpkgs.config.allowUnfree = true;
+
+  # Explicitly disable insecure packages
+  nixpkgs.config.permittedInsecurePackages = [];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
