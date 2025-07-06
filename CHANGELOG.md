@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/sijanthapa171/NixOS/compare/v1.2.2...v1.2.3) (2025-07-06)
+
+
+### Bug Fixes
+
+* update C# dev-shell to use .NET SDK 8 and permit required legacy dependencies ([f982a4a](https://github.com/sijanthapa171/NixOS/commit/f982a4a55314e3dc268bc324d35652a49c4ef638))
+
 ## [1.2.2](https://github.com/sijanthapa171/NixOS/compare/v1.2.1...v1.2.2) (2025-07-06)
 
 
