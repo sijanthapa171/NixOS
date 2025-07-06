@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/sijanthapa171/NixOS/compare/v1.2.0...v1.2.1) (2025-07-06)
+
+
+### Bug Fixes
+
+* update ISO build configuration and workflow ([78ea2b9](https://github.com/sijanthapa171/NixOS/commit/78ea2b9af31a3361a93397e9ae9c2aad06c3173c))
+
 # [1.2.0](https://github.com/sijanthapa171/NixOS/compare/v1.1.1...v1.2.0) (2025-07-06)
 
 
