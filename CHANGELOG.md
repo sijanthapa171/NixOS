@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/sijanthapa171/NixOS/compare/v1.1.1...v1.2.0) (2025-07-06)
+
+
+### Features
+
+* enable ISO builds on push to main branch ([73381e6](https://github.com/sijanthapa171/NixOS/commit/73381e66ad8850c17c0b62c75d00689a0b9149cd))
+
 ## [1.1.1](https://github.com/sijanthapa171/NixOS/compare/v1.1.0...v1.1.1) (2025-07-06)
 
 
