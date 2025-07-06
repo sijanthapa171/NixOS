@@ -21,11 +21,14 @@ jobs:
       - name: Check Root Flake
         run: nix flake check
 
-      - name: Check Template Flake
+      - name: Check Dev-Shells Templates
         run: |
-          cd template
-          sed -i 's|url = "github:richen604/hydenix"|url = "path:../"|' flake.nix
-          nix flake check
-          git checkout flake.nix
-          rm -f flake.lock
+          cd dev-shells
+          for template in */; do
+            if [ -f "${template}flake.nix" ]; then
+              cd "$template"
+              nix flake check
+              cd ..
+            fi
+          done
           
