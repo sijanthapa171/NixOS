@@ -36,15 +36,15 @@ jobs:
         if: github.event_name == 'release'
         run: |
           VERSION="${{ github.event.release.tag_name }}"
-          cp "$ISO_PATH" "hydenix-iso-${VERSION}.iso"
-          echo "VERSIONED_ISO_PATH=hydenix-iso-${VERSION}.iso" >> $GITHUB_ENV
+          cp "$ISO_PATH" "nixos-iso-${VERSION}.iso"
+          echo "VERSIONED_ISO_PATH=nixos-iso-${VERSION}.iso" >> $GITHUB_ENV
 
       - name: Rename ISO with commit (Push or Manual)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         run: |
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
-          cp "$ISO_PATH" "hydenix-iso-v${SHORT_SHA}.iso"
-          echo "VERSIONED_ISO_PATH=hydenix-iso-v${SHORT_SHA}.iso" >> $GITHUB_ENV
+          cp "$ISO_PATH" "nixos-iso-v${SHORT_SHA}.iso"
+          echo "VERSIONED_ISO_PATH=nixos-iso-v${SHORT_SHA}.iso" >> $GITHUB_ENV
 
       - name: Upload ISO to Release
         if: github.event_name == 'release'
@@ -60,7 +60,7 @@ jobs:
             1. Download the ISO file
             2. Burn it to a USB drive using:
                ```
-               nix run github:richen604/hydenix#burn-iso -- ${{ env.VERSIONED_ISO_PATH }} /dev/sdX
+               sudo dd if=${{ env.VERSIONED_ISO_PATH }} of=/dev/sdX bs=4M status=progress conv=fsync
                ```
                (Replace /dev/sdX with your USB device)
             3. Boot from the USB drive
@@ -73,12 +73,12 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: iso-${{ github.sha }}
-          name: HydeNix ISO ${{ github.sha }}
+          name: NixOS ISO ${{ github.sha }}
           draft: false
           prerelease: true
           files: ${{ env.VERSIONED_ISO_PATH }}
           body: |
-            HydeNix ISO built from commit ${{ github.sha }}
+            NixOS ISO built from commit ${{ github.sha }}
 
             This is an automated ISO build from a push or manual trigger.
 
@@ -87,7 +87,7 @@ jobs:
             1. Download the ISO file
             2. Burn it to a USB drive using:
                ```
-               nix run github:richen604/hydenix#burn-iso -- ${{ env.VERSIONED_ISO_PATH }} /dev/sdX
+               sudo dd if=${{ env.VERSIONED_ISO_PATH }} of=/dev/sdX bs=4M status=progress conv=fsync
                ```
                (Replace /dev/sdX with your USB device)
             3. Boot from the USB drive
