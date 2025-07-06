@@ -1,6 +1,8 @@
 name: Build ISO
 
 on:
+  push:
+    branches: [main]
   release:
     types: [created]
   workflow_dispatch:
@@ -37,8 +39,8 @@ jobs:
           cp "$ISO_PATH" "hydenix-iso-${VERSION}.iso"
           echo "VERSIONED_ISO_PATH=hydenix-iso-${VERSION}.iso" >> $GITHUB_ENV
 
-      - name: Rename ISO with commit (Manual)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Rename ISO with commit (Push or Manual)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         run: |
           SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
           cp "$ISO_PATH" "hydenix-iso-v${SHORT_SHA}.iso"
@@ -66,8 +68,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create ISO Release (Manual Trigger)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Create ISO Release (Push or Manual Trigger)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
         uses: softprops/action-gh-release@v1
         with:
           tag_name: iso-${{ github.sha }}
@@ -78,7 +80,7 @@ jobs:
           body: |
             HydeNix ISO built from commit ${{ github.sha }}
 
-            This is a manually triggered ISO build.
+            This is an automated ISO build from a push or manual trigger.
 
             ## Installation
 
