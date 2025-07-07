@@ -65,16 +65,6 @@ Edit `flake.nix`:
 }
 ```
 
-### How do I choose a different desktop environment?
-Enable your preferred desktop environment in the configuration:
-```nix
-{
-  modules.desktop = {
-    hyprland.enable = true;  # Or gnome.enable, plasma.enable
-  };
-}
-```
-
 ### How do I add custom packages?
 Add them to your configuration:
 ```nix
@@ -169,14 +159,6 @@ sudo nix-env --delete-generations old
 - Regular updates: Monthly recommended
 - Major version upgrades: Every 6 months
 
-## 🔐 Security
-
-### Is this configuration secure?
-Yes! It includes:
-- Secure boot support
-- Firewall configuration
-- Security-focused browser settings
-- Regular security updates
 
 ### How do I enable additional security features?
 ```nix
@@ -194,7 +176,7 @@ Yes! It includes:
 ### Where can I get help?
 - [NixOS Discourse](https://discourse.nixos.org)
 - [NixOS Matrix Chat](https://matrix.to/#/#nixos:matrix.org)
-- [GitHub Issues](https://github.com/authxt/NixOS/issues)
+- [GitHub Issues](https://github.com/sijanthapa171/NixOS/issues)
 
 ### How can I contribute?
 1. Fork the repository
@@ -203,7 +185,7 @@ Yes! It includes:
 4. Submit a pull request
 
 ### Where can I report bugs?
-Open an issue on [GitHub](https://github.com/authxt/NixOS/issues) with:
+Open an issue on [GitHub](https://github.com/sijanthapa171/NixOS/issues) with:
 - Description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
