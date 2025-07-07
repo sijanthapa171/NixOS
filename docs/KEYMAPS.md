@@ -112,28 +112,6 @@ A comprehensive guide to keyboard shortcuts and keybindings in your NixOS config
 | `SUPER + Print` | Screenshot Monitor |
 | `SUPER + ALT + P` | Screenshot All Outputs |
 
-## 🎵 Media Controls
-
-### Audio
-| Shortcut | Action |
-|----------|--------|
-| `XF86AudioRaiseVolume` | Volume Up |
-| `XF86AudioLowerVolume` | Volume Down |
-| `XF86AudioMute` | Toggle Mute |
-| `XF86AudioMicMute` | Toggle Mic |
-
-### Media
-| Shortcut | Action |
-|----------|--------|
-| `XF86AudioPlay/Pause` | Play/Pause |
-| `XF86AudioNext` | Next Track |
-| `XF86AudioPrev` | Previous Track |
-
-### Brightness
-| Shortcut | Action |
-|----------|--------|
-| `XF86MonBrightnessUp` | Increase Brightness |
-| `XF86MonBrightnessDown` | Decrease Brightness |
 
 ## 🎮 Special Functions
 
@@ -148,7 +126,6 @@ A comprehensive guide to keyboard shortcuts and keybindings in your NixOS config
 |----------|--------|
 | `SUPER + ALT + K` | Switch Keyboard Layout |
 | `SUPER + CTRL + C` | Color Picker |
-| `XF86Sleep` | Suspend System |
 
 ## 🖱️ Mouse Bindings
 
