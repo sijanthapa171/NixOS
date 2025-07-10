@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/sijanthapa171/NixOS/compare/v1.4.0...v1.5.0) (2025-07-10)
+
+
+### Features
+
+* chnage wallpaper purp to basement ([cd86fa4](https://github.com/sijanthapa171/NixOS/commit/cd86fa421f42afd995ba43bf24a4e9d33ad7bc2e))
+
 # [1.4.0](https://github.com/sijanthapa171/NixOS/compare/v1.3.0...v1.4.0) (2025-07-10)
 
 
