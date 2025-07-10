@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/sijanthapa171/NixOS/compare/v1.2.4...v1.3.0) (2025-07-10)
+
+
+### Features
+
+* add wallpaper for brave ([2428923](https://github.com/sijanthapa171/NixOS/commit/24289239dcdc0ddfba021fa7ed2bc02641875f47))
+
 ## [1.2.4](https://github.com/sijanthapa171/NixOS/compare/v1.2.3...v1.2.4) (2025-07-06)
 
 
