@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/sijanthapa171/NixOS/compare/v1.3.0...v1.4.0) (2025-07-10)
+
+
+### Features
+
+* > ([503cc36](https://github.com/sijanthapa171/NixOS/commit/503cc3651b9aa3b5874d40f7d53812bca1d9ad89))
+
 # [1.3.0](https://github.com/sijanthapa171/NixOS/compare/v1.2.4...v1.3.0) (2025-07-10)
 
 
