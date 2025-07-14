@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/sijanthapa171/NixOS/compare/v1.5.0...v1.6.0) (2025-07-14)
+
+
+### Features
+
+* add cowsay package module ([3482860](https://github.com/sijanthapa171/NixOS/commit/34828608b9be83108cfa6a8157e3133c416be1ae))
+
 # [1.5.0](https://github.com/sijanthapa171/NixOS/compare/v1.4.0...v1.5.0) (2025-07-10)
 
 
