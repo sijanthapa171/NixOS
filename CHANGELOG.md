@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/sijanthapa171/NixOS/compare/v1.6.0...v1.7.0) (2025-07-14)
+
+
+### Features
+
+* add cowsay config ([ddb90fb](https://github.com/sijanthapa171/NixOS/commit/ddb90fba0b28c685b45bc7e0be107c7afeae93a6))
+
 # [1.6.0](https://github.com/sijanthapa171/NixOS/compare/v1.5.0...v1.6.0) (2025-07-14)
 
 
