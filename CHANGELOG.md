@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/sijanthapa171/NixOS/compare/v1.7.0...v1.8.0) (2025-07-15)
+
+
+### Features
+
+* add teligram desktop ([58c1bd6](https://github.com/sijanthapa171/NixOS/commit/58c1bd657b3aba9367663e9df93c04ca51ddcb8c))
+
 # [1.7.0](https://github.com/sijanthapa171/NixOS/compare/v1.6.0...v1.7.0) (2025-07-14)
 
 
