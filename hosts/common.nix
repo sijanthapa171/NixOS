@@ -84,6 +84,7 @@
         unzip
         unrar
         cowsay
+        telegram-desktop
       ];
     };
   };
