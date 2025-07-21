@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/sijanthapa171/NixOS/compare/v1.8.0...v1.9.0) (2025-07-21)
+
+
+### Features
+
+* add neovim keybinds ([b804716](https://github.com/sijanthapa171/NixOS/commit/b804716b17aa8d2a693419fe2c617b04e25da2c1))
+
 # [1.8.0](https://github.com/sijanthapa171/NixOS/compare/v1.7.0...v1.8.0) (2025-07-15)
 
 
