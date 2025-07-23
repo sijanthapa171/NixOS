@@ -112,6 +112,8 @@
     vcpkg
     vcpkg-tool
     nodejs
+    go 
+    hugo
     # --> Temp
   ];
 
