@@ -10,6 +10,7 @@
   kbdLayout,
   kbdVariant,
   consoleKeymap,
+  config,
   self,
   ...
 }: {
@@ -46,46 +47,47 @@
       xdg.enable = true;
       xdg.portal = {
         enable = true;
-        extraPortals = with pkgs; [ xdg-desktop-portal-hyprland xdg-desktop-portal-gtk ];
+        extraPortals = with pkgs; [xdg-desktop-portal-hyprland xdg-desktop-portal-gtk];
         xdgOpenUsePortal = true;
       };
-      home.username = username;
-      home.homeDirectory =
-        if pkgs.stdenv.isDarwin
-        then "/Users/${username}"
-        else "/home/${username}";
-      home.stateVersion = "23.11"; # Please read the comment before changing.
-      home.sessionVariables = {
-        EDITOR = "nvim";
-        BROWSER = browser;
-        TERMINAL = terminal;
+      home = {
+        username = username;
+        homeDirectory =
+          if pkgs.stdenv.isDarwin
+          then "/Users/${username}"
+          else "/home/${username}";
+        stateVersion = "23.11"; # Please read the comment before changing.
+        sessionVariables = {
+          EDITOR = "nvim";
+          BROWSER = browser;
+          TERMINAL = terminal;
+        };
+        # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
+        packages = with pkgs; [
+          # Applications
+          #kate
+
+          # Terminal
+          fast-cli
+          speedtest-cli
+          neofetch
+          nitch
+          fzf
+          fd
+          git
+          gh
+          htop
+          libjxl
+          microfetch
+          nix-prefetch-scripts
+          ripgrep
+          tldr
+          unzip
+          unrar
+          cowsay
+          telegram-desktop
+        ];
       };
-
-      # Packages that don't require configuration. If you're looking to configure a program see the /modules dir
-      home.packages = with pkgs; [
-        # Applications
-        #kate
-
-        # Terminal
-        fast-cli
-        speedtest-cli
-        neofetch
-        nitch
-        fzf
-        fd
-        git
-        gh
-        htop
-        libjxl
-        microfetch
-        nix-prefetch-scripts
-        ripgrep
-        tldr
-        unzip
-        unrar
-        cowsay
-        telegram-desktop
-      ];
     };
   };
 
@@ -95,16 +97,16 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
-  services.scx = {
-    enable = true;
-    package = pkgs.scx.rustscheds;
-    scheduler = "scx_lavd"; # https://github.com/sched-ext/scx/blob/main/scheds/rust/README.md
-  };
+  # services.scx = {
+  #   enable = true;
+  #   package = pkgs.scx.rustscheds;
+  #   scheduler = "scx_lavd"; # https://github.com/sched-ext/scx/blob/main/scheds/rust/README.md
+  # };
 
   # Bootloader.
   boot = {
     tmp.cleanOnBoot = true;
-    kernelPackages = pkgs.linuxPackages_zen; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
+    kernelPackages = pkgs.linuxPackages_latest; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
@@ -230,6 +232,7 @@
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
+  fonts.fontDir.enable = true;
   fonts.packages = with pkgs.nerd-fonts; [
     jetbrains-mono
     fira-code
