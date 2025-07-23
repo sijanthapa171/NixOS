@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/sijanthapa171/NixOS/compare/v1.9.0...v1.9.1) (2025-07-23)
+
+
+### Bug Fixes
+
+* **hyprland:** remove invalid explicit_sync options from render block ([9e285ad](https://github.com/sijanthapa171/NixOS/commit/9e285ad655bb66c501af7aea8ce6227eb6ceb55f))
+
 # [1.9.0](https://github.com/sijanthapa171/NixOS/compare/v1.8.0...v1.9.0) (2025-07-21)
 
 
