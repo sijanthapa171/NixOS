@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/sijanthapa171/NixOS/compare/v1.9.1...v1.10.0) (2025-07-23)
+
+
+### Features
+
+* update tmux config ([494bbe4](https://github.com/sijanthapa171/NixOS/commit/494bbe4b71b8c45af71cec174e8d4b6feee248a2))
+
 ## [1.9.1](https://github.com/sijanthapa171/NixOS/compare/v1.9.0...v1.9.1) (2025-07-23)
 
 
