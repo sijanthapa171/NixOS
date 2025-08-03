@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/sijanthapa171/NixOS/compare/v1.10.1...v1.10.2) (2025-08-03)
+
+
+### Bug Fixes
+
+* gcb ([40b2224](https://github.com/sijanthapa171/NixOS/commit/40b222426cef9ffeff6b65688f074d940565cc46))
+
 ## [1.10.1](https://github.com/sijanthapa171/NixOS/compare/v1.10.0...v1.10.1) (2025-08-03)
 
 
