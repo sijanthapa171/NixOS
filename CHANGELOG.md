@@ -1,3 +1,10 @@
+## [1.10.1](https://github.com/sijanthapa171/NixOS/compare/v1.10.0...v1.10.1) (2025-08-03)
+
+
+### Bug Fixes
+
+* firefox throwing an error on rebuild ([2538f46](https://github.com/sijanthapa171/NixOS/commit/2538f46837064452a72882208167bad965becfcf))
+
 # [1.10.0](https://github.com/sijanthapa171/NixOS/compare/v1.9.1...v1.10.0) (2025-07-23)
 
 
