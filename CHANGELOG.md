@@ -1,3 +1,17 @@
+# [1.11.0](https://github.com/sijanthapa171/NixOS/compare/v1.10.2...v1.11.0) (2025-08-03)
+
+
+### Bug Fixes
+
+* Fixed and updated firefox config ([4a06a22](https://github.com/sijanthapa171/NixOS/commit/4a06a22ff0e0e948546d6cc5c8f2545cdecd25e3))
+* update zsh config ([403c095](https://github.com/sijanthapa171/NixOS/commit/403c095071ed4a9f239abc78817c8b4b61b8267a))
+* Updated nvk config ([9772b4d](https://github.com/sijanthapa171/NixOS/commit/9772b4dec902ed6370c1ef4bfb8846e242d9de96))
+
+
+### Features
+
+* switched to firefox for now ([bcd3a79](https://github.com/sijanthapa171/NixOS/commit/bcd3a7941a00ffe7634bb044e2471a4556aaade2))
+
 ## [1.10.2](https://github.com/sijanthapa171/NixOS/compare/v1.10.1...v1.10.2) (2025-08-03)
 
 
