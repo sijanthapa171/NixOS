@@ -4,10 +4,9 @@
   config,
   ...
 }: let
-  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.latest; # stable, latest, beta, etc.
+  nvidiaDriverChannel = config.boot.kernelPackages.nvidiaPackages.beta; # stable, latest, beta, etc.
 in {
   environment.sessionVariables = lib.optionalAttrs config.programs.hyprland.enable {
-    NVD_BACKEND = "direct";
     GBM_BACKEND = "nvidia-drm";
     WLR_NO_HARDWARE_CURSORS = "1";
     LIBVA_DRIVER_NAME = "nvidia";
@@ -15,6 +14,8 @@ in {
     # MOZ_DISABLE_RDD_SANDBOX = 1; # Potential security risk
 
     __GL_GSYNC_ALLOWED = "1"; # GSync
+    __GL_VRR_ALLOWED = "1"; # VRR
+    __GL_MaxFramesAllowed = "1"; # Reduces input lag
   };
 
   # Load nvidia driver for Xorg and Wayland
@@ -28,8 +29,10 @@ in {
       open = false;
       # nvidiaPersistenced = true;
       nvidiaSettings = false;
-      powerManagement.enable = true; # This can cause sleep/suspend to fail.
-      modesetting.enable = true;
+      powerManagement.enable = true; # Fixes sleep/suspend
+
+      modesetting.enable = true; # Modesetting is required.
+
       package = nvidiaDriverChannel;
     };
     graphics = {
@@ -40,6 +43,7 @@ in {
         nvidia-vaapi-driver
         vaapiVdpau
         libvdpau-va-gl
+        egl-wayland
       ];
     };
   };

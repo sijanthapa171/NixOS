@@ -15,7 +15,6 @@
 
     ../common.nix
     ../../modules/scripts
-    ../../modules/programs/pkg # Import our new package configurations
 
     ../../modules/desktop/hyprland # Enable hyprland window manager
     # ../../modules/desktop/i3-gaps # Enable i3 window manager
@@ -37,49 +36,21 @@
     ../../modules/programs/media/spicetify
     # ../../modules/programs/media/youtube-music
     # ../../modules/programs/media/thunderbird
-    ../../modules/programs/media/obs-studio
+    # ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/thunar
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
     # ../../modules/programs/misc/nix-ld
-    ../../modules/programs/misc/virt-manager
-    ../../modules/programs/wine
-    ../../modules/programs/docker
+    # ../../modules/programs/misc/virt-manager
   ];
-
-  # Enable our modular package configurations
-  modules.programs.pkg = {
-    brave.enable = true;
-    google-chrome.enable = true;
-    libreoffice.enable = true;
-    obsidian.enable = true;
-    vscode = {
-      enable = true;
-      enableCursor = true;
-    };
-    tgpt.enable = true;
-    bat.enable = true;
-    cmatrix.enable = true;
-    trok = {
-      enable = true;
-      # Uncomment and adjust these if you want to run a trok server
-      # server = {
-      #   enable = true;
-      #   host = "0.0.0.0";
-      #   port = 1337;
-      #   openFirewall = true;
-      #   user = "trok";
-      #   group = "trok";
-      # };
-    };
-    figma.enable = true;
-  };
 
   # Home-manager config
   home-manager.sharedModules = [
     (_: {
       home.packages = with pkgs; [
+        obsidian
+        protonvpn-gui # VPN
         # pokego # Overlayed
         # krita
         github-desktop
@@ -90,31 +61,6 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
-    
-    #<-- Temp for NoteCLI
-    # Build tools
-    gcc
-    gnumake
-    cmake
-    pkg-config
-
-    # Testing tools
-    cunit
-    gtest
-    lcov
-
-    # Development tools
-    clang-tools
-    codespell
-    conan
-    cppcheck
-    doxygen
-    vcpkg
-    vcpkg-tool
-    nodejs
-    go 
-    hugo
-    # --> Temp
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix

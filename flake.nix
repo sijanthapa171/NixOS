@@ -16,6 +16,10 @@
       url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    neovim = {
+      url = "github:Sly-Harvey/nvim";
+      flake = false;
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +34,7 @@
       flake = false;
     };
     zen-browser = {
-      url = "github:maximoffua/zen-browser.nix";
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nvchad4nix = {
@@ -47,13 +51,13 @@
     inherit (self) outputs;
     settings = {
       # User configuration
-      username = "sijanthapa"; # automatically set with install.sh and live-install.sh
+      username = "auth"; # automatically set with install.sh and live-install.sh
       editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
-      browser = "firefox"; # firefox, floorp, zen
+      browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "basement"; # see modules/themes/wallpapers
+      wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
 
       # System configuration
       videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
@@ -74,29 +78,11 @@
     templates = import ./dev-shells;
     overlays = import ./overlays {inherit inputs settings;};
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    
-    packages = forAllSystems (system: {
-      iso = let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-        pkgs.writeShellScriptBin "build-iso" ''
-          nix build .#nixosConfigurations.iso.config.system.build.isoImage
-          cp result/iso/*.iso .
-        '';
-    });
-
     nixosConfigurations = {
       Default = nixpkgs.lib.nixosSystem {
         system = forAllSystems (system: system);
         specialArgs = {inherit self inputs outputs;} // settings;
         modules = [./hosts/Default/configuration.nix];
-      };
-
-      iso = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/iso/configuration.nix
-        ];
       };
     };
   };

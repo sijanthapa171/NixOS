@@ -68,10 +68,6 @@
           #kate
 
           # Terminal
-          fast-cli
-          speedtest-cli
-          neofetch
-          nitch
           fzf
           fd
           git
@@ -82,10 +78,8 @@
           nix-prefetch-scripts
           ripgrep
           tldr
-          unzip
           unrar
-          cowsay
-          telegram-desktop
+          unzip
         ];
       };
     };
@@ -97,6 +91,7 @@
   services.gvfs.enable = true;
   services.udisks2.enable = true;
 
+  # Depends on system
   # services.scx = {
   #   enable = true;
   #   package = pkgs.scx.rustscheds;
@@ -107,6 +102,9 @@
   boot = {
     tmp.cleanOnBoot = true;
     kernelPackages = pkgs.linuxPackages_latest; # _latest, _zen, _xanmod_latest, _hardened, _rt, _OTHER_CHANNEL, etc.
+    kernelParams = [
+      "preempt=full"
+    ];
     loader = {
       efi.canTouchEfiVariables = true;
       efi.efiSysMountPoint = "/boot";
@@ -261,6 +259,7 @@
   environment.systemPackages = with pkgs; [
     killall
     lm_sensors
+    gnome-disk-utility
     jq
     bibata-cursors
     sddm-astronaut # Overlayed

@@ -5,7 +5,7 @@
   services.xserver = {
     enable = true;
     desktopManager.gnome.enable = true;
-    #layout = "us";
+    #layout = "gb";
     #libinput = { touchpad.tapping = true; };
   };
   services.gnome.gnome-initial-setup.enable = false;

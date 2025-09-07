@@ -132,8 +132,8 @@
           input = {
             kb_layout = "${kbdLayout},ru";
             kb_variant = "${kbdVariant},";
-            repeat_delay = 300; # or 212
-            repeat_rate = 30;
+            repeat_delay = 275; # or 212
+            repeat_rate = 35;
 
             follow_mouse = 1;
 
@@ -226,7 +226,7 @@
             swallow_regex = "^(Alacritty|kitty)$";
             enable_swallow = true;
             vfr = true; # always keep on
-            vrr = 1; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only)
+            vrr = 2; # enable variable refresh rate (0=off, 1=on, 2=fullscreen only, 3 = fullscreen games/media)
           };
           xwayland.force_zero_scaling = false;
           gestures = {
@@ -262,7 +262,7 @@
             "opacity 0.90 0.90,title:^(Hyprland Polkit Agent)$" # polkit prompt
             "opacity 1.00 1.00,class:^(firefox)$"
             "opacity 0.90 0.90,class:^(Brave-browser)$"
-            "opacity 0.80 0.80,class:^(thunar)$"
+            "opacity 0.80 0.80,class:^(org.gnome.Nautilus|thunar)$"
             "opacity 0.80 0.80,class:^(Steam)$"
             "opacity 0.80 0.80,class:^(steam)$"
             "opacity 0.80 0.80,class:^(steamwebhelper)$"
@@ -501,22 +501,18 @@
         };
         extraConfig = ''
           binds {
-            workspace_back_and_forth = 1
+            workspace_back_and_forth = 0
             #allow_workspace_cycles=1
             #pass_mouse_when_bound=0
           }
-          
+
           # Easily plug in any monitor
-          # Custom Monitor Configuration (Added)
-          #  monitor=,preferred,auto,1
-          monitor = HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1
-          monitor = DP-1, 1920x1080@60, 1280x0, 1
-          monitor = eDP-1, 1920x1080@60, 1280x1080, 1
+          monitor=,preferred,auto,1
 
           # 1080p-HDR monitor on the left, 4K-HDR monitor in the middle and 1080p vertical monitor on the right.
           monitor=desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1
           monitor=desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2
-          monitor=desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x0,1,transform,1 # 5 for fipped
+          monitor=desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x-420,1,transform,1 # 5 for fipped
 
           # Binds workspaces to my monitors only (find desc with: hyprctl monitors)
           workspace=1,monitor:desc:BNQ BenQ EL2870U PCK00489SL0,default:true

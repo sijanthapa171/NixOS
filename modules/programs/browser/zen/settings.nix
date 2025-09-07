@@ -8,6 +8,9 @@ let
     Status = "locked";
   };
 in {
+  "zen.watermark.enabled" = false;
+  "zen.welcome-screen.seen" = true;
+
   # enable custom userchrome
   "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
   "svg.context-properties.content.enabled" = true;
@@ -169,7 +172,7 @@ in {
   "browser.newtabpage.activity-stream.improvesearch.topSiteSearchShortcuts.searchEngines" = "";
   "browser.protections_panel.infoMessage.seen" = lock-true;
   "browser.ssb.enabled" = true;
-  "browser.toolbars.bookmarks.visibility" = "newtab"; # always, never, newtab
+  "browser.toolbars.bookmarks.visibility" = "always"; # always, never, newtab
   #"browser.urlbar.placeholderName" = "Google";
   "browser.urlbar.suggest.topsites" = lock-false;
   "browser.urlbar.suggest.openpage" = lock-false;
@@ -215,7 +218,6 @@ in {
     placements = {
       widget-overflow-fixed-list = [];
       unified-extensions-area = [
-        # "extension_one-tab_com-browser-action"
         "ublock0_raymondhill_net-browser-action"
         "firemonkey_eros_man-browser-action"
         "addon_darkreader_org-browser-action"
@@ -232,10 +234,9 @@ in {
         "unified-extensions-button"
 
         # Extensions
-        "extension_one-tab_com-browser-action"
-        "ublock0_raymondhill_net-browser-action"
-        "firemonkey_eros_man-browser-action"
         "_c4b582ec-4343-438c-bda2-2f691c16c262_-browser-action"
+        "firemonkey_eros_man-browser-action"
+        "ublock0_raymondhill_net-browser-action"
         # "addon_darkreader_org-browser-action"
         # "queryamoid_kaply_com-browser-action"
         # "_aecec67f-0d10-4fa7-b7c7-609a2db280cf_-browser-action"

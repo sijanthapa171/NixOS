@@ -11,19 +11,15 @@
     forEachSupportedSystem = f:
       nixpkgs.lib.genAttrs supportedSystems (system:
         f {
-          pkgs = import nixpkgs {
-            inherit system;
-            config.permittedInsecurePackages = [
-              "dotnet-sdk-6.0.428"
-              "dotnet-runtime-6.0.36"
-            ];
-          };
+          pkgs = import nixpkgs {inherit system;};
         });
   in {
     devShells = forEachSupportedSystem ({pkgs}: {
       default = pkgs.mkShell {
         packages = with pkgs; [
-          dotnet-sdk_8
+          #dotnet-sdk_6
+          dotnet-sdk_7
+          #dotnet-sdk_8
           omnisharp-roslyn
           mono
           msbuild
