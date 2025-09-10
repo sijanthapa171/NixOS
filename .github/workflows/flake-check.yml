@@ -1,0 +1,57 @@
+name: Flake Check
+
+on:
+  push:
+    branches: [ main, master, develop ]
+    paths:
+      - 'flake.nix'
+      - 'flake.lock'
+      - '**/flake.nix'
+  pull_request:
+    branches: [ main, master, develop ]
+    paths:
+      - 'flake.nix'
+      - 'flake.lock'
+      - '**/flake.nix'
+  workflow_dispatch: # Allow manual triggering
+
+jobs:
+  flake-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v25
+        with:
+          extra_nix_config: |
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check flake syntax
+        run: nix flake check --no-build
+
+      - name: Verify flake inputs
+        run: nix flake metadata
+
+      - name: Check flake outputs
+        run: nix flake show
+
+      - name: Validate dependency resolution
+        run: nix flake lock --no-update --no-write-lock-file
+
+      - name: Build default package
+        run: nix build .#nixosConfigurations.Default.config.system.build.toplevel --dry-run
+
+      - name: Run flake checks
+        run: nix flake check
+
+      - name: Verify formatter
+        run: |
+          # Check if the formatter is defined and works
+          if nix flake show | grep -q formatter; then
+            echo "Running formatter check"
+            nix fmt -- --check .
+          else
+            echo "No formatter defined, skipping check"
+          fi
