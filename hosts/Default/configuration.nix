@@ -56,6 +56,7 @@
         github-desktop
         # gimp
         google-chrome
+        brave
       ];
     })
   ];
