@@ -55,6 +55,7 @@
         # krita
         github-desktop
         # gimp
+        google-chrome
       ];
     })
   ];

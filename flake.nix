@@ -51,7 +51,7 @@
     inherit (self) outputs;
     settings = {
       # User configuration
-      username = "auth"; # automatically set with install.sh and live-install.sh
+      username = "sijanthapa"; # automatically set with install.sh and live-install.sh
       editor = "nixvim"; # nixvim, vscode, nvchad, neovim, emacs (WIP)
       browser = "zen"; # firefox, floorp, zen
       terminal = "kitty"; # kitty, alacritty, wezterm
@@ -60,7 +60,7 @@
       wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
 
       # System configuration
-      videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
+      videoDriver = "intel"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
       hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
       locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
       timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE

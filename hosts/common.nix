@@ -267,7 +267,6 @@
     pkgs.kdePackages.qtmultimedia
     pkgs.kdePackages.qtvirtualkeyboard
     # libsForQt5.qt5.qtgraphicaleffects
-
     # devenv
     # devbox
     # shellify
