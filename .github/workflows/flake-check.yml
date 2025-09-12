@@ -3,16 +3,8 @@ name: Flake Check
 on:
   push:
     branches: [ main, master, develop ]
-    paths:
-      - 'flake.nix'
-      - 'flake.lock'
-      - '**/flake.nix'
   pull_request:
     branches: [ main, master, develop ]
-    paths:
-      - 'flake.nix'
-      - 'flake.lock'
-      - '**/flake.nix'
   workflow_dispatch: # Allow manual triggering
 
 jobs:
