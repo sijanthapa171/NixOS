@@ -11,19 +11,28 @@ on:
 
 jobs:
   update-flake-lock:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       pull-requests: write
+    env:
+      NIX_CONFIG: |
+        experimental-features = nix-command flakes
+        access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: cachix/install-nix-action@v25
+        uses: cachix/install-nix-action@v27
         with:
+          install_url: https://releases.nixos.org/nix/nix-2.22.1/install
           extra_nix_config: |
+            experimental-features = nix-command flakes
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable Magic Nix Cache
+        uses: DeterminateSystems/magic-nix-cache-action@v7
 
       - name: Update flake.lock
         id: update
@@ -32,7 +41,7 @@ jobs:
           if nix flake update --dry-run | grep -q "Updated input";
           then
             echo "Updates available, updating flake.lock"
-            nix flake update
+            nix flake update -L
             echo "updated=true" >> $GITHUB_OUTPUT
           else
             echo "No updates available"
@@ -44,8 +53,8 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update flake.lock"
-          title: "chore: update flake.lock"
+          commit-message: "chore(ci): update flake.lock"
+          title: "chore(ci): update flake.lock"
           body: |
             This PR updates the flake.lock file with the latest dependency versions.
             
