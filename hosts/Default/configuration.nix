@@ -56,8 +56,8 @@
         github-desktop
         # gimp
         google-chrome
+        code-cursor
         brave
-        vscode
       ];
     })
   ];
