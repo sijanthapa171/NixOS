@@ -57,6 +57,7 @@
         # gimp
         google-chrome
         brave
+        vscode
       ];
     })
   ];
