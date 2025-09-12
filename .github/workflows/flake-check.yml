@@ -29,7 +29,7 @@ jobs:
       - name: Enable Magic Nix Cache
         uses: DeterminateSystems/magic-nix-cache-action@v7
 
-      - name: Define retry helper
+      - name: Check flake syntax
         shell: bash
         run: |
           set -eu
@@ -47,25 +47,107 @@ jobs:
               n=$((n+1))
             done
           }
-          echo "retry() defined"
-
-      - name: Check flake syntax
-        run: retry nix flake check --no-build
+          retry nix flake check --no-build
 
       - name: Verify flake inputs
-        run: retry nix flake metadata
+        shell: bash
+        run: |
+          set -eu
+          retry() {
+            local -r max=3
+            local -r delay=10
+            local n=1
+            until "$@"; do
+              if [[ $n -ge $max ]]; then
+                echo "Command failed after $n attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$max: $*" >&2
+              sleep $((delay*n))
+              n=$((n+1))
+            done
+          }
+          retry nix flake metadata
 
       - name: Check flake outputs
-        run: retry nix flake show
+        shell: bash
+        run: |
+          set -eu
+          retry() {
+            local -r max=3
+            local -r delay=10
+            local n=1
+            until "$@"; do
+              if [[ $n -ge $max ]]; then
+                echo "Command failed after $n attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$max: $*" >&2
+              sleep $((delay*n))
+              n=$((n+1))
+            done
+          }
+          retry nix flake show
 
       - name: Validate dependency resolution
-        run: retry nix flake lock --no-update --no-write-lock-file
+        shell: bash
+        run: |
+          set -eu
+          retry() {
+            local -r max=3
+            local -r delay=10
+            local n=1
+            until "$@"; do
+              if [[ $n -ge $max ]]; then
+                echo "Command failed after $n attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$max: $*" >&2
+              sleep $((delay*n))
+              n=$((n+1))
+            done
+          }
+          retry nix flake lock --no-update --no-write-lock-file
 
       - name: Build default package (dry-run)
-        run: retry nix build .#nixosConfigurations.Default.config.system.build.toplevel --dry-run -L
+        shell: bash
+        run: |
+          set -eu
+          retry() {
+            local -r max=3
+            local -r delay=10
+            local n=1
+            until "$@"; do
+              if [[ $n -ge $max ]]; then
+                echo "Command failed after $n attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$max: $*" >&2
+              sleep $((delay*n))
+              n=$((n+1))
+            done
+          }
+          retry nix build .#nixosConfigurations.Default.config.system.build.toplevel --dry-run -L
 
       - name: Run flake checks
-        run: retry nix flake check -L
+        shell: bash
+        run: |
+          set -eu
+          retry() {
+            local -r max=3
+            local -r delay=10
+            local n=1
+            until "$@"; do
+              if [[ $n -ge $max ]]; then
+                echo "Command failed after $n attempts: $*" >&2
+                return 1
+              fi
+              echo "Retry $n/$max: $*" >&2
+              sleep $((delay*n))
+              n=$((n+1))
+            done
+          }
+          retry nix flake check -L
 
       - name: Verify formatter
         run: |
