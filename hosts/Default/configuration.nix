@@ -50,10 +50,10 @@
     (_: {
       home.packages = with pkgs; [
         obsidian
-        protonvpn-gui # VPN
+        # protonvpn-gui # VPN
         # pokego # Overlayed
         # krita
-        github-desktop
+        # github-desktop
         # gimp
         google-chrome
         code-cursor
