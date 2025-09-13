@@ -1,4 +1,3 @@
-# NixOS Configuration System
 ## 🚀 Installation
 
 ### Quick Start
