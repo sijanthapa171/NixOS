@@ -32,14 +32,4 @@
    # Rebuild and switch to the new configuration
    sysup
    ```
-   
----
-
-<div align="center">
-  <p>Made with ❤️ by the NixOS community</p>
-  <p>
-    <a href="https://nixos.org">Website</a> •
-    <a href="https://discourse.nixos.org">Forum</a> •
-    <a href="https://matrix.to/#/#nixos:matrix.org">Matrix</a>
-  </p>
-</div> 
+  
