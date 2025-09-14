@@ -58,6 +58,7 @@
         google-chrome
         code-cursor
         brave
+        zoom-us
       ];
     })
   ];
