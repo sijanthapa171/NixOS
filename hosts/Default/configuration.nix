@@ -65,6 +65,7 @@
 
   # Define system packages here
   environment.systemPackages = with pkgs; [
+    bun  
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
