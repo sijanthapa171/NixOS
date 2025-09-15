@@ -10,7 +10,6 @@
         inherit (lib) getExe;
       in {
         enable = true;
-        package = pkgs.rofi;
         terminal = "${getExe pkgs.${terminal}}";
         plugins = with pkgs; [
           rofi-emoji # https://github.com/Mange/rofi-emoji 🤯
