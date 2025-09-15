@@ -151,6 +151,7 @@
           tree = "${pkgs.eza}/bin/eza --icons=auto --tree"; # dir tree
           vc = "code --disable-gpu"; # gui code editor
           nv = "nvim";
+          n = "neofetch";
           nf = "${pkgs.microfetch}/bin/microfetch";
           cp = "cp -iv";
           mv = "mv -iv";
@@ -161,7 +162,7 @@
           tpr = "${pkgs.trash-cli}/bin/trash-restore";
           grep = "grep --color=always";
           pokemon = "pokego --random 1-8 --no-title";
-
+          
           # Nixos
           list-gens = "sudo nix-env --list-generations --profile /nix/var/nix/profiles/system/";
           find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';
