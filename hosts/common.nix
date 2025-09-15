@@ -74,6 +74,8 @@
           gh
           htop
           libjxl
+          neofetch
+          nitch
           microfetch
           nix-prefetch-scripts
           ripgrep
