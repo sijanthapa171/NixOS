@@ -68,7 +68,8 @@
   environment.systemPackages = with pkgs; [
     bun
     nodejs 
-    pnpm 
+    pnpm
+    gcc
   ];
 
   networking.hostName = hostname; # Set hostname defined in flake.nix
