@@ -59,6 +59,7 @@
         vscode
         code-cursor
         brave
+        jetbrains.webstorm
         zoom-us
       ];
     })
