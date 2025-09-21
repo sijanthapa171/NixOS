@@ -57,7 +57,7 @@
       terminal = "kitty"; # kitty, alacritty, wezterm
       terminalFileManager = "yazi"; # yazi or lf
       sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
+      wallpaper = "basement"; # see modules/themes/wallpapers
 
       # System configuration
       videoDriver = "intel"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
