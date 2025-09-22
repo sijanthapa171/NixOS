@@ -60,7 +60,7 @@
         code-cursor
         brave
         jetbrains.webstorm
-        zoom-us
+        postman
       ];
     })
   ];
