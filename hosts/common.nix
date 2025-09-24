@@ -74,6 +74,7 @@
           gh
           htop
           libjxl
+          peaclock
           neofetch
           nitch
           microfetch
