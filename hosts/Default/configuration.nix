@@ -56,6 +56,9 @@
         # pokego # Overlayed
         # krita
         # gimp
+        google-chrome
+        brave
+        vscode
       ];
     })
   ];
