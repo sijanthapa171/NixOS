@@ -11,16 +11,16 @@
 
   # Theming
   sddmTheme = "purple_leaves"; # Options: astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-  wallpaper = "basement"; # See modules/themes/wallpapers for options
+  wallpaper = "kurzgesagt"; # See modules/themes/wallpapers for options
 
   # Hardware Configuration
   videoDriver = "nvidia"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel)
   hostname = "NixOS"; # Your system hostname
 
   # Localization
-  locale = "en_US.UTF-8"; # System locale
-  timezone = "Asia/Kathmandu"; # Your timezone
-  kbdLayout = "us"; # Keyboard layout
-  kbdVariant = ""; # Keyboard variant (can be empty)
-  consoleKeymap = "us"; # TTY keymap
+  locale = "en_GB.UTF-8"; # System locale
+  timezone = "Europe/London"; # Your timezone
+  kbdLayout = "gb"; # Keyboard layout
+  kbdVariant = "extd"; # Keyboard variant (can be empty)
+  consoleKeymap = "uk"; # TTY keymap
 }
