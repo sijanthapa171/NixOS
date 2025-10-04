@@ -13,7 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:sijanthapa171/nixvim";
+      url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim = {
@@ -43,47 +43,53 @@
     };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    settings = {
-      # User configuration
-      username = "sijanthapa"; # automatically set with install.sh and live-install.sh
-      editor = "nixvim"; # nixvim, vscode, helix, nvchad, neovim, emacs (WIP)
-      browser = "zen"; # firefox, floorp, zen
-      terminal = "kitty"; # kitty, alacritty, wezterm
-      terminalFileManager = "yazi"; # yazi or lf
-      sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-      wallpaper = "basement"; # see modules/themes/wallpapers
+  outputs =
+    {
+      self,
+      nixpkgs,
+      ...
+    }@inputs:
+    let
+      inherit (self) outputs;
+      settings = {
+        # User configuration
+        username = "zer0"; # automatically set with install.sh and live-install.sh
+        editor = "nixvim"; # nixvim, vscode, helix, nvchad, neovim, emacs (WIP)
+        browser = "zen"; # firefox, floorp, zen
+        terminal = "kitty"; # kitty, alacritty, wezterm
+        terminalFileManager = "yazi"; # yazi or lf
+        sddmTheme = "purple_leaves"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+        wallpaper = "kurzgesagt"; # see modules/themes/wallpapers
 
-      # System configuration
-      videoDriver = "intel"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
-      hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
-      locale = "en_US.UTF-8"; # CHOOSE YOUR LOCALE
-      timezone = "Asia/Kathmandu"; # CHOOSE YOUR TIMEZONE
-      kbdLayout = "us"; # CHOOSE YOUR KEYBOARD LAYOUT
-      kbdVariant = ""; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
-      consoleKeymap = "us"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
-    };
+        # System configuration
+        videoDriver = "nvidia"; # CHOOSE YOUR GPU DRIVERS (nvidia, amdgpu or intel)
+        hostname = "NixOS"; # CHOOSE A HOSTNAME HERE
+        locale = "en_GB.UTF-8"; # CHOOSE YOUR LOCALE
+        timezone = "Europe/London"; # CHOOSE YOUR TIMEZONE
+        kbdLayout = "gb"; # CHOOSE YOUR KEYBOARD LAYOUT
+        kbdVariant = "extd"; # CHOOSE YOUR KEYBOARD VARIANT (Can leave empty)
+        consoleKeymap = "uk"; # CHOOSE YOUR CONSOLE KEYMAP (Affects the tty?)
+      };
 
-    systems = [
-      "x86_64-linux"
-      "aarch64-linux"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    templates = import ./dev-shells;
-    overlays = import ./overlays {inherit inputs settings;};
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    nixosConfigurations = {
-      Default = nixpkgs.lib.nixosSystem {
-        system = forAllSystems (system: system);
-        specialArgs = {inherit self inputs outputs;} // settings;
-        modules = [./hosts/Default/configuration.nix];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+    in
+    {
+      templates = import ./dev-shells;
+      overlays = import ./overlays { inherit inputs settings; };
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      nixosConfigurations = {
+        Default = nixpkgs.lib.nixosSystem {
+          system = forAllSystems (system: system);
+          modules = [ ./hosts/Default/configuration.nix ];
+          specialArgs = {
+            inherit self inputs outputs;
+          }
+          // settings;
+        };
       };
     };
-  };
 }
