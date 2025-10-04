@@ -29,11 +29,11 @@ in
     # Optional
     ./hardware/drives
     ./hardware/video/${vars.videoDriver}.nix # Enable gpu drivers defined in variables.nix
-    ./desktop/${vars.windowManager} # Set window manager defined in variables.nix
+    ./desktop/${vars.desktop} # Set window manager defined in variables.nix
     ./programs/browser/${vars.browser} # Set browser defined in variables.nix
     ./programs/terminal/${vars.terminal} # Set terminal defined in variables.nix
     ./programs/editor/${vars.editor} # Set editor defined in variables.nix
-    ./programs/cli/${vars.terminalFileManager} # Set file-manager defined in variables.nix
+    ./programs/cli/${vars.tuiFileManager} # Set file-manager defined in variables.nix
     ./programs/cli/tmux
     ./programs/cli/direnv
     ./programs/cli/lazygit
@@ -49,5 +49,5 @@ in
     ./programs/misc/thunar
     ./programs/misc/lact # GPU fan, clock and power configuration
   ]
-  ++ lib.optional (vars.gaming == true) ./core/gaming.nix;
+  ++ lib.optional (vars.games == true) ./core/games.nix;
 }
