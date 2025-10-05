@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ host, pkgs, ... }:
 pkgs.writeShellScriptBin "rebuild" ''
   # Colors for output
   RED='\033[0;31m'
@@ -10,12 +10,6 @@ pkgs.writeShellScriptBin "rebuild" ''
     exit 1
   fi
 
-  if [[ ! "$(grep -i nixos </etc/os-release)" ]]; then
-    echo "This installation script only works on NixOS! Download an iso at https://nixos.org/download/"
-    echo "Keep in mind that this script is not intended for use while in the live environment."
-    exit 1
-  fi
-
   if [ -f "$HOME/NixOS/flake.nix" ]; then
     flake=$HOME/NixOS
   elif [ -f "/etc/nixos/flake.nix" ]; then
@@ -24,31 +18,23 @@ pkgs.writeShellScriptBin "rebuild" ''
     echo "Error: flake not found. ensure flake.nix exists in either $HOME/NixOS or /etc/nixos"
     exit 1
   fi
-  echo -e "''${GREEN}Rebuilding from $flake''${NC}"
+  echo -e "''${GREEN}Flake: $flake''${NC}"
+  echo -e "''${GREEN}Host: ${host}''${NC}"
   currentUser=$(logname)
 
   # replace username variable in variables.nix with $USER
-  sudo sed -i -e "s/username = \".*\"/username = \"$currentUser\"/" "$flake/hosts/Default/variables.nix"
+  sudo sed -i -e "s/username = \".*\"/username = \"$currentUser\"/" "$flake/hosts/${host}/variables.nix"
 
   if [ -f "/etc/nixos/hardware-configuration.nix" ]; then
-    cat "/etc/nixos/hardware-configuration.nix" | sudo tee "$flake/hosts/Default/hardware-configuration.nix" >/dev/null
-  elif [ -f "/etc/nixos/hosts/Default/hardware-configuration.nix" ]; then
-    cat "/etc/nixos/hosts/Default/hardware-configuration.nix" | sudo tee "$flake/hosts/Default/hardware-configuration.nix" >/dev/null
+    cat "/etc/nixos/hardware-configuration.nix" | sudo tee "$flake/hosts/${host}/hardware-configuration.nix" >/dev/null
   else
-    # read -p "No hardware config found, generate another? (Y/n): " confirm
-    # if [[ "$confirm" =~ ^[nN]$ ]]; then
-    #   echo "Aborted."
-    #   exit 1
-    # fi
-    sudo nixos-generate-config --show-hardware-config >"$flake/hosts/Default/hardware-configuration.nix"
+    sudo nixos-generate-config --show-hardware-config >"$flake/hosts/${host}/hardware-configuration.nix"
   fi
 
-  sudo git -C "$flake" add hosts/Default/hardware-configuration.nix
+  sudo git -C "$flake" add hosts/${host}/hardware-configuration.nix
 
-  # nh os switch "$flake"
-  sudo nixos-rebuild switch --flake "$flake#Default"
-  # rm "$flake"/hosts/Default/hardware-configuration.nix &>/dev/null
-  # git restore --staged "$flake"/hosts/Default/hardware-configuration.nix &>/dev/null
+  # nh os switch --hostname "${host}"
+  sudo nixos-rebuild switch --flake "$flake#${host}"
 
   echo
   read -rsn1 -p"$(echo -e "''${GREEN}Press any key to continue''${NC}")"
