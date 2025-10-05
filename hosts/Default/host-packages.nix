@@ -2,8 +2,11 @@
 {
   environment.systemPackages = with pkgs; [
     obsidian
-    protonvpn-gui # VPN
-    github-desktop
+    vscode
+    brave
+    google-chrome
+    # protonvpn-gui # VPN
+    # github-desktop
     # pokego # Overlayed
   ];
 }

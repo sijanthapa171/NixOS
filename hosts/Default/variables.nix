@@ -12,14 +12,14 @@
   games = true; # Whether to enable the gaming module
 
   # Hardware Configuration
-  videoDriver = "nvidia"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel)
+  videoDriver = "intel"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel)
   hostname = "NixOS"; # Your system hostname
 
   # Localization
   clock24h = true; # 24H or 12H clock in waybar
-  locale = "en_GB.UTF-8"; # System locale
-  timezone = "Europe/London"; # Your timezone
-  kbdLayout = "gb"; # Keyboard layout
-  kbdVariant = "extd"; # Keyboard variant (can be empty)
-  consoleKeymap = "uk"; # TTY keymap
+  locale = "en_US.UTF-8"; # System locale
+  timezone = "Asia/Kathmandu"; # Your timezone
+  kbdLayout = "us"; # Keyboard layout
+  kbdVariant = ""; # Keyboard variant (can be empty)
+  consoleKeymap = "us"; # TTY keymap
 }
