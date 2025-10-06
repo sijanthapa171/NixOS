@@ -86,7 +86,6 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
-        auth = mkHost "auth";
       };
     };
 }
