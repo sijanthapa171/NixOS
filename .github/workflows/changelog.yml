@@ -1,0 +1,35 @@
+name: Release & Changelog
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Setup Node.js for release management
+        uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+
+      - name: Install release tools
+        run: |
+          npm install -g semantic-release @semantic-release/changelog @semantic-release/git conventional-changelog-cli
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
