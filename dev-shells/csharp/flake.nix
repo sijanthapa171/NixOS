@@ -30,9 +30,8 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              #dotnet-sdk_6
-              dotnet-sdk_7
-              #dotnet-sdk_8
+              # Use .NET 8 (LTS/Current) instead of the insecure EOL .NET 7 package
+              dotnet-sdk_8
               omnisharp-roslyn
               mono
               msbuild
