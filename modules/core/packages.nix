@@ -21,6 +21,7 @@
     gnome-disk-utility # Disk Partitioning and Mounting Utility
     jq # Json Formatting Utility
     bibata-cursors
+    nitch #  incredibly fast system fetch 
     sddm-astronaut # Sddm Theme (Overlayed)
     kdePackages.qtsvg # Sddm Dependency
     kdePackages.qtmultimedia # Sddm Dependency
@@ -71,5 +72,10 @@
     # devenv
     # devbox
     # shellify
+    # <-- Temp 
+    pnpm 
+    nodejs
+    bun
+    # --> Temp
   ];
 }
