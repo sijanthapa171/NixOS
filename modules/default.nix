@@ -43,7 +43,7 @@ in
     ./programs/media/spicetify
     # ./programs/media/youtube-music
     # ./programs/media/thunderbird
-    ./programs/media/obs-studio
+    # ./programs/media/obs-studio
     ./programs/media/mpv
     ./programs/misc/tlp
     ./programs/misc/thunar

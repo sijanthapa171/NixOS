@@ -14,7 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
-      url = "github:sijanthapa171/nixvim";
+      url = "github:Sly-Harvey/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     neovim = {
@@ -86,7 +86,6 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
-        auth = mkHost "auth";
       };
     };
 }
