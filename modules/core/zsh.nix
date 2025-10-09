@@ -129,6 +129,7 @@
             tpr = "${pkgs.trash-cli}/bin/trash-restore";
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
+            h = "history";
 
             # Nixos
             list-gens = "nixos-rebuild list-generations";
@@ -137,6 +138,7 @@
             sysup = "nix flake update --flake ~/NixOS && rebuild";
 
             # Directory Shortcuts.
+            hosts = "cd ~/NixOS/hosts/ && ls";
             dots = "cd ~/NixOS/";
             games = "cd /mnt/games/";
             work = "cd /mnt/work/";
