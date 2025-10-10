@@ -21,7 +21,7 @@
     gnome-disk-utility # Disk Partitioning and Mounting Utility
     jq # Json Formatting Utility
     bibata-cursors
-    nitch #  incredibly fast system fetch 
+    nitch  
     sddm-astronaut # Sddm Theme (Overlayed)
     kdePackages.qtsvg # Sddm Dependency
     kdePackages.qtmultimedia # Sddm Dependency
@@ -29,6 +29,7 @@
     fzf # Fuzzy Finder
     fd # Better Find
     git # Git
+    peaclock
     gh # Github Authentication Client
     libjxl # Support for JXL Images
     microfetch # Small fetch (Blazingly fast)
