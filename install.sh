@@ -86,7 +86,7 @@ create_new_host() {
     return 1
   }
 
-  # Remove old hardware config for new config
+  # Remove old hardware config
   rm -f "./hosts/$selected_host/hardware-configuration.nix"
 
   # Update hostname in the new host's variables.nix if it exists

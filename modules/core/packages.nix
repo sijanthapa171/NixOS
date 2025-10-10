@@ -77,6 +77,7 @@
     pnpm 
     nodejs
     bun
+    gcc
     # --> Temp
   ];
 }
