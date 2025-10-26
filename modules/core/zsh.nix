@@ -130,7 +130,8 @@
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
             h = "history";
-
+            auth = "tgpt";
+            
             # Nixos
             list-gens = "nixos-rebuild list-generations";
             find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';

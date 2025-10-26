@@ -4,7 +4,8 @@
     obsidian
     vscode
     brave
-    xournalpp
+    # localsend
+    # xournalpp
     google-chrome
     # protonvpn-gui # VPN
     # github-desktop

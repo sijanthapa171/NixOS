@@ -559,13 +559,17 @@ in
               };
 
               monitor = [
-                # Easily plug in any monitor
+                # Auto-detect fallback
                 ",preferred,auto,1"
 
-                # My Monitors (Fine to leave these since i used the serial numbers)
-                "desc:BNQ BenQ EW277HDR 99J01861SL0,preferred,-1920x0,1"
-                "desc:BNQ BenQ EL2870U PCK00489SL0,preferred,0x0,2"
-                "desc:BNQ BenQ xl2420t 99D06760SL0,preferred,1920x-420,1,transform,1" # 5 for fipped
+                # HDMI-A-1 → right-side vertical monitor
+                "HDMI-A-1, 1280x1024@60, 240x1080, 1, transform, 1"
+
+                # DP-1 → center main monitor
+                "DP-1, 1920x1080@60, 1280x0, 1"
+
+                # eDP-1 → bottom laptop display
+                "eDP-1, 1920x1080@60, 1280x1080, 1"
               ];
 
               workspace = [

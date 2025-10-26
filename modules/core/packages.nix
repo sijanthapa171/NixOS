@@ -30,6 +30,8 @@
     fd # Better Find
     git # Git
     peaclock
+    tgpt
+    fast-cli # internet speed test cli 
     gh # Github Authentication Client
     libjxl # Support for JXL Images
     microfetch # Small fetch (Blazingly fast)
