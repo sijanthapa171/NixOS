@@ -360,6 +360,7 @@ in
 
                 # Float and pin Picture-in-Picture in browsers
                 "float,title:^(Picture-in-Picture)$,class:^(zen|zen-beta|floorp|firefox)$"
+                "pin,title:^(Picture-in-Picture)$,class:^(zen|zen-beta|floorp|firefox)$"
 
                 "float,class:^(qt5ct)$"
                 "float,class:^(nwg-look)$"
