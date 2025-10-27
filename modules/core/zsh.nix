@@ -118,8 +118,8 @@
             tree = "${pkgs.eza}/bin/eza --icons=auto --tree"; # dir tree
             vc = "code --disable-gpu"; # gui code editor
             nv = "nvim";
-            nf = "nitch";
-            mf = "${pkgs.microfetch}/bin/microfetch";
+            nf = "${pkgs.microfetch}/bin/microfetch";
+            ff = "fastfetch";
             cp = "cp -iv";
             mv = "mv -iv";
             rm = "rm -vI";
@@ -129,9 +129,7 @@
             tpr = "${pkgs.trash-cli}/bin/trash-restore";
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
-            h = "history";
-            auth = "tgpt";
-            
+
             # Nixos
             list-gens = "nixos-rebuild list-generations";
             find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';
@@ -139,7 +137,6 @@
             sysup = "nix flake update --flake ~/NixOS && rebuild";
 
             # Directory Shortcuts.
-            hosts = "cd ~/NixOS/hosts/ && ls";
             dots = "cd ~/NixOS/";
             games = "cd /mnt/games/";
             work = "cd /mnt/work/";
