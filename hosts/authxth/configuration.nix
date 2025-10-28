@@ -22,7 +22,7 @@ in
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/btop
     ../../modules/programs/cli/tmux
-    ../../modules/programs/media/mpv
+    # ../../modules/programs/media/mpv
   ];
 
   # Basic networking / identity
