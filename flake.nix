@@ -99,6 +99,7 @@
         Default = mkHost "Default";
         auth = mkHost "auth";
         pork = mkHost "pork";
+        authxth = mkHost "authxth";
       };
     };
 }
