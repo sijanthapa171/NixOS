@@ -1,7 +1,11 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, ... }:
 {
   nixpkgs.config.packageOverrides = pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+  };
+
+  environment.sessionVariables = lib.optionalAttrs config.programs.hyprland.enable {
+    LIBVA_DRIVER_NAME = "iHD";
   };
 
   boot.kernelParams = [
@@ -20,10 +24,11 @@
 
   # OpenGL
   hardware.graphics = {
+    enable = true;
     extraPackages = with pkgs; [
       intel-media-driver
       vaapiIntel
-      vaapiVdpau
+      libva-vdpau-driver
       libvdpau-va-gl
     ];
   };
