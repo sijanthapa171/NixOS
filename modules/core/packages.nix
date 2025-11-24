@@ -21,7 +21,7 @@
     gnome-disk-utility # Disk Partitioning and Mounting Utility
     jq # Json Formatting Utility
     bibata-cursors
-    nitch  
+    nitch
     sddm-astronaut # Sddm Theme (Overlayed)
     kdePackages.qtsvg # Sddm Dependency
     kdePackages.qtmultimedia # Sddm Dependency
