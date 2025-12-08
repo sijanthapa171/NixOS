@@ -31,6 +31,7 @@
     git # Git
     peaclock
     tgpt
+    bat
     fast-cli # internet speed test cli 
     gh # Github Authentication Client
     libjxl # Support for JXL Images
@@ -75,7 +76,7 @@
     # devenv
     # devbox
     # shellify
-    # <-- Temp 
+    # <-- Temp
     pnpm 
     nodejs
     bun
