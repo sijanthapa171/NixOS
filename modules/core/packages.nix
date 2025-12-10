@@ -19,9 +19,9 @@
     killall # For Killing All Instances Of Programs
     lm_sensors # Used For Getting Hardware Temps
     gnome-disk-utility # Disk Partitioning and Mounting Utility
+    rclone # Cloning Utility
     jq # Json Formatting Utility
     bibata-cursors
-    nitch
     sddm-astronaut # Sddm Theme (Overlayed)
     kdePackages.qtsvg # Sddm Dependency
     kdePackages.qtmultimedia # Sddm Dependency
@@ -29,10 +29,6 @@
     fzf # Fuzzy Finder
     fd # Better Find
     git # Git
-    peaclock
-    tgpt
-    bat
-    fast-cli # internet speed test cli 
     gh # Github Authentication Client
     libjxl # Support for JXL Images
     microfetch # Small fetch (Blazingly fast)
@@ -41,6 +37,10 @@
     tldr # Improved Man
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
+    peaclock
+    tgpt
+    bat
+    nitch
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
     # cowsay # Great Fun Terminal Program

@@ -9,12 +9,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = ""; # Doesn't use nixpkgs
@@ -23,7 +21,6 @@
       url = "github:Sly-Harvey/doom";
       flake = false;
     };
-    
     nixvim = {
       url = "github:sijanthapa171/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";

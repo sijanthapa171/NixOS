@@ -7,6 +7,7 @@
     # localsend
     # xournalpp
     google-chrome
+    jetbrains-toolbox
     # protonvpn-gui # VPN
     # github-desktop
     # pokego # Overlayed

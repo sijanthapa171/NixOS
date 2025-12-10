@@ -7,8 +7,8 @@
   # Theme & Appearance
   waybarTheme = "minimal"; # stylish, minimal
   sddmTheme = "astronaut"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-  defaultWallpaper = "kurzgesagt.webp"; # Change with SUPER + SHIFT + W
-  hyprlockWallpaper = "evening-sky.webp";
+  defaultWallpaper = "train-sideview.webp"; # Change with SUPER + SHIFT + W
+  hyprlockWallpaper = "train-sideview.webp";
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty
@@ -16,11 +16,11 @@
   browser = "firefox"; # zen, firefox, floorp
   tuiFileManager = "yazi"; # yazi, lf
   shell = "zsh"; # zsh, bash
+  games = true; # Enable/Disable gaming module
 
   # Hardware
   hostname = "NixOS";
   videoDriver = "intel"; # nvidia, amdgpu, intel
-  games = true;
 
   # Localization
   timezone = "Asia/Kathmandu";
