@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
     obsidian
@@ -11,5 +11,6 @@
     # protonvpn-gui # VPN
     # github-desktop
     # pokego # Overlayed
+    (inputs.caelestia-shell.packages.${pkgs.system}.with-cli)
   ];
 }
