@@ -4,7 +4,7 @@
     obsidian
     vscode
     brave
-    # localsend
+    localsend
     # xournalpp
     google-chrome
     jetbrains-toolbox
