@@ -1,7 +1,7 @@
 { pkgs, lib, config, ... }:
 {
   nixpkgs.config.packageOverrides = pkgs: {
-    vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
   };
 
   environment.sessionVariables = lib.optionalAttrs config.programs.hyprland.enable {
