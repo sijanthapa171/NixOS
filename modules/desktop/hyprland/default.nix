@@ -504,13 +504,16 @@ in
                   "$mainMod, k, movefocus, u"
                   "$mainMod, j, movefocus, d"
 
-                  # Go to workspace 6 and 7 with mouse side buttons
+                  # Go to workspace 5, 6 and 7 with mouse side buttons
                   "$mainMod, mouse:276, workspace, 5"
                   "$mainMod, mouse:275, workspace, 6"
+                  "$mainMod ALT, mouse:275, workspace, 7"
                   "$mainMod SHIFT, mouse:276, movetoworkspace, 5"
                   "$mainMod SHIFT, mouse:275, movetoworkspace, 6"
+                  "$mainMod SHIFT ALT, mouse:275, movetoworkspace, 7"
                   "$mainMod CTRL, mouse:276, movetoworkspacesilent, 5"
                   "$mainMod CTRL, mouse:275, movetoworkspacesilent, 6"
+                  "$mainMod CTRL ALT, mouse:275, movetoworkspacesilent, 7"
 
                   # Rebuild NixOS with a KeyBind
                   "$mainMod, U, exec, $term -e rebuild"
@@ -568,7 +571,7 @@ in
                 #allow_workspace_cycles=1
                 #pass_mouse_when_bound=0
               };
-             
+
               monitor = [
                 # Auto-detect fallback
                 ",preferred,auto,1"
