@@ -317,6 +317,7 @@ in
                 "opacity 0.80 0.70,title:^(Kvantum Manager)$"
                 "opacity 0.80 0.70,class:^(VSCodium|codium-url-handler)$"
                 "opacity 0.80 0.70,class:^(code|code-url-handler)$"
+                "opacity 0.80 0.70,class:^(protonvpn-app)$"
                 "opacity 0.80 0.70,class:^(tuiFileManager)$"
                 "opacity 0.80 0.70,class:^(org.kde.dolphin)$"
                 "opacity 0.80 0.70,class:^(org.kde.ark)$"
@@ -567,7 +568,7 @@ in
                 #allow_workspace_cycles=1
                 #pass_mouse_when_bound=0
               };
-
+             
               monitor = [
                 # Auto-detect fallback
                 ",preferred,auto,1"
