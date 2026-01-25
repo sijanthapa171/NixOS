@@ -15,6 +15,10 @@ rec {
     path = ./clojure;
     description = "Clojure development environment";
   };
+  csharp = {
+    path = ./csharp;
+    description = "C# development environment";
+  };
   cue = {
     path = ./cue;
     description = "Cue development environment";
