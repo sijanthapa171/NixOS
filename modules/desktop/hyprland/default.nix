@@ -67,7 +67,7 @@ in
 
   programs.hyprland = {
     enable = true;
-    package = pkgs.stable.hyprland;
+    package = pkgs.hyprland;
     # withUWSM = true;
   };
 
@@ -104,7 +104,7 @@ in
         #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
         wayland.windowManager.hyprland = {
           enable = true;
-          package = pkgs.stable.hyprland;
+          package = pkgs.hyprland;
           plugins = [
             # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprwinwrap
             # inputs.hyprsysteminfo.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -206,17 +206,14 @@ in
               "col.border_locked_inactive" = "rgba(b4befecc) rgba(6c7086cc) 45deg";
             };
             layerrule = [
-              "blur, rofi"
-              "ignorezero, rofi"
-              "ignorealpha 0.7, rofi"
+              "blur, ^(rofi)$"
+              "ignorealpha 0.7, ^(rofi)$"
 
-              "blur, swaync-control-center"
-              "blur, swaync-notification-window"
-              "ignorezero, swaync-control-center"
-              "ignorezero, swaync-notification-window"
-              "ignorealpha 0.7, swaync-control-center"
-              # "ignorealpha 0.8, swaync-notification-window"
-              # "dimaround, swaync-control-center"
+              "blur, ^(swaync-control-center)$"
+              "blur, ^(swaync-notification-window)$"
+              "ignorealpha 0.7, ^(swaync-control-center)$"
+              # "ignorealpha 0.8, ^(swaync-notification-window)$"
+              # "dimaround, ^(swaync-control-center)$"
             ];
             animations = {
               enabled = true;
@@ -272,106 +269,86 @@ in
               new_on_top = true;
               mfact = 0.5;
             };
-            windowrule = [
-              #"noanim, class:^(Rofi)$
-              "tile,title:(.*)(Godot)(.*)$"
-              # "workspace 1, class:^(kitty|Alacritty|org.wezfurlong.wezterm)$"
-              # "workspace 2, class:^(code|VSCodium|code-url-handler|codium-url-handler)$"
-              # "workspace 3, class:^(krita)$"
-              # "workspace 3, title:(.*)(Godot)(.*)$"
-              # "workspace 3, title:(GNU Image Manipulation Program)(.*)$"
-              # "workspace 3, class:^(factorio)$"
-              # "workspace 3, class:^(steam)$"
-              # "workspace 5, class:^(firefox|floorp|zen|zen-beta)$"
-              # "workspace 6, class:^(Spotify)$"
-              # "workspace 6, title:(.*)(Spotify)(.*)$"
+            windowrulev2 = [
+              "tile, title:(.*)(Godot)(.*)"
 
-              # Can use FLOAT FLOAT for active and inactive or just FLOAT
-              "opacity 1.00 1.00,class:^(firefox|Brave-browser|floorp|zen|zen-beta)$"
-              "opacity 0.90 0.80,class:^(Emacs)$"
-              "opacity 0.90 0.80,class:^(gcr-prompter)$" # keyring prompt
-              "opacity 0.90 0.80,title:^(Hyprland Polkit Agent)$" # polkit prompt
-              "opacity 0.90 0.80,class:^(obsidian)$"
-              "opacity 0.90 0.80,class:^(Lutris|lutris|net.lutris.Lutris)$"
-              "opacity 0.80 0.70,class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
-              "opacity 0.80 0.70,class:^(nvim-wrapper)$"
-              "opacity 0.80 0.70,class:^(gnome-disks)$"
-              "opacity 0.80 0.70,class:^(org.gnome.Nautilus|Thunar|thunar|pcmanfm)$"
-              "opacity 0.80 0.70,class:^(thunar-volman-settings)$"
-              "opacity 0.80 0.70,class:^(org.gnome.FileRoller)$"
-              "opacity 0.80 0.70,class:^(io.github.ilya_zlobintsev.LACT)$"
-              "opacity 0.80 0.70,class:^(Steam|steam|steamwebhelper)$"
-              "opacity 0.80 0.70,class:^(Spotify|spotify|com.github.th_ch.youtube_music)$"
-              "opacity 0.80 0.70,title:^(Kvantum Manager)$"
-              "opacity 0.80 0.70,class:^(VSCodium|codium-url-handler)$"
-              "opacity 0.80 0.70,class:^(code|code-url-handler)$"
-              "opacity 0.80 0.70,class:^(protonvpn-app)$"
-              "opacity 0.80 0.70,class:^(tuiFileManager)$"
-              "opacity 0.80 0.70,class:^(org.kde.dolphin)$"
-              "opacity 0.80 0.70,class:^(org.kde.ark)$"
-              "opacity 0.80 0.70,class:^(nwg-look)$"
-              "opacity 0.80 0.70,class:^(qt5ct|qt6ct)$"
-              "opacity 0.80 0.70,class:^(yad)$"
+              "opacity 1.0, class:^(firefox|Brave-browser|floorp|zen|zen-beta)$"
+              "opacity 0.9 0.8, class:^(Emacs)$"
+              "opacity 0.9 0.8, class:^(gcr-prompter)$"
+              "opacity 0.9 0.8, title:^(Hyprland Polkit Agent)$"
+              "opacity 0.9 0.8, class:^(obsidian)$"
+              "opacity 0.9 0.8, class:^(Lutris|lutris|net.lutris.Lutris)$"
 
-              "opacity 0.90 0.80,class:^(discord)$" # Discord-Electron
-              "opacity 0.90 0.80,class:^(WebCord)$" # WebCord-Electron
-              "opacity 0.90 0.80,class:^(com.github.rafostar.Clapper)$" # Clapper-Gtk
-              "opacity 0.80 0.70,class:^(com.github.tchx84.Flatseal)$" # Flatseal-Gtk
-              "opacity 0.80 0.70,class:^(hu.kramo.Cartridges)$" # Cartridges-Gtk
-              "opacity 0.80 0.70,class:^(com.obsproject.Studio)$" # Obs-Qt
-              "opacity 0.80 0.70,class:^(gnome-boxes)$" # Boxes-Gtk
-              "opacity 0.80 0.70,class:^(app.drey.Warp)$" # Warp-Gtk
-              "opacity 0.80 0.70,class:^(net.davidotek.pupgui2)$" # ProtonUp-Qt
-              "opacity 0.80 0.70,class:^(Signal)$" # Signal-Gtk
-              "opacity 0.80 0.70,class:^(io.gitlab.theevilskeleton.Upscaler)$" # Upscaler-Gtk
+              "opacity 0.8 0.7, class:^(kitty|alacritty|Alacritty|org.wezfurlong.wezterm)$"
+              "opacity 0.8 0.7, class:^(nvim-wrapper)$"
+              "opacity 0.8 0.7, class:^(gnome-disks)$"
+              "opacity 0.8 0.7, class:^(org.gnome.Nautilus|Thunar|thunar|pcmanfm)$"
+              "opacity 0.8 0.7, class:^(thunar-volman-settings)$"
+              "opacity 0.8 0.7, class:^(org.gnome.FileRoller)$"
+              "opacity 0.8 0.7, class:^(io.github.ilya_zlobintsev.LACT)$"
+              "opacity 0.8 0.7, class:^(Steam|steam|steamwebhelper)$"
+              "opacity 0.8 0.7, class:^(Spotify|spotify|com.github.th_ch.youtube_music)$"
+              "opacity 0.8 0.7, title:^(Kvantum Manager)$"
+              "opacity 0.8 0.7, class:^(VSCodium|codium-url-handler)$"
+              "opacity 0.8 0.7, class:^(code|code-url-handler)$"
+              "opacity 0.8 0.7, class:^(tuiFileManager)$"
+              "opacity 0.8 0.7, class:^(org.kde.dolphin)$"
+              "opacity 0.8 0.7, class:^(org.kde.ark)$"
+              "opacity 0.8 0.7, class:^(nwg-look)$"
+              "opacity 0.8 0.7, class:^(qt5ct|qt6ct)$"
+              "opacity 0.8 0.7, class:^(yad)$"
 
-              "opacity 0.80 0.70,class:^(pavucontrol)$"
-              "opacity 0.80 0.70,class:^(org.pulseaudio.pavucontrol)$"
-              "opacity 0.80 0.70,class:^(blueman-manager)$"
-              "opacity 0.80 0.70,class:^(.blueman-manager-wrapped)$"
-              "opacity 0.80 0.70,class:^(nm-applet)$"
-              "opacity 0.80 0.70,class:^(nm-connection-editor)$"
-              "opacity 0.80 0.70,class:^(org.kde.polkit-kde-authentication-agent-1)$"
+              "opacity 0.9 0.8, class:^(discord)$"
+              "opacity 0.9 0.8, class:^(WebCord)$"
+              "opacity 0.9 0.8, class:^(com.github.rafostar.Clapper)$"
+              "opacity 0.8 0.7, class:^(com.github.tchx84.Flatseal)$"
+              "opacity 0.8 0.7, class:^(hu.kramo.Cartridges)$"
+              "opacity 0.8 0.7, class:^(com.obsproject.Studio)$"
+              "opacity 0.8 0.7, class:^(gnome-boxes)$"
+              "opacity 0.8 0.7, class:^(app.drey.Warp)$"
+              "opacity 0.8 0.7, class:^(net.davidotek.pupgui2)$"
+              "opacity 0.8 0.7, class:^(Signal)$"
+              "opacity 0.8 0.7, class:^(io.gitlab.theevilskeleton.Upscaler)$"
 
-              # Block discord and browsers from screenshare/screenshots
-              # "noscreenshare,class:^(firefox|Brave-browser|floorp|zen|zen-beta)$"
-              # "noscreenshare,class:^(discord)$"
+              "opacity 0.8 0.7, class:^(pavucontrol)$"
+              "opacity 0.8 0.7, class:^(org.pulseaudio.pavucontrol)$"
+              "opacity 0.8 0.7, class:^(blueman-manager)$"
+              "opacity 0.8 0.7, class:^(.blueman-manager-wrapped)$"
+              "opacity 0.8 0.7, class:^(nm-applet)$"
+              "opacity 0.8 0.7, class:^(nm-connection-editor)$"
+              "opacity 0.8 0.7, class:^(org.kde.polkit-kde-authentication-agent-1)$"
 
-              # Float and pin Picture-in-Picture in browsers
-              "float,title:^(Picture-in-Picture)$,class:^(zen|zen-beta|floorp|firefox)$"
-              "pin,title:^(Picture-in-Picture)$,class:^(zen|zen-beta|floorp|firefox)$"
+              "float, title:^(Picture-in-Picture)$, class:^(zen|zen-beta|floorp|firefox)$"
+              "pin, title:^(Picture-in-Picture)$, class:^(zen|zen-beta|floorp|firefox)$"
 
-              "content game, tag:games"
               "tag +games, content:game"
-              "tag +games, class:^(steam_app.*|steam_app_\d+)$"
+              "tag +games, class:^(steam_app.*|steam_app_\\d+)$"
               "tag +games, class:^(gamescope)$"
               "tag +games, class:(Waydroid)"
               "tag +games, class:(osu!)"
 
-              # Games
-              "syncfullscreen,tag:games"
-              "fullscreen,tag:games"
-              "noborder 1,tag:games"
-              "noshadow,tag:games"
-              "noblur,tag:games"
-              "noanim,tag:games"
+              "fullscreen, tag:games"
+              "noborder, tag:games"
+              "noshadow, tag:games"
+              "noblur, tag:games"
+              "noanim, tag:games"
 
-              "float,class:^(qt5ct)$"
-              "float,class:^(nwg-look)$"
-              "float,class:^(org.kde.ark)$"
-              "float,class:^(Signal)$" # Signal-Gtk
-              "float,class:^(com.github.rafostar.Clapper)$" # Clapper-Gtk
-              "float,class:^(app.drey.Warp)$" # Warp-Gtk
-              "float,class:^(net.davidotek.pupgui2)$" # ProtonUp-Qt
-              "float,class:^(eog)$" # Imageviewer-Gtk
-              "float,class:^(io.gitlab.theevilskeleton.Upscaler)$" # Upscaler-Gtk
-              "float,class:^(yad)$"
-              "float,class:^(pavucontrol)$"
-              "float,class:^(blueman-manager)$"
-              "float,class:^(.blueman-manager-wrapped)$"
-              "float,class:^(nm-applet)$"
-              "float,class:^(nm-connection-editor)$"
-              "float,class:^(org.kde.polkit-kde-authentication-agent-1)$"
+              "float, class:^(qt5ct)$"
+              "float, class:^(nwg-look)$"
+              "float, class:^(org.kde.ark)$"
+              "float, class:^(Signal)$"
+              "float, class:^(com.github.rafostar.Clapper)$"
+              "float, class:^(app.drey.Warp)$"
+              "float, class:^(net.davidotek.pupgui2)$"
+              "float, class:^(eog)$"
+              "float, class:^(io.gitlab.theevilskeleton.Upscaler)$"
+              "float, class:^(yad)$"
+              "float, class:^(pavucontrol)$"
+              "float, class:^(blueman-manager)$"
+              "float, class:^(.blueman-manager-wrapped)$"
+              "float, class:^(nm-applet)$"
+              "float, class:^(nm-connection-editor)$"
+              "float, class:^(org.kde.polkit-kde-authentication-agent-1)$"
             ];
             binde = [
               # Resize windows
@@ -558,7 +535,7 @@ in
               #pass_mouse_when_bound=0
             };
 
-              monitor = [
+            monitor = [
                 # Auto-detect fallback
                 ",preferred,auto,1"
 
