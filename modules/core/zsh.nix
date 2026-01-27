@@ -164,14 +164,12 @@
             tpr = "${pkgs.trash-cli}/bin/trash-restore";
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
-            gp = "git push";
 
             # Nixos
             list-gens = "nixos-rebuild list-generations";
             find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';
             update-input = "nix flake update $@";
             sysup = "nix flake update --flake ~/NixOS && rebuild";
-            auth = "tgpt"; 
 
             # Directory Shortcuts.
             dots = "cd ~/NixOS/";

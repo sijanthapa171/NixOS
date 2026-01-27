@@ -36,10 +36,6 @@
     tldr # Improved Man
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
-    peaclock
-    tgpt
-    bat
-    nitch
     # aider-chat # AI in terminal (Optional: Client only)
     # cmatrix # Matrix Movie Effect In Terminal
     # cowsay # Great Fun Terminal Program
@@ -75,11 +71,5 @@
     # devenv
     # devbox
     # shellify
-    # <-- Temp
-    pnpm 
-    nodejs
-    bun
-    gcc
-    # --> Temp
   ];
 }
