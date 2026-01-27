@@ -71,5 +71,10 @@
     # devenv
     # devbox
     # shellify
+
+    peaclock
+    # tgpt
+    bat
+    nitch
   ];
 }
