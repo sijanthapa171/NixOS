@@ -11,5 +11,11 @@
     # protonvpn-gui # VPN
     # github-desktop
     # pokego # Overlayed
+    nitch
+    peaclock
+    antigravity
+    nodejs
+    code-cursor 
+    pnpm
   ];
 }
