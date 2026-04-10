@@ -17,6 +17,8 @@
 
 ---
 
+![Screenshot](preview.png)
+
 ## ✨ Features
 
 🖥️ **4 Desktop Environments** — Hyprland · GNOME · KDE Plasma 6 · i3
