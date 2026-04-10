@@ -1,130 +1,106 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nix-snowflake-colours.svg" width="120" alt="NixOS Snowflake" />
+</p>
 
-## Installation
+<h1 align="center">❄️ NixOS Dotfiles</h1>
 
-> [!Note]
-> Before proceeding with the installation, check these files and adjust them for your system:
->
-> - `hosts/Default/variables.nix`: Contains host-specific variables.
-> - `hosts/Default/host-packages.nix`: Lists installed packages for the host.
-> - `hosts/Default/configuration.nix`: Module imports for the host and extra configuration.
+<p align="center">
+  <b>A fully declarative, reproducible, and modular NixOS system configuration.</b>
+</p>
 
-<!-- You can install this configuration either on a running system or from the NixOS live installer. The minimal ISO is recommended and can be downloaded from the [official NixOS website](https://nixos.org/download/#nixos-iso). -->
+<p align="center">
+  <a href="#-features"><img src="https://img.shields.io/badge/Features-blue?style=for-the-badge" /></a>
+  <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick%20Start-green?style=for-the-badge" /></a>
+  <a href="./docs.md"><img src="https://img.shields.io/badge/Docs-orange?style=for-the-badge" /></a>
+  <a href="../LICENSE"><img src="https://img.shields.io/badge/License-MIT-purple?style=for-the-badge" /></a>
+</p>
 
-You can install on a running system or from the NixOS live installer. Get the minimal ISO from the [NixOS website](https://nixos.org/download/#nixos-iso).
+---
 
-### Installation Steps
+## ✨ Features
 
-1. Clone the Repository:
+🖥️ **4 Desktop Environments** — Hyprland · GNOME · KDE Plasma 6 · i3
+
+🎨 **3 Stunning Themes** — Catppuccin · Dracula · Rosé Pine
+
+🧰 **43 Dev Shell Templates** — Instant, reproducible environments for nearly every language
+
+🔧 **One-Variable Config** — Switch your desktop, editor, terminal, browser, GPU driver, and more from a single `variables.nix`
+
+📦 **Multi-Host Support** — Manage unlimited machines from one flake
+
+🚀 **One-Command Install** — Automated `install.sh` handles everything from a fresh ISO to a running system
+
+🔁 **Instant Rollbacks** — Roll back any generation with a single command
+
+🎮 **Gaming Ready** — Steam, Lutris, MangoHud, Gamemode — toggle with one boolean
+
+---
+
+## 🧩 What's Inside
+
+| Category | Options |
+| :--- | :--- |
+| **Desktop** | Hyprland, GNOME, Plasma 6, i3 |
+| **Status Bar** | Waybar (stylish / minimal), HyprPanel, Noctalia |
+| **Terminal** | Kitty, Alacritty |
+| **Editor** | Nixvim, VS Code, Helix, Doom Emacs, NvChad, Neovim |
+| **Browser** | Firefox, Zen, Floorp |
+| **File Manager** | Yazi, lf, Thunar |
+| **Shell** | Zsh (w/ Starship), Bash |
+| **Media** | Spicetify, Discord, MPV, OBS Studio, Thunderbird |
+| **GPU Drivers** | NVIDIA, AMD, Intel |
+| **Themes** | Catppuccin, Dracula, Rosé Pine |
+| **SDDM Themes** | Astronaut, Black Hole, Purple Leaves, Jake the Dog, Hyprland Kath |
+| **Wallpapers** | 15+ curated wallpapers (change with `Super + Shift + W`) |
+
+---
+
+## 🚀 Quick Start
+
+> [!NOTE]
+> Works on both a running NixOS system and the NixOS live installer (minimal ISO recommended).
+> Download the ISO from the [official NixOS website](https://nixos.org/download/#nixos-iso).
 
 ```bash
+# 1. Clone the repo
 git clone https://github.com/sijanthapa171/NixOS.git ~/NixOS
+
+# 2. Run the installer
+cd ~/NixOS && ./install.sh
 ```
 
-<!-- 2. Navigate to the Directory: -->
+The installer will:
+- Let you **select or create** a host profile
+- Prompt for **GPU driver** selection (NVIDIA / AMD / Intel)
+- Open `variables.nix` for you to **customize** your setup
+- Auto-generate `hardware-configuration.nix` for your machine
+- **Build and apply** the configuration
 
-2. Change Directory:
+> [!TIP]
+> After the first install, rebuild anytime with `Super + U`, the `rebuild` command, or see [docs.md](./docs.md) for all methods.
 
-```bash
-cd ~/NixOS
-```
+---
 
-3. Run the Installer:
 
-```bash
-./install.sh
-```
+## ⌨️ Key Bindings
 
-<!-- The script handles host setup, username configuration, and automatically generates `hardware-configuration.nix` based on your hardware. -->
+Press `Super + ?` or `Super + Ctrl + K` to view all keybindings.
 
-The install and rebuild scripts automate the setup process, including hosts, username, and applying the configuration. It also automatically generates the hardware-configuration.nix file based on your system's detected hardware, eliminating the need to manually generate it.
+| Shortcut | Action |
+| :--- | :--- |
+| `Super + U` | Rebuild system |
+| `Super + Shift + W` | Change wallpaper |
+| `Super + ?` | Show all keybindings |
 
-## Usage
+---
 
-### Managing Hosts
+## 📖 Documentation
 
-**Method 1: Automatic** - run the installer again to select or create another host:
+See **[docs.md](./docs.md)** for the full setup guide, host management, dev shells, rollbacks, and configuration reference.
 
-```bash
-./install.sh
-```
+---
 
-**Method 2: Manual:**
+## 📜 License
 
-1. Copy `hosts/Default` to a new directory (e.g., `hosts/Laptop`)
-2. Edit the new host's `variables.nix` and `host-packages.nix`
-3. Add the host to `flake.nix`:
-
-   ```nix
-   nixosConfigurations = {
-     Default = mkHost "Default";
-     Laptop = mkHost "Laptop";
-   };
-   ```
-
-<!-- 4. Rebuild with the new hostname (see below) -->
-
-4. Rebuild with the new hostname using either `nixos-rebuild` or `nh` (see [Rebuilding](#rebuilding) below). Once rebuilt, any rebuilding method can be used, as the host name will be implicitly recognised.
-
-### Rebuilding
-
-Apply configuration changes:
-
-- **Keyboard shortcut:** `Super + U`
-- **rebuild script:** `rebuild`
-- **nixos-rebuild:** `sudo nixos-rebuild switch --flake ~/NixOS#<HOST>`
-- **nh:** `nh os switch --hostname <HOST>`
-
-Replace `<HOST>` with the name of your host (e.g., `Laptop`).
-
-### Rollbacks
-
-List generations:
-
-```bash
-list-gens
-```
-
-Rollback to generation N:
-
-```bash
-rollback N
-```
-
-Replace `N` with the generation number (e.g., `69`).
-
-### Keybindings
-
-View all keybindings with `Super + ?` or `Super + Ctrl + K`.
-
-## Development Shells
-
-Pre-configured dev shells for various languages are included.
-
-Initialize a project from a template:
-
-```bash
-nix flake init -t ~/NixOS#<TEMPLATE_NAME>
-```
-
-Create a new project directory:
-
-```bash
-nix flake new -t ~/NixOS#<TEMPLATE_NAME> <PROJECT_NAME>
-```
-
-Templates are defined in `dev-shells/default.nix` (python, node, etc.).
-
-Enter the shell:
-
-```bash
-cd <PROJECT_NAME>
-nix develop
-```
-
-If you're using direnv, the shell activates automatically.
-
-<!-- ## Hosts
-
-|     | Hostname   | Board             | CPU                | RAM  | GPU                       | Purpose                                                                            |
-| --- | ---------- | ----------------- | ------------------ | ---- | ------------------------- | ---------------------------------------------------------------------------------- |
-| 🖥️  | `nix-wsl`   | MSI MAG B760 Tomahawk    | Intel I7-13700F    | 32GB | RTX 4070 | Triple-monitor desktop running Windows Subsystem for Linux.                        | -->
+This project is licensed under the [MIT License](../LICENSE).
