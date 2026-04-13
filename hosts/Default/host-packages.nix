@@ -17,5 +17,6 @@
     nodejs
     code-cursor 
     pnpm
+    bun
   ];
 }
