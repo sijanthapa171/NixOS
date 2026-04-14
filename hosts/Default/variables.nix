@@ -15,7 +15,7 @@
   terminal = "kitty"; # kitty, alacritty
   editor = "nixvim"; # nixvim, vscode, helix, doom-emacs, nvchad, neovim
   browser = "firefox"; # zen-beta, firefox, floorp
-  fileManager = "yazi"; # yazi, lf, thunar
+  fileManager = "thunar"; # yazi, lf, thunar
   shell = "zsh"; # zsh, bash
   games = true; # Enable/Disable gaming module
 
