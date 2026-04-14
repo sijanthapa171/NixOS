@@ -22,6 +22,7 @@
   # Hardware
   hostname = "NixOS";
   videoDriver = "intel"; # nvidia, amdgpu, intel
+  nvidiaChannel = "stable"; # latest, stable, beta, legacy_xxx
   bluetoothSupport = true; # Whether your motherboard supports bluetooth
 
   # Localization
