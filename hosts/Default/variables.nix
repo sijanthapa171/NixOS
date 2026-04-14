@@ -15,14 +15,14 @@
   terminal = "kitty"; # kitty, alacritty
   editor = "nixvim"; # nixvim, vscode, helix, doom-emacs, nvchad, neovim
   browser = "firefox"; # zen-beta, firefox, floorp
-  tuiFileManager = "yazi"; # yazi, lf
+  fileManager = "yazi"; # yazi, lf, thunar
   shell = "zsh"; # zsh, bash
   games = true; # Enable/Disable gaming module
 
   # Hardware
   hostname = "NixOS";
   videoDriver = "intel"; # nvidia, amdgpu, intel
-  nvidiaChannel = "stable"; # latest, stable, beta, legacy_xxx
+  nvidiaChannel = "stable"; # stable, latest, beta, legacy_xxx
   bluetoothSupport = true; # Whether your motherboard supports bluetooth
 
   # Localization
