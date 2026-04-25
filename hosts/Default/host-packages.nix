@@ -18,8 +18,6 @@
     code-cursor 
     pnpm
     bun
-
-
     # temp
                   gcc
               gdb
