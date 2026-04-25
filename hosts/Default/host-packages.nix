@@ -15,13 +15,12 @@
     peaclock
     antigravity
     nodejs
-    code-cursor 
     pnpm
     bun
-    # temp
-                  gcc
-              gdb
-              gnumake
-              pkg-config
+    # temp---->
+    gcc
+    gdb
+    gnumake
+    pkg-config
   ];
 }
