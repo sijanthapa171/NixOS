@@ -28,7 +28,7 @@
   # Localization
   timezone = "Asia/Kathmandu";
   locale = "en_US.UTF-8";
-  clock24h = true;
+  clock24h = false;
   kbdLayout = "us";
   kbdVariant = "";
   consoleKeymap = "us";
