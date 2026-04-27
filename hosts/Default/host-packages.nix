@@ -22,5 +22,7 @@
     gdb
     gnumake
     pkg-config
+    uv
+    python3
   ];
 }
