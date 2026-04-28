@@ -24,5 +24,6 @@
     pkg-config
     uv
     python3
+    jdk
   ];
 }
