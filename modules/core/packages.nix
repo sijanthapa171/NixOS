@@ -71,5 +71,6 @@
     # devenv
     # devbox
     # shellify
+    nitch # Nix Shell Manager (Optional: Only If You Use It)
   ];
 }
