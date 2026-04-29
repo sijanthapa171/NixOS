@@ -219,15 +219,15 @@
     "neovim": {
       "flake": false,
       "locked": {
-        "lastModified": 1756715888,
-        "narHash": "sha256-0o1h27/xj+9u/noN4lsmQVk+YYFFUmdfmjwkqdWM650=",
-        "owner": "Sly-Harvey",
+        "lastModified": 1777434435,
+        "narHash": "sha256-yuLpsZzstxfhqtbattrQ7VjyoJP+KmCxqba9zJpvy4g=",
+        "owner": "sijanthapa171",
         "repo": "nvim",
-        "rev": "978d468def66f1626474cee1dbecfe463de82f3f",
+        "rev": "e165f2674f62786985112de16eeb7a3841e1f51e",
         "type": "github"
       },
       "original": {
-        "owner": "Sly-Harvey",
+        "owner": "sijanthapa171",
         "repo": "nvim",
         "type": "github"
       }
