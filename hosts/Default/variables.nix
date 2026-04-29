@@ -13,7 +13,7 @@
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty
-  editor = "nixvim"; # nixvim, vscode, helix, doom-emacs, nvchad, neovim
+  editor = "nixvim"; # nixvim, vscode, neovim
   browser = "firefox"; # zen-beta, firefox, floorp
   fileManager = "thunar"; # yazi, lf, thunar
   shell = "zsh"; # zsh, bash

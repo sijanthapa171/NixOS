@@ -9,14 +9,13 @@
   sddmTheme = "astronaut";
   wallpaper = "kurzgesagt";
   shell = "zsh";
-  games = false; # WSL host doesn't need gaming module
 
   # Hardware / minimal
   videoDriver = "none"; # not applicable on WSL
   hostname = "authxth"; # requested hostname
 
   # Localization
-  clock24h = true;
+  clock24h = false;
   locale = "en_US.UTF-8";
   timezone = "Asia/Kathmandu";
   kbdLayout = "us";

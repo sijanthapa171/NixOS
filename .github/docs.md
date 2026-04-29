@@ -112,7 +112,7 @@ This is the **single source of truth** for your system preferences. Every option
 
   # Default Applications
   terminal = "kitty";             # kitty | alacritty
-  editor = "nixvim";              # nixvim | vscode | helix | doom-emacs
+  editor = "nixvim";              # nixvim | vscode  | doom-emacs
                                   # nvchad | neovim
   browser = "firefox";            # firefox | zen-beta | floorp
   tuiFileManager = "yazi";        # yazi | lf
@@ -347,7 +347,7 @@ Located at `modules/programs/`. Organized by category.
 
 **Browsers** (`programs/browser/`) — Firefox, Zen, Floorp
 
-**Editors** (`programs/editor/`) — Nixvim, VS Code, Helix, Doom Emacs, NvChad, Neovim
+**Editors** (`programs/editor/`) — Nixvim, VS Code, Neovim
 
 **Terminals** (`programs/terminal/`) — Kitty, Alacritty
 
