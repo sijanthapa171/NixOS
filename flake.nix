@@ -13,10 +13,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-doom-emacs-unstraightened = {
-      url = "github:marienz/nix-doom-emacs-unstraightened";
-      inputs.nixpkgs.follows = ""; # Doesn't use nixpkgs
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -29,10 +25,6 @@
     caelestia-shell = {
       url = "github:caelestia-dots/shell";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    doom-config = {
-      url = "github:Sly-Harvey/doom";
-      flake = false;
     };
     nixvim = {
       url = "github:sijanthapa171/nixvim";
