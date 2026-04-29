@@ -161,22 +161,6 @@
         "type": "github"
       }
     },
-    "neovim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1777434435,
-        "narHash": "sha256-yuLpsZzstxfhqtbattrQ7VjyoJP+KmCxqba9zJpvy4g=",
-        "owner": "sijanthapa171",
-        "repo": "nvim",
-        "rev": "e165f2674f62786985112de16eeb7a3841e1f51e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "sijanthapa171",
-        "repo": "nvim",
-        "type": "github"
-      }
-    },
     "nix-flatpak": {
       "locked": {
         "lastModified": 1767983141,
@@ -486,7 +470,6 @@
         "betterfox": "betterfox",
         "caelestia-shell": "caelestia-shell",
         "home-manager": "home-manager",
-        "neovim": "neovim",
         "nix-flatpak": "nix-flatpak",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",

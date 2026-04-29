@@ -30,10 +30,6 @@
       url = "github:sijanthapa171/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    neovim = {
-      url = "github:sijanthapa171/nvim";
-      flake = false;
-    };
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
