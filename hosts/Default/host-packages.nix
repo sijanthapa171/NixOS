@@ -24,5 +24,6 @@
     uv
     python3
     jdk
+    deno
   ];
 }
