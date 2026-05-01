@@ -4,11 +4,26 @@
     obsidian
     vscode
     brave
-    # localsend
+    localsend
     # xournalpp
     google-chrome
+    jetbrains-toolbox
     # protonvpn-gui # VPN
     # github-desktop
     # pokego # Overlayed
+    peaclock
+    antigravity
+    nodejs
+    pnpm
+    bun
+    # temp---->
+    gcc
+    gdb
+    gnumake
+    pkg-config
+    uv
+    python3
+    jdk
+    deno
   ];
 }

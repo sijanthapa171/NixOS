@@ -1,26 +1,34 @@
 {
-  # User Configuration
-  username = "sijanthapa"; # Your username (auto-set with install.sh, live-install.sh, rebuild)
-  desktop = "gnome"; # Options: hyprland, i3-gaps, gnome, plasma6
-  terminal = "kitty"; # Options: kitty, alacritty
-  editor = "nixvim"; # Options: nixvim, vscode, neovim
-  browser = "firefox"; # Options: firefox, floorp, zen
-  tuiFileManager = "yazi"; # Options: yazi, lf
-  sddmTheme = "astronaut"; # Options: astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-  defaultWallpaper = "kurzgesagt.webp"; # to change wallpaper: SUPER + SHIFT + W
-  hyprlockWallpaper = "evening-sky.webp"; # See modules/themes/wallpapers for options
-  shell = "zsh"; # Options: zsh, bash
-  games = true; # Whether to enable the gaming module
+  username = "sijanthapa"; # auto-set with install.sh, live-install.sh, and rebuild scripts.
 
-  # Hardware Configuration
-  videoDriver = "intel"; # CRITICAL: Choose your GPU driver (nvidia, amdgpu, intel)
-  hostname = "majduri"; # Your system hostname
+  # Desktop Environment
+  desktop = "gnome"; # hyprland, i3, gnome, plasma6
+
+  # Theme & Appearance
+  bar = "noctalia-shell"; # waybar, hyprpanel, noctalia-shell, caelestia-shell
+  waybarTheme = "minimal"; # stylish, minimal
+  sddmTheme = "astronaut"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
+  defaultWallpaper = "galaxy.webp"; # Change with SUPER + SHIFT + W (Hyprland)
+  hyprlockWallpaper = "galaxy.webp";
+
+  # Default Applications
+  terminal = "kitty"; # kitty, alacritty
+  editor = "nixvim"; # nixvim, vscode
+  browser = "firefox"; # zen-beta, firefox, floorp
+  fileManager = "thunar"; # yazi, lf, thunar
+  shell = "zsh"; # zsh, bash
+
+  # Hardware
+  hostname = "majduri";
+  videoDriver = "intel"; # nvidia, amdgpu, intel
+  nvidiaChannel = "stable"; # stable, latest, beta, legacy_xxx
+  bluetoothSupport = true; # Whether your motherboard supports bluetooth
 
   # Localization
-  clock24h = true; # 24H or 12H clock in waybar
-  locale = "en_US.UTF-8"; # System locale
-  timezone = "Asia/Kathmandu"; # Your timezone
-  kbdLayout = "us"; # Keyboard layout
-  kbdVariant = ""; # Keyboard variant (can be empty)
-  consoleKeymap = "us"; # TTY keymap
+  timezone = "Asia/Kathmandu";
+  locale = "en_US.UTF-8";
+  clock24h = false;
+  kbdLayout = "us";
+  kbdVariant = "";
+  consoleKeymap = "us";
 }
