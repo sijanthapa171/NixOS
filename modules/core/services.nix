@@ -27,6 +27,7 @@
         PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
       };
     };
+    postgresql.enable = true;
     blueman.enable = true; # Bluetooth Support
     tumbler.enable = true; # Image/video preview
 

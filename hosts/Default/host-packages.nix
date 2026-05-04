@@ -8,6 +8,8 @@
     # xournalpp
     google-chrome
     jetbrains-toolbox
+    android-studio
+    sqlitebrowser
     # protonvpn-gui # VPN
     # github-desktop
     # pokego # Overlayed
@@ -23,6 +25,7 @@
     pkg-config
     uv
     python3
+    python3Packages.pip
     jdk
     deno
   ];

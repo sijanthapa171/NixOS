@@ -18,6 +18,8 @@
     lm_sensors # Used For Getting Hardware Temps
     gnome-disk-utility # Disk Partitioning and Mounting Utility
     rclone # Cloning Utility
+    postgresql # PostgreSQL server and client tools
+    sqlite # SQLite command-line tools and libraries
     jq # Json Formatting Utility
     bibata-cursors
     sddm-astronaut # Sddm Theme (Overlayed)

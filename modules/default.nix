@@ -23,7 +23,7 @@ in
     ./core/system.nix
     ./core/users.nix
     # ./core/flatpak.nix
-    # ./core/virtualisation.nix
+    ./core/virtualisation.nix
     # ./core/dlna.nix
 
     # Optional
