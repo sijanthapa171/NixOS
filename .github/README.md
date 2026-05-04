@@ -79,9 +79,6 @@ The installer will:
 - Auto-generate `hardware-configuration.nix` for your machine
 - **Build and apply** the configuration
 
-> [!TIP]
-> After the first install, rebuild anytime with `Super + U`, the `rebuild` command, or see [docs.md](./docs.md) for all methods.
-
 ---
 
 
@@ -96,13 +93,3 @@ Press `Super + ?` or `Super + Ctrl + K` to view all keybindings.
 | `Super + ?` | Show all keybindings |
 
 ---
-
-## 📖 Documentation
-
-See **[docs.md](./docs.md)** for the full setup guide, host management, dev shells, rollbacks, and configuration reference.
-
----
-
-## 📜 License
-
-This project is licensed under the [MIT License](../LICENSE).
