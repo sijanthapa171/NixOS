@@ -98,10 +98,6 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
-        majduri = mkHost "majduri";
-        auth = mkHost "auth";
-        pork = mkHost "pork";
-        authxth = mkHost "authxth";
       };
     };
 }
