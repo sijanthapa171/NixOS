@@ -16,7 +16,7 @@ in {
   extensionSettings = with extensions; {
     "*" = {
       blocked_install_message = "Addon is not added in the nix config";
-      installation_mode = "blocked";o
+      installation_mode = "blocked";
     };
 
     "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
