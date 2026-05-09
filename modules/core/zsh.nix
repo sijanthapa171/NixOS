@@ -165,6 +165,8 @@
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
             b = "cat /sys/class/power_supply/BAT*/capacity";
+            gp = "git push";
+            gcm = "git commit -m"; 
 
             # Nixos
             list-gens = "nixos-rebuild list-generations";
