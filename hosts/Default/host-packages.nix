@@ -28,6 +28,5 @@
     python3Packages.pip
     jdk
     deno
-    figma-linux
   ];
 }
