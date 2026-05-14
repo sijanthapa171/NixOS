@@ -7,6 +7,8 @@
     localsend
     # xournalpp
     google-chrome
+    dbeaver-bin
+    maven
     jetbrains-toolbox
     android-studio
     sqlitebrowser
