@@ -13,13 +13,12 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    nitch # Nix Shell Manager (Optional: Only If You Use It
     appimage-run # Needed For AppImage Support
     killall # For Killing All Instances Of Programs
     lm_sensors # Used For Getting Hardware Temps
     gnome-disk-utility # Disk Partitioning and Mounting Utility
     rclone # Cloning Utility
-    postgresql # PostgreSQL server and client tools
-    sqlite # SQLite command-line tools and libraries
     jq # Json Formatting Utility
     bibata-cursors
     sddm-astronaut # Sddm Theme (Overlayed)
@@ -73,6 +72,5 @@
     # devenv
     # devbox
     # shellify
-    nitch # Nix Shell Manager (Optional: Only If You Use It
   ];
 }

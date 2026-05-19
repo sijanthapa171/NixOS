@@ -47,5 +47,5 @@ in
     ./programs/media/mpv
     ./programs/misc/tlp
     ./programs/misc/lact # GPU fan, clock and power configuration
-  ];
+  ]
 }
