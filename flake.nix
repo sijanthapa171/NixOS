@@ -98,7 +98,8 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
-        majduri = mkHost "majduri"; 
+        majduri = mkHost "majduri";
+        wsl = mkHost "wsl";
       };
     };
 }
