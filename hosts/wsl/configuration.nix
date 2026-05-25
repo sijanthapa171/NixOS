@@ -1,13 +1,28 @@
-{ config, pkgs, lib, specialArgs, ... }:
+{ inputs, ... }:
 let
-  username = "sijanthapa"; # set to your user from Default/variables.nix
-  hostname = "wsl";
+  vars = import ./variables.nix;
 in
 {
   imports = [
-    (import ../../nixos-wsl-repo/wsl.nix {
-      inherit username hostname pkgs;
-      inputs = specialArgs.inputs;
-    })
+    inputs.nixos-wsl.nixosModules.default
+    ./host-packages.nix
+
+    ../../modules/core/bash.nix
+    ../../modules/core/zsh.nix
+    ../../modules/core/starship.nix
+    ../../modules/core/nh.nix
+    ../../modules/core/system.nix
+    ../../modules/core/users.nix
   ];
+
+  wsl = {
+    enable = true;
+    defaultUser = vars.username;
+  };
+
+  networking.hostName = vars.hostname;
+
+  system.stateVersion = "25.05";
+
+  nixpkgs.config.allowUnfree = true;
 }
