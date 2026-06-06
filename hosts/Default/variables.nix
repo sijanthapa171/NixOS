@@ -5,7 +5,7 @@
   desktop = "hyprland"; # hyprland, i3, gnome, plasma6
 
   # Theme & Appearance
-  bar = "waybar"; # waybar, hyprpanel, noctalia-shell, caelestia-shell
+  bar = "waybar"; # waybar, wayle, hyprpanel, noctalia-shell, caelestia-shell
   waybarTheme = "minimal"; # stylish, minimal
   sddmTheme = "astronaut"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
   defaultWallpaper = "galaxy.webp"; # Change with SUPER + SHIFT + W (Hyprland)
@@ -17,13 +17,14 @@
   browser = "firefox"; # zen-beta, firefox, floorp
   fileManager = "thunar"; # yazi, lf, thunar
   shell = "zsh"; # zsh, bash
-  games = true; # Enable/Disable gaming module
+  games = false; # Enable/Disable gaming module
 
   # Hardware
   hostname = "NixOS";
-  videoDriver = "intel"; # nvidia, amdgpu, intel
-  nvidiaChannel = "stable"; # stable, latest, beta, legacy_xxx
+  videoDriver = "nvidia"; # nvidia, amdgpu, intel
+  nvidiaChannel = "latest"; # stable, latest, beta, legacy_xxx
   bluetoothSupport = true; # Whether your motherboard supports bluetooth
+  batterySupport = false; # Whether device has a battery (laptop)
 
   # Localization
   timezone = "Asia/Kathmandu";
