@@ -13,6 +13,7 @@ in
     ../../modules/core/nh.nix
     ../../modules/core/system.nix
     ../../modules/core/users.nix
+    ../../modules/core/packages.nix
     ../../modules/programs/editor/${vars.editor}
     ../../modules/programs/cli/lazygit/default.nix
     ../../modules/programs/cli/tmux/default.nix
