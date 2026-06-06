@@ -13,6 +13,7 @@ in
     ../../modules/core/nh.nix
     ../../modules/core/system.nix
     ../../modules/core/users.nix
+    ../../modules/programs/editor/${vars.editor}
   ];
 
   wsl = {
@@ -21,8 +22,6 @@ in
   };
 
   networking.hostName = vars.hostname;
-
-  system.stateVersion = "25.05";
 
   nixpkgs.config.allowUnfree = true;
 }
