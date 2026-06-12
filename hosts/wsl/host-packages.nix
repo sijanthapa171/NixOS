@@ -19,5 +19,10 @@
     xorg.libXtst
     xorg.libXi
     mesa
+
+    nodejs
+    pnpm 
+    bun 
+
   ];
 }
