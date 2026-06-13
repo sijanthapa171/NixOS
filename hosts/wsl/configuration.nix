@@ -14,10 +14,13 @@ in
     ../../modules/core/system.nix
     ../../modules/core/users.nix
     ../../modules/core/packages.nix
+    ../../modules/core/nh.nix
     ../../modules/programs/editor/${vars.editor}
     ../../modules/programs/cli/lazygit/default.nix
     ../../modules/programs/cli/tmux/default.nix
     ../../modules/programs/cli/btop/default.nix
+    ../../modules/programs/file-manager/${vars.fileManager} # Set file-manager defined in variables.nix
+    ../../modules/programs/cli/fastfetch 
   ];
 
   wsl = {

@@ -11,7 +11,7 @@
   terminal = "kitty";
   editor = "nixvim";
   browser = "firefox";
-  fileManager = "thunar";
+  fileManager = "yazi";
   shell = "zsh";
   games = false;
 
