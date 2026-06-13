@@ -164,6 +164,7 @@
             tpr = "${pkgs.trash-cli}/bin/trash-restore";
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
+            f = "yazi ."; 
 
             # Nixos
             list-gens = "nixos-rebuild list-generations";
