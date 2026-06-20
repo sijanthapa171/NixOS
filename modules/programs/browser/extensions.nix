@@ -25,7 +25,7 @@
       installation_mode = "blocked";
     };
     "uBlock0@raymondhill.net" = {
-      private_browsing = true;
+      private_browsing = false;
       default_area = "navbar";
       installation_mode = "force_installed";
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
