@@ -103,7 +103,7 @@
       nixosConfigurations = {
         Default = mkHost "Default";
         majduri = mkHost "majduri";
-        wsl = mkHost "wsl"; # WIP (not working yet)
+        vega = mkHost "vega";
       };
     };
 }
