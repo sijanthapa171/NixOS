@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/NixOS/nixos-artwork/master/logo/nix-snowflake-colours.svg" width="120" alt="NixOS Snowflake" />
 </p>
 
-<h1 align="center">❄️ NixOS Dotfiles</h1>
+<h1 align="center">NixOS Config</h1>
 
 <p align="center">
   <b>A fully declarative, reproducible, and modular NixOS system configuration.</b>
@@ -18,6 +18,14 @@
 ---
 
 ![Screenshot](preview.png)
+
+## Hosts
+
+|     | Hostname   | Board             | CPU                | RAM   | GPU                       | Purpose                                                                          |
+| --- | ---------- | ----------------- | ------------------ | ----- | ------------------------- | -------------------------------------------------------------------------------- |
+| 🖥️  | `vega`   | Gigabyte Z890M Aorus Elite WIFI7    |  Intel i9-13900F    | 32GB 6000MHz | RTX 4070 OC | Triple-monitor desktop running Windows Subsystem for Linux             |
+| 💻  | `Default`   | Asus Zephyrus G15    |  Ryzen 9 5900HS    | 16GB | RTX 3060 | Optimized for productivity on the go and some gaming.                                         |
+
 
 ## ✨ Features
 
