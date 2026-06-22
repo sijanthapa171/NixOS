@@ -23,7 +23,7 @@
 
 |     | Hostname   | Board             | CPU                | RAM   | GPU                       | Purpose                                                                          |
 | --- | ---------- | ----------------- | ------------------ | ----- | ------------------------- | -------------------------------------------------------------------------------- |
-| 🖥️  | `vega`   | Gigabyte Z890M Aorus Elite WIFI7    |  Intel i9-13900F    | 32GB 6000MHz | RTX 4070 OC | Triple-monitor desktop running Windows Subsystem for Linux             |
+| 🖥️  | `vega`   | Gigabyte Z890M Aorus Elite WIFI7    |  Intel i9-13900F    | 32GB 6000MHz | RTX 4070 OC | Running Windows Subsystem for Linux             |
 | 💻  | `Default`   | Asus Zephyrus G15    |  Ryzen 9 5900HS    | 16GB | RTX 3060 | Used for productivity.                                         |
 
 
