@@ -164,7 +164,6 @@
             tpr = "${pkgs.trash-cli}/bin/trash-restore";
             grep = "grep --color=always";
             pokemon = "pokego --random 1-8 --no-title";
-            f = "yazi ."; 
 
             # Nixos
             list-gens = "nixos-rebuild list-generations";
@@ -174,9 +173,12 @@
 
             # Directory Shortcuts.
             dots = "cd ~/NixOS/";
-            b = "cat /sys/class/power_supply/BAT*/capacity";
-            gp = "git push";
-            gcm = "git commit -m"; 
+            games = "cd /mnt/games/";
+            work = "cd /mnt/work/";
+            media = "cd /mnt/work/media/";
+            projects = "cd /mnt/work/Projects/";
+            proj = "cd /mnt/work/Projects/";
+            dev = "cd /mnt/work/Projects/";
           };
         };
       }

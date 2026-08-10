@@ -12,6 +12,7 @@
         };
 
         home.pointerCursor = {
+          enable = true;
           gtk.enable = true;
           x11.enable = true;
           package = pkgs.bibata-cursors;
@@ -21,7 +22,7 @@
 
         qt = {
           enable = true;
-          platformTheme.name = "gtk"; # gnome
+          platformTheme.name = "gtk3"; # gnome
           #platformTheme = "gnome";
           #style = {
           #  name = "adwaita-dark";

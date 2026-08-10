@@ -23,7 +23,7 @@ in
     ./core/system.nix
     ./core/users.nix
     # ./core/flatpak.nix
-    ./core/virtualisation.nix
+    # ./core/virtualisation.nix
     # ./core/dlna.nix
 
     # Optional
@@ -48,4 +48,5 @@ in
     ./programs/misc/tlp
     ./programs/misc/lact # GPU fan, clock and power configuration
   ]
+  ++ lib.optional (vars.games == true) ./core/games.nix;
 }

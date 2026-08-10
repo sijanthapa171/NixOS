@@ -13,7 +13,6 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    nitch # Nix Shell Manager (Optional: Only If You Use It
     appimage-run # Needed For AppImage Support
     killall # For Killing All Instances Of Programs
     lm_sensors # Used For Getting Hardware Temps
@@ -68,7 +67,7 @@
     # waypaper # Change wallpaper
     # wget # Tool For Fetching Files With Links
     # ytmdl # Tool For Downloading Audio From YouTube
-    bat 
+
     # devenv
     # devbox
     # shellify

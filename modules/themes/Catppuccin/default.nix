@@ -14,7 +14,7 @@ in
 
         qt = {
           enable = true;
-          platformTheme.name = "gtk";
+          platformTheme.name = "gtk3";
           style.name = "kvantum";
         };
         gtk = {
@@ -53,6 +53,7 @@ in
         };
 
         home.pointerCursor = {
+          enable = true;
           gtk.enable = true;
           x11.enable = true;
           package = pkgs.bibata-cursors;

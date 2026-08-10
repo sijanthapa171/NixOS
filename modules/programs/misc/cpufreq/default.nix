@@ -4,8 +4,8 @@
     enable = true;
     settings = {
       charger = {
-        governor = "schedutil";
-        turbo = "never";
+        governor = "performance";
+        turbo = "auto";
       };
       battery = {
         governor = "schedutil";

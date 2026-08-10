@@ -25,7 +25,7 @@
       installation_mode = "blocked";
     };
     "uBlock0@raymondhill.net" = {
-      private_browsing = false;
+      private_browsing = true;
       default_area = "navbar";
       installation_mode = "force_installed";
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
@@ -49,7 +49,7 @@
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/600-sound-volume-privacy/latest.xpi";
     };
     "extension@one-tab.com" = {
-      private_browsing = true;
+      private_browsing = false;
       default_area = "navbar";
       installation_mode = "force_installed";
       install_url = "https://addons.mozilla.org/firefox/downloads/latest/onetab/latest.xpi";

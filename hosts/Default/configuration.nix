@@ -26,8 +26,9 @@ in
     ../../modules/core/syncthing.nix
     ../../modules/core/system.nix
     ../../modules/core/users.nix
+    ../../modules/programs/media/jellyfin
     # ../../modules/core/flatpak.nix
-    ../../modules/core/virtualisation.nix
+    # ../../modules/core/virtualisation.nix
     # ../../modules/core/dlna.nix
 
     # Optional
@@ -48,9 +49,10 @@ in
     ../../modules/programs/media/spicetify
     # ../../modules/programs/media/youtube-music
     # ../../modules/programs/media/thunderbird
-    ../../modules/programs/media/obs-studio
+    # ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
-  ];
+  ]
+  ++ lib.optional (vars.games == true) ../../modules/core/games.nix;
 }
