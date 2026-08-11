@@ -9,6 +9,11 @@
     # pokego # Overlayed
     vscode
     kiro
+    
+    # dev temp
+    nodejs
+    bun 
+    pnpm 
 
     # All-in-one front-end for emulators 
     (retroarch.withCores (cores: with cores; [
