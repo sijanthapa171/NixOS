@@ -13,7 +13,8 @@
     # dev temp
     nodejs
     bun 
-    pnpm 
+    pnpm
+    python3
 
     # All-in-one front-end for emulators 
     (retroarch.withCores (cores: with cores; [
