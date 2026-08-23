@@ -9,7 +9,8 @@
     # pokego # Overlayed
     vscode
     kiro
-    
+    brave
+
     # dev temp
     nodejs
     bun 
