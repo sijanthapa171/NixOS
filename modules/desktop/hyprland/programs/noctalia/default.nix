@@ -182,7 +182,7 @@ in
             };
           };
           location = {
-            address = "London, United Kingdom";
+            address = "Kathmandu, Nepal";
             auto_locate = false;
           };
           lockscreen = {
