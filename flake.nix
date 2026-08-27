@@ -76,8 +76,7 @@
       mkHost =
         host:
         nixpkgs.lib.nixosSystem {
-          # inherit system;
-          system = forAllSystems (system: system);
+          system = "x86_64-linux";
           modules = [
             ./hosts/${host}/configuration.nix
           ];
@@ -97,6 +96,7 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
+        vega = mkHost "vega";
       };
     };
 }
