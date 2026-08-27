@@ -83,7 +83,7 @@ hl.window_rule({
 })
 hl.window_rule({
 	match = { class = "^(kitty|[Aa]lacritty|org.wezfurlong.wezterm)$" },
-	opacity = "0.80 0.70",
+	opacity = "0.90 0.80",
 })
 hl.window_rule({
 	match = { class = "^(nvim-wrapper)$" },
@@ -127,7 +127,7 @@ hl.window_rule({
 })
 hl.window_rule({
 	match = { class = "^(code|code-url-handler)$" },
-	opacity = "0.80 0.70",
+	opacity = "0.95 0.88",
 })
 hl.window_rule({
 	match = { class = "^(fileManager)$" },

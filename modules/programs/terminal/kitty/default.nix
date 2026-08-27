@@ -5,7 +5,7 @@
       programs.kitty = {
         enable = true;
         font = {
-          size = 12.0;
+          size = 14.0;
           name = "monospace";
         };
         themeFile = "Catppuccin-Mocha";
