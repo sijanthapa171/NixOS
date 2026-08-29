@@ -10,6 +10,8 @@
     vscode
     kiro
     brave
+    telegram-desktop
+    google-chrome
 
     # dev temp
     nodejs

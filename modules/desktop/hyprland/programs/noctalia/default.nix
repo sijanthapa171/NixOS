@@ -182,7 +182,7 @@ in
             };
           };
           location = {
-            address = "Kathmandu, Nepal";
+            address = "Pokhara, Nepal";
             auto_locate = false;
           };
           lockscreen = {
