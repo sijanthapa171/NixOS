@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NixOS Config — Declarative. Reproducible. Modular.</title>
+  <meta name="description" content="A fully declarative, reproducible, modular NixOS flake config with 4 desktop environments, 43 dev-shell templates, 3 themes, and one-variable control." />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sijanthapa171.github.io/NixOS/" />
+  <meta property="og:title" content="NixOS Config — Declarative. Reproducible. Modular." />
+  <meta property="og:description" content="A fully declarative, reproducible, modular NixOS flake config with 4 desktop environments, 43 dev-shell templates, 3 themes, and one-variable control." />
+  <meta property="og:image" content="https://sijanthapa171.github.io/NixOS/assets/img/nix-snowflake.svg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://sijanthapa171.github.io/NixOS/" />
+  <meta property="twitter:title" content="NixOS Config — Declarative. Reproducible. Modular." />
+  <meta property="twitter:description" content="A fully declarative, reproducible, modular NixOS flake config with 4 desktop environments, 43 dev-shell templates, 3 themes, and one-variable control." />
+  <meta property="twitter:image" content="https://sijanthapa171.github.io/NixOS/assets/img/nix-snowflake.svg" />
+  
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/nix-snowflake.svg" />
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-logo" href="index.html">
+      <img src="assets/img/nix-snowflake.svg" width="24" height="24" alt="NixOS" />
+      <span class="logo-text">NixOS<span class="logo-accent">Config</span></span>
+    </a>
+    <nav class="topnav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="docs.html" class="nav-link">Docs</a>
+      <a href="dev-shells.html" class="nav-link">Dev Shells</a>
+      <a href="keybindings.html" class="nav-link">Keybindings</a>
+    </nav>
+    <div class="topnav-actions">
+      <a class="btn-ghost" href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <button class="topnav-toggle" id="topnav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="docs.html" class="mobile-nav-link">Docs</a>
+    <a href="dev-shells.html" class="mobile-nav-link">Dev Shells</a>
+    <a href="keybindings.html" class="mobile-nav-link">Keybindings</a>
+    <a href="https://github.com/sijanthapa171/NixOS" class="mobile-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" aria-labelledby="hero-h">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>NixOS · Flakes · Declarative · Reproducible</span>
+    </div>
+
+    <h1 id="hero-h" class="hero-title">
+      A <em>modular</em> NixOS<br/>configuration
+    </h1>
+    <p class="hero-subtitle">
+      Fully declarative and reproducible. Switch your entire desktop, editor, GPU driver,
+      and theme across unlimited machines from a single <code>variables.nix</code> file.
+    </p>
+
+    <div class="hero-actions">
+      <a href="docs.html#installation" class="btn btn-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12l7-7 7 7M12 5v14"/></svg>
+        Get Started
+      </a>
+      <a href="docs.html" class="btn btn-secondary">Read the Docs</a>
+    </div>
+
+    <div class="terminal" role="region" aria-label="Quick start">
+      <div class="t-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="t-title">bash — ~/NixOS</span>
+      </div>
+      <div class="t-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">git clone https://github.com/sijanthapa171/NixOS.git ~/NixOS</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">cd ~/NixOS &amp;&amp; ./install.sh</span></div>
+        <div class="t-line t-comment"><span># interactive — host · GPU driver · variables.nix · build</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar" aria-label="Project stats">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-v">4</span><span class="stat-l">Desktop Environments</span></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat"><span class="stat-v">43</span><span class="stat-l">Dev Shell Templates</span></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat"><span class="stat-v">3</span><span class="stat-l">Themes</span></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat"><span class="stat-v">18</span><span class="stat-l">Bundled Wallpapers</span></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat"><span class="stat-v">1</span><span class="stat-l">File to Rule Them All</span></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" aria-labelledby="feat-h">
+  <div class="section-inner">
+    <div class="section-hd">
+      <p class="eyebrow"><span class="eyebrow-line"></span>Features</p>
+      <h2 id="feat-h" class="section-title">Everything you need. Nothing you don't.</h2>
+    </div>
+    <div class="features-grid">
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>4 Desktop Environments</h3>
+        <p>Hyprland · GNOME · KDE Plasma 6 · i3. Each fully themed and configured. Switch with one variable — no manual tweaking.</p>
+        <a href="docs.html#desktops" class="feat-link">Learn more →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>43 Dev Shell Templates</h3>
+        <p>Instant, reproducible dev environments for nearly every language and framework. Activated automatically by direnv.</p>
+        <a href="dev-shells.html" class="feat-link">Browse templates →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
+        </div>
+        <h3>One-Variable Config</h3>
+        <p>Every option in <code>variables.nix</code> maps to a module loaded at eval time. Change <code>desktop</code>, <code>editor</code>, <code>videoDriver</code>, or <code>theme</code> — rebuild once.</p>
+        <a href="docs.html#variables" class="feat-link">See variables →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Multi-Host Support</h3>
+        <p>Manage multiple machines from one flake. The installer creates a new host by copying a template, patching it, and adding it to <code>flake.nix</code> automatically.</p>
+        <a href="docs.html#hosts" class="feat-link">Manage hosts →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <h3>One-Command Install</h3>
+        <p>Both <code>install.sh</code> (running system) and <code>live-install.sh</code> (ISO) handle partitioning, encryption, GPU selection, hardware config, and <code>nixos-install</code>.</p>
+        <a href="docs.html#installation" class="feat-link">Installation guide →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+        </div>
+        <h3>Instant Rollbacks</h3>
+        <p>Every generation is preserved. The built-in <code>rollback N</code> script or the GRUB boot menu lets you revert in seconds.</p>
+        <a href="docs.html#rollbacks" class="feat-link">Rollback docs →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </div>
+        <h3>3 Full Themes</h3>
+        <p>Catppuccin Mocha · Dracula · Rosé Pine — each applied across GTK 2/3/4, Qt/Kvantum, SDDM, cursors, and icon theme.</p>
+        <a href="docs.html#themes" class="feat-link">Explore themes →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Gaming Ready</h3>
+        <p>Steam + Proton-GE, Lutris, Heroic, Bottles, gamescope, gamemode, and MangoHud — all enabled by setting <code>games = true</code>.</p>
+        <a href="docs.html#gaming" class="feat-link">Gaming setup →</a>
+      </article>
+
+      <article class="feat-card">
+        <div class="feat-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Privacy-first DNS</h3>
+        <p>Unbound with DNS-over-TLS (Quad9 + Cloudflare) and AdGuardHome with hagezi/oisd blocklists — baked in as NixOS config.</p>
+        <a href="docs.html#core-modules" class="feat-link">Core modules →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INSIDE -->
+<section class="section section-alt" aria-labelledby="inside-h">
+  <div class="section-inner">
+    <div class="section-hd">
+      <p class="eyebrow"><span class="eyebrow-line"></span>What's Inside</p>
+      <h2 id="inside-h" class="section-title">Batteries included.</h2>
+    </div>
+    <div class="tbl-wrap" role="region" aria-label="Configuration options">
+      <table class="tbl">
+        <thead><tr><th>Category</th><th>Options</th></tr></thead>
+        <tbody>
+          <tr><td><span class="cat">Desktop</span></td><td><code>hyprland</code> · <code>gnome</code> · <code>plasma6</code> · <code>i3</code></td></tr>
+          <tr><td><span class="cat">Bar</span></td><td><code>waybar</code> (stylish / minimal) · <code>hyprpanel</code> · <code>noctalia</code> · <code>wayle</code> · <code>caelestia</code></td></tr>
+          <tr><td><span class="cat">Terminal</span></td><td><code>kitty</code> · <code>alacritty</code> · <code>wezterm</code></td></tr>
+          <tr><td><span class="cat">Editor</span></td><td><code>nixvim</code> · <code>vscode</code> · <code>helix</code> · <code>doom-emacs</code> · <code>nvchad</code> · <code>neovim</code></td></tr>
+          <tr><td><span class="cat">Browser</span></td><td><code>firefox</code> · <code>zen-beta</code> · <code>floorp</code></td></tr>
+          <tr><td><span class="cat">File Manager</span></td><td><code>yazi</code> · <code>lf</code> · <code>thunar</code></td></tr>
+          <tr><td><span class="cat">Shell</span></td><td><code>zsh</code> (lazy-loaded · Starship) · <code>bash</code></td></tr>
+          <tr><td><span class="cat">GPU Driver</span></td><td><code>nvidia</code> · <code>amdgpu</code> · <code>intel</code></td></tr>
+          <tr><td><span class="cat">Themes</span></td><td>Catppuccin Mocha · Dracula · Rosé Pine</td></tr>
+          <tr><td><span class="cat">SDDM</span></td><td>astronaut · black_hole · purple_leaves · jake_the_dog · hyprland_kath</td></tr>
+          <tr><td><span class="cat">Media</span></td><td>Spicetify · Discord · MPV · OBS Studio · Thunderbird · YouTube Music · Jellyfin</td></tr>
+          <tr><td><span class="cat">CLI Tools</span></td><td>tmux · lazygit · btop · direnv · cava · fastfetch · eza · zoxide · fzf · ripgrep</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOSTS -->
+<section class="section" aria-labelledby="hosts-h">
+  <div class="section-inner">
+    <div class="section-hd">
+      <p class="eyebrow"><span class="eyebrow-line"></span>Hosts</p>
+      <h2 id="hosts-h" class="section-title">Configured machines.</h2>
+    </div>
+    <div class="hosts-grid">
+      <article class="host-card">
+        <div class="host-hd">
+          <span class="host-ico" aria-hidden="true">💻</span>
+          <div>
+            <p class="host-name"><code>Default</code></p>
+            <p class="host-sub">Productivity Laptop</p>
+          </div>
+        </div>
+        <div class="specs">
+          <div class="spec"><span class="sk">Board</span><span class="sv">Asus Zephyrus G15</span></div>
+          <div class="spec"><span class="sk">CPU</span><span class="sv">Ryzen 9 5900HS</span></div>
+          <div class="spec"><span class="sk">RAM</span><span class="sv">16 GB</span></div>
+          <div class="spec"><span class="sk">GPU</span><span class="sv">RTX 3060</span></div>
+          <div class="spec"><span class="sk">DE</span><span class="sv">Hyprland (default)</span></div>
+        </div>
+        <div class="chips">
+          <span class="chip">Full Desktop</span>
+          <span class="chip">TLP battery</span>
+          <span class="chip">OBS</span>
+          <span class="chip">Discord</span>
+          <span class="chip">RetroArch</span>
+        </div>
+      </article>
+
+      <article class="host-card">
+        <div class="host-hd">
+          <span class="host-ico" aria-hidden="true">🖥️</span>
+          <div>
+            <p class="host-name"><code>vega</code></p>
+            <p class="host-sub">WSL Workstation</p>
+          </div>
+        </div>
+        <div class="specs">
+          <div class="spec"><span class="sk">Board</span><span class="sv">Gigabyte Z890M</span></div>
+          <div class="spec"><span class="sk">CPU</span><span class="sv">Intel i9-13900F</span></div>
+          <div class="spec"><span class="sk">RAM</span><span class="sv">32 GB 6000 MHz</span></div>
+          <div class="spec"><span class="sk">GPU</span><span class="sv">RTX 4070 OC</span></div>
+          <div class="spec"><span class="sk">Mode</span><span class="sv">NixOS-WSL (headless)</span></div>
+        </div>
+        <div class="chips">
+          <span class="chip">WSL</span>
+          <span class="chip">Headless</span>
+          <span class="chip">Java / Maven</span>
+          <span class="chip">Node.js</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DEV SHELLS PREVIEW -->
+<section class="section section-alt" aria-labelledby="shells-h">
+  <div class="section-inner">
+    <div class="section-hd">
+      <p class="eyebrow"><span class="eyebrow-line"></span>Dev Shells</p>
+      <h2 id="shells-h" class="section-title">43 languages, zero setup friction.</h2>
+      <p class="section-desc">Pick a template, run <code>nix develop</code>, and you're in a fully reproducible environment. With direnv, it activates automatically on <code>cd</code>.</p>
+    </div>
+
+    <div class="lang-cloud">
+      <span class="lang-chip">Rust</span><span class="lang-chip">Go 1.24</span>
+      <span class="lang-chip">Python 3.13</span><span class="lang-chip">Node.js</span>
+      <span class="lang-chip">Haskell</span><span class="lang-chip">Java 25</span>
+      <span class="lang-chip">Kotlin</span><span class="lang-chip">Scala</span>
+      <span class="lang-chip">C/C++</span><span class="lang-chip">Zig</span>
+      <span class="lang-chip">Elixir</span><span class="lang-chip">OCaml</span>
+      <span class="lang-chip">Gleam</span><span class="lang-chip">Elm</span>
+      <span class="lang-chip">Clojure</span><span class="lang-chip">Deno</span>
+      <span class="lang-chip">Bun</span><span class="lang-chip">Bevy</span>
+      <span class="lang-chip">LaTeX</span><span class="lang-chip">Nix</span>
+      <a href="dev-shells.html" class="lang-chip lang-chip-more">+23 more →</a>
+    </div>
+
+    <div class="terminal" style="max-width:560px;margin:0 auto;" role="region" aria-label="Dev shell example">
+      <div class="t-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="t-title">~/myproject</span>
+      </div>
+      <div class="t-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">fnew rust myproject</span></div>
+        <div class="t-line t-out">• Created myproject/flake.nix</div>
+        <div class="t-line t-out">• Created myproject/.envrc</div>
+        <div class="t-line t-out">direnv: loading .envrc</div>
+        <div class="t-line t-ok">✓ rustc 1.x · cargo · clippy · rust-analyzer ready</div>
+      </div>
+    </div>
+
+    <div class="section-cta">
+      <a href="dev-shells.html" class="btn btn-primary">Browse all 43 templates</a>
+    </div>
+  </div>
+</section>
+
+<!-- HYPRLAND HIGHLIGHT -->
+<section class="section" aria-labelledby="hypr-h">
+  <div class="section-inner">
+    <div class="section-hd">
+      <p class="eyebrow"><span class="eyebrow-line"></span>Hyprland</p>
+      <h2 id="hypr-h" class="section-title">Lua-based, bleeding-edge Wayland.</h2>
+      <p class="section-desc">Hyprland is configured in pure Lua — not <code>.conf</code>. Variables from <code>variables.nix</code> are baked into a <code>variables.lua</code> at build time.</p>
+    </div>
+
+    <div class="terminal" style="max-width:640px;margin:0 auto 2rem;" role="region" aria-label="Hyprland settings excerpt">
+      <div class="t-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="t-title">~/.config/hypr/settings.lua</span>
+      </div>
+      <div class="t-body">
+        <div class="t-line"><span style="color:var(--overlay1)">-- general</span></div>
+        <div class="t-line"><span class="t-cmd">hl.config({ general = { gaps_in = 4, gaps_out = 9, border_size = 2,</span></div>
+        <div class="t-line"><span class="t-cmd">&nbsp;&nbsp;col = { active_border = { colors = { <span style="color:var(--mauve)">"rgba(ca9ee6ff)"</span>, <span style="color:var(--pink)">"rgba(f2d5cfff)"</span> } } },</span></div>
+        <div class="t-line"><span class="t-cmd">&nbsp;&nbsp;layout = <span style="color:var(--green)">"dwindle"</span>, resize_on_border = true },</span></div>
+        <div class="t-line"><span class="t-cmd">&nbsp;&nbsp;decoration = { rounding = 10, blur = { enabled = true, size = 6 } } })</span></div>
+      </div>
+    </div>
+
+    <div class="features-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr));margin-top:0">
+      <div class="feat-card">
+        <h3 style="color:var(--accent)">Lua Config</h3>
+        <p>6 Lua files: <code>hyprland.lua</code>, <code>monitors.lua</code>, <code>settings.lua</code>, <code>animations.lua</code>, <code>binds.lua</code>, <code>rules.lua</code></p>
+      </div>
+      <div class="feat-card">
+        <h3 style="color:var(--accent)">Bar Options</h3>
+        <p>waybar (stylish/minimal) · noctalia · hyprpanel · wayle · caelestia — set via <code>bar</code> variable</p>
+      </div>
+      <div class="feat-card">
+        <h3 style="color:var(--accent)">Blur &amp; Rules</h3>
+        <p>Per-window opacity rules, rofi/swaync blur layers, float/pin rules, game tag with fullscreen content</p>
+      </div>
+      <div class="feat-card">
+        <h3 style="color:var(--accent)">Animations</h3>
+        <p>Custom bezier curves: <code>md3_decel</code>, <code>easeOutExpo</code>, <code>fluent_decel</code> for windows, workspaces, and fade</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" aria-labelledby="cta-h">
+  <div class="cta-inner">
+    <h2 id="cta-h" class="cta-title">Ready to build your system?</h2>
+    <p class="cta-desc">Two commands and you're running a fully declarative NixOS setup.</p>
+    <div class="cta-terminal" role="region" aria-label="Install commands">
+      <div class="t-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="t-title">bash</span>
+      </div>
+      <div class="t-body">
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">git clone https://github.com/sijanthapa171/NixOS.git ~/NixOS</span></div>
+        <div class="t-line"><span class="t-prompt">$</span><span class="t-cmd">cd ~/NixOS &amp;&amp; ./install.sh</span></div>
+      </div>
+    </div>
+    <div class="cta-actions">
+      <a href="docs.html#installation" class="btn btn-primary">Full install guide</a>
+      <a href="https://github.com/sijanthapa171/NixOS" class="btn btn-secondary" target="_blank" rel="noopener">View on GitHub</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/img/nix-snowflake.svg" width="18" height="18" alt="" aria-hidden="true" />
+      NixOS Config
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="index.html">Home</a>
+      <a href="docs.html">Docs</a>
+      <a href="dev-shells.html">Dev Shells</a>
+      <a href="keybindings.html">Keybindings</a>
+      <a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <p class="footer-copy">Made with ❄️ and Nix · MIT License</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keybindings — NixOS Config</title>
+  <meta name="description" content="Complete Hyprland keybindings reference extracted from binds.lua." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/nix-snowflake.svg" />
+</head>
+<body>
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-logo" href="index.html">
+      <img src="assets/img/nix-snowflake.svg" width="24" height="24" alt="NixOS" />
+      <span class="logo-text">NixOS<span class="logo-accent">Config</span></span>
+    </a>
+    <nav class="topnav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="docs.html" class="nav-link">Docs</a>
+      <a href="dev-shells.html" class="nav-link">Dev Shells</a>
+      <a href="keybindings.html" class="nav-link active">Keybindings</a>
+    </nav>
+    <div class="topnav-actions">
+      <a class="btn-ghost" href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <button class="topnav-toggle" id="topnav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="docs.html" class="mobile-nav-link">Docs</a>
+    <a href="dev-shells.html" class="mobile-nav-link">Dev Shells</a>
+    <a href="keybindings.html" class="mobile-nav-link">Keybindings</a>
+    <a href="https://github.com/sijanthapa171/NixOS" class="mobile-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span><span>Hyprland · Lua binds.lua · HJKL + arrows</span></div>
+    <h1 class="page-hero-title">Keybindings</h1>
+    <p class="page-hero-desc">All keybindings from <code>modules/desktop/hyprland/lua/binds.lua</code>. Press <kbd>Super</kbd>+<kbd>?</kbd> or <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>K</kbd> in-session for the interactive yad help menu.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+
+    <!-- FILTER -->
+    <div class="filter-bar-col">
+      <div class="search-wrap">
+        <svg class="search-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="kb-search" class="search" placeholder="Search keybindings…" aria-label="Search keybindings" autocomplete="off" />
+      </div>
+      <div class="ftags" role="group" aria-label="Filter">
+        <button class="ftag on" data-kb-filter="all">All</button>
+        <button class="ftag" data-kb-filter="system">System</button>
+        <button class="ftag" data-kb-filter="apps">Apps</button>
+        <button class="ftag" data-kb-filter="windows">Windows</button>
+        <button class="ftag" data-kb-filter="workspaces">Workspaces</button>
+        <button class="ftag" data-kb-filter="media">Media</button>
+        <button class="ftag" data-kb-filter="screenshots">Screenshots</button>
+      </div>
+    </div>
+
+    <!-- SYSTEM -->
+    <div class="kb-sec" data-kb-cat="system">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">⚙</span>System</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Super</kbd>+<kbd>U</kbd></td><td>Rebuild NixOS configuration (<code>rebuild</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>?</kbd> / <kbd>Super</kbd>+<kbd>/</kbd></td><td>Show keybindings help (yad)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>K</kbd></td><td>Show keybindings help (yad)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Delete</kbd></td><td>Kill Hyprland session (<code>hyprshutdown</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd></td><td>Lock screen (noctalia session lock or hyprlock)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Backspace</kbd></td><td>Logout menu (noctalia session panel or wlogout -b 4)</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Escape</kbd></td><td>Toggle bar (waybar / noctalia / wayle)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>F9</kbd></td><td>Night mode ON — 2500 K warm (hyprsunset)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>F10</kbd></td><td>Night mode OFF (pkill hyprsunset)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>F8</kbd></td><td>Toggle auto-clicker (40 CPS)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>G</kbd></td><td>Toggle Hyprland effects for gamemode</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- APPLICATIONS -->
+    <div class="kb-sec" data-kb-cat="apps">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">▶</span>Applications</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Super</kbd>+<kbd>Return</kbd> / <kbd>T</kbd></td><td>Open terminal (<code>$terminal</code> from variables)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>F</kbd></td><td>Open browser (<code>$browser</code> from variables)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>C</kbd></td><td>Open editor (<code>$editor</code> from variables)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>E</kbd></td><td>Open file manager (<code>$fileManager</code> from variables)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>A</kbd> / <kbd>Super</kbd>+<kbd>Space</kbd></td><td>App launcher — <code>launcher drun</code></td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd></td><td>Wallpaper picker — <code>launcher wallpaper</code></td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Z</kbd></td><td>Emoji picker — <code>launcher emoji</code></td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd></td><td>Tmux session picker — <code>launcher tmux</code></td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>G</kbd></td><td>Game launcher — <code>launcher games</code></td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>V</kbd></td><td>Clipboard manager (cliphist)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>M</kbd></td><td>Online music (rofimusic)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd></td><td>Spotify</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Y</kbd></td><td>YouTube Music</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>C</kbd></td><td>Color picker — hex format, auto-copy (hyprpicker)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></td><td>Switch keyboard layout (us ↔ ru)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td><td>Audio panel (noctalia control-center audio or pavucontrol)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd></td><td>Media panel (noctalia control-center media)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>N</kbd> / <kbd>Q</kbd></td><td>SwayNC notification center toggle</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Delete</kbd></td><td>Open btop (system monitor) in terminal</td></tr>
+            <tr><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>M</kbd></td><td>Open microfetch (float, class: microfetch)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>mouse_down</kbd></td><td>Zoom in</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>mouse_up</kbd></td><td>Zoom out</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- WINDOWS -->
+    <div class="kb-sec" data-kb-cat="windows">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">⬜</span>Windows</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="kb-sub" colspan="2">Close / Kill</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Q</kbd></td><td>Close window</td></tr>
+            <tr><td><kbd>Alt</kbd>+<kbd>F4</kbd></td><td>Kill window</td></tr>
+            <tr><td><kbd>Alt</kbd>+<kbd>Return</kbd></td><td>Toggle fullscreen</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>W</kbd></td><td>Toggle float</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>G</kbd></td><td>Toggle window group</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Tab</kbd></td><td>Cycle to next window (brings to top)</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Focus (arrow keys or HJKL)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>←</kbd> / <kbd>H</kbd></td><td>Focus left</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>→</kbd> / <kbd>L</kbd></td><td>Focus right</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>↑</kbd> / <kbd>K</kbd></td><td>Focus up</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>↓</kbd> / <kbd>J</kbd></td><td>Focus down</td></tr>
+            <tr><td><kbd>Alt</kbd>+<kbd>Tab</kbd></td><td>Focus down</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Move window (arrow keys or HJKL)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>←</kbd> / <kbd>H</kbd></td><td>Move window left</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>→</kbd> / <kbd>L</kbd></td><td>Move window right</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>↑</kbd> / <kbd>K</kbd></td><td>Move window up</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Ctrl</kbd>+<kbd>↓</kbd> / <kbd>J</kbd></td><td>Move window down</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Resize (repeating, arrow keys or HJKL)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>→</kbd> / <kbd>L</kbd></td><td>Resize wider (+30 px)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>←</kbd> / <kbd>H</kbd></td><td>Resize narrower (−30 px)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>↑</kbd> / <kbd>K</kbd></td><td>Resize taller (−30 px)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>↓</kbd> / <kbd>J</kbd></td><td>Resize shorter (+30 px)</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Mouse</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>LMB</kbd> drag</td><td>Move window</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>RMB</kbd> drag</td><td>Resize window</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- WORKSPACES -->
+    <div class="kb-sec" data-kb-cat="workspaces">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">⊞</span>Workspaces</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Super</kbd>+<kbd>1</kbd>–<kbd>0</kbd></td><td>Switch to workspace 1–10</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>1</kbd>–<kbd>0</kbd></td><td>Move window to workspace 1–10 (follow window)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>1</kbd>–<kbd>0</kbd></td><td>Move window to workspace 1–10 (stay on current)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>→</kbd></td><td>Next workspace (r+1)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>←</kbd></td><td>Previous workspace (r-1)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>↓</kbd></td><td>First empty workspace</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>→</kbd></td><td>Move window to next workspace</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>←</kbd></td><td>Move window to previous workspace</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>scroll↓</kbd></td><td>Scroll to next workspace (e+1)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>scroll↑</kbd></td><td>Scroll to previous workspace (e-1)</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Scratchpad (special workspace)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>S</kbd></td><td>Toggle special (scratchpad) workspace</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>S</kbd> / <kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>S</kbd></td><td>Move window to scratchpad (no follow)</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Scrolling layout</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>,</kbd></td><td>Move column left</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>.</kbd></td><td>Move column right</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Mouse side buttons</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Mouse 276</kbd></td><td>Go to workspace 5</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Mouse 275</kbd></td><td>Go to workspace 6</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>Mouse 275</kbd></td><td>Go to workspace 7</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Mouse 276</kbd></td><td>Move window to workspace 5 (follow)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>Mouse 275</kbd></td><td>Move window to workspace 6 (follow)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Mouse 276</kbd></td><td>Move window to workspace 5 (no follow)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>Mouse 275</kbd></td><td>Move window to workspace 6 (no follow)</td></tr>
+
+            <tr><td class="kb-sub" colspan="2">Touchpad</td></tr>
+            <tr><td>3-finger swipe horizontal</td><td>Switch workspace</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MEDIA -->
+    <div class="kb-sec" data-kb-cat="media">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">♫</span>Media &amp; Function Keys</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Key</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>XF86AudioRaiseVolume</kbd></td><td>Volume +2% (pamixer, repeating)</td></tr>
+            <tr><td><kbd>XF86AudioLowerVolume</kbd></td><td>Volume −2% (pamixer, repeating)</td></tr>
+            <tr><td><kbd>XF86AudioMute</kbd></td><td>Toggle mute (pamixer)</td></tr>
+            <tr><td><kbd>XF86AudioMicMute</kbd></td><td>Toggle microphone mute (pamixer --default-source)</td></tr>
+            <tr><td><kbd>XF86AudioPlay</kbd> / <kbd>Pause</kbd></td><td>Play / Pause (playerctl)</td></tr>
+            <tr><td><kbd>xf86AudioNext</kbd></td><td>Next track (playerctl)</td></tr>
+            <tr><td><kbd>xf86AudioPrev</kbd></td><td>Previous track (playerctl)</td></tr>
+            <tr><td><kbd>XF86MonBrightnessUp</kbd></td><td>Brightness +2% (brightnessctl, repeating)</td></tr>
+            <tr><td><kbd>XF86MonBrightnessDown</kbd></td><td>Brightness −2% (brightnessctl, repeating)</td></tr>
+            <tr><td><kbd>xf86Sleep</kbd></td><td>Suspend system (systemctl suspend)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCREENSHOTS -->
+    <div class="kb-sec" data-kb-cat="screenshots">
+      <h2 class="kb-sec-title"><span class="kb-ico" aria-hidden="true">📷</span>Screenshots &amp; Screen Recording</h2>
+      <div class="kb-wrap">
+        <table class="kb-tbl">
+          <thead><tr><th>Shortcut</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td><kbd>Super</kbd>+<kbd>P</kbd></td><td>Snip area / click on window to capture (<code>screenshot s</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>P</kbd></td><td>Frozen screen snip (<code>screenshot sf</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Print</kbd></td><td>Screenshot focused monitor (<code>screenshot m</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Alt</kbd>+<kbd>P</kbd></td><td>Screenshot all monitors (<code>screenshot p</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd></td><td>Screen record — area select (<code>screen-record a</code>)</td></tr>
+            <tr><td><kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>R</kbd></td><td>Screen record — monitor select (<code>screen-record m</code>)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="empty-msg" id="kb-empty" hidden>No keybindings match your search.</p>
+
+  </div>
+</section>
+
+<div class="callout-sec">
+  <div style="max-width:1440px;margin:0 auto">
+    <div class="callout c-tip">
+      <span class="callout-ico">💡</span>
+      <div class="callout-body">
+        Press <kbd>Super</kbd>+<kbd>?</kbd> at any time in Hyprland to open the interactive keybindings reference via <code>yad</code>. All bindings are defined in <code>modules/desktop/hyprland/lua/binds.lua</code>.
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><img src="assets/img/nix-snowflake.svg" width="18" height="18" alt="" aria-hidden="true" /> NixOS Config</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="index.html">Home</a><a href="docs.html">Docs</a>
+      <a href="dev-shells.html">Dev Shells</a><a href="keybindings.html">Keybindings</a>
+      <a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <p class="footer-copy">Made with ❄️ and Nix · MIT License</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

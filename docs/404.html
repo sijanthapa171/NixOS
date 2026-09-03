@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | NixOS Config</title>
+  <meta name="description" content="Page not found" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/nix-snowflake.svg" />
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-logo" href="index.html">
+      <img src="assets/img/nix-snowflake.svg" width="24" height="24" alt="NixOS" />
+      <span class="logo-text">NixOS<span class="logo-accent">Config</span></span>
+    </a>
+    <nav class="topnav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="docs.html" class="nav-link">Docs</a>
+      <a href="dev-shells.html" class="nav-link">Dev Shells</a>
+      <a href="keybindings.html" class="nav-link">Keybindings</a>
+    </nav>
+    <div class="topnav-actions">
+      <a class="btn-ghost" href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <button class="topnav-toggle" id="topnav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="docs.html" class="mobile-nav-link">Docs</a>
+    <a href="dev-shells.html" class="mobile-nav-link">Dev Shells</a>
+    <a href="keybindings.html" class="mobile-nav-link">Keybindings</a>
+    <a href="https://github.com/sijanthapa171/NixOS" class="mobile-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main style="min-height: calc(100vh - 140px); display: flex; align-items: center; justify-content: center;">
+  <div style="max-width: 600px; padding: 2rem; text-align: center;">
+    <div style="font-size: 8rem; font-weight: 700; color: var(--mauve); line-height: 1; margin-bottom: 1.5rem; font-family: var(--font-mono);">
+      404
+    </div>
+    <h1 style="font-size: 2rem; margin-bottom: 1rem; color: var(--text);">
+      Page Not Found
+    </h1>
+    <p style="font-size: 1.125rem; color: var(--subtext0); margin-bottom: 2rem; line-height: 1.6;">
+      The page you're looking for doesn't exist or has been moved.
+      <br />
+      Like a failed <code style="background: var(--surface0); padding: 0.125rem 0.5rem; border-radius: 0.25rem; color: var(--blue);">nix build</code>, this path leads nowhere.
+    </p>
+    
+    <div class="code-block" style="margin-bottom: 2rem; text-align: left;">
+      <div class="code-header">
+        <div class="code-dots">
+          <span style="background: var(--red);"></span>
+          <span style="background: var(--yellow);"></span>
+          <span style="background: var(--green);"></span>
+        </div>
+        <span class="code-title">error.log</span>
+      </div>
+      <div class="code-content">
+        <pre><code><span class="prompt">$</span> <span class="cmd">cd</span> <span class="str">{{requested_path}}</span>
+<span class="err">error:</span> path does not exist
+<span class="comment"># Try one of these instead:</span></code></pre>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="index.html" class="btn-primary">
+        ← Back Home
+      </a>
+      <a href="docs.html" class="btn-secondary">
+        Read Docs
+      </a>
+    </div>
+
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--surface0);">
+      <p style="color: var(--subtext1); font-size: 0.875rem; margin-bottom: 0.5rem;">
+        Quick Navigation:
+      </p>
+      <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; font-size: 0.875rem;">
+        <a href="index.html" style="color: var(--blue); text-decoration: none;">Home</a>
+        <a href="docs.html" style="color: var(--blue); text-decoration: none;">Documentation</a>
+        <a href="dev-shells.html" style="color: var(--blue); text-decoration: none;">Dev Shells</a>
+        <a href="keybindings.html" style="color: var(--blue); text-decoration: none;">Keybindings</a>
+        <a href="https://github.com/sijanthapa171/NixOS" style="color: var(--blue); text-decoration: none;" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p>Built with <span style="color: var(--blue);">❄️</span> NixOS — Declarative. Reproducible. Reliable.</p>
+    <p class="footer-links">
+      <a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">GitHub</a>
+      <span>·</span>
+      <a href="https://nixos.org" target="_blank" rel="noopener">NixOS.org</a>
+      <span>·</span>
+      <a href="https://catppuccin.com" target="_blank" rel="noopener">Catppuccin</a>
+    </p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

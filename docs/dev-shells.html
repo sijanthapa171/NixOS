@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dev Shells — NixOS Config</title>
+  <meta name="description" content="43 ready-to-use Nix flake development shell templates for every major language." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/nix-snowflake.svg" />
+</head>
+<body>
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-logo" href="index.html">
+      <img src="assets/img/nix-snowflake.svg" width="24" height="24" alt="NixOS" />
+      <span class="logo-text">NixOS<span class="logo-accent">Config</span></span>
+    </a>
+    <nav class="topnav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="docs.html" class="nav-link">Docs</a>
+      <a href="dev-shells.html" class="nav-link active">Dev Shells</a>
+      <a href="keybindings.html" class="nav-link">Keybindings</a>
+    </nav>
+    <div class="topnav-actions">
+      <a class="btn-ghost" href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <button class="topnav-toggle" id="topnav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="docs.html" class="mobile-nav-link">Docs</a>
+    <a href="dev-shells.html" class="mobile-nav-link">Dev Shells</a>
+    <a href="keybindings.html" class="mobile-nav-link">Keybindings</a>
+    <a href="https://github.com/sijanthapa171/NixOS" class="mobile-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="hero-badge"><span class="badge-dot"></span><span>43 Templates · direnv · x86_64 + aarch64 + Darwin</span></div>
+    <h1 class="page-hero-title">Dev Shell Templates</h1>
+    <p class="page-hero-desc">Instant, reproducible development environments for nearly every language. Powered by Nix flakes — <code>nix develop</code> or auto-activated by direnv.</p>
+  </div>
+</section>
+
+<!-- HOW TO USE -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-sm-title">How to use</h2>
+    <div class="usage-grid">
+      <div class="usage-card">
+        <div class="usage-step">01</div>
+        <h3>Create a new project</h3>
+        <div class="cb sm"><div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+        <pre><code><span class="t-prompt">$</span> nix flake new -t ~/NixOS#rust myproject</code></pre></div>
+      </div>
+      <div class="usage-card">
+        <div class="usage-step">02</div>
+        <h3>Enter the dev shell</h3>
+        <div class="cb sm"><div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+        <pre><code><span class="t-prompt">$</span> cd myproject &amp;&amp; nix develop</code></pre></div>
+      </div>
+      <div class="usage-card">
+        <div class="usage-step">03</div>
+        <h3>Or use the shell aliases</h3>
+        <div class="cb sm"><div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+        <pre><code><span class="t-prompt">$</span> fnew rust myproject   <span class="t-cmt"># new dir</span>
+<span class="t-prompt">$</span> finit python          <span class="t-cmt"># init in cwd</span></code></pre></div>
+      </div>
+    </div>
+
+    <div class="callout c-tip" style="margin-top:1.75rem">
+      <span class="callout-ico">💡</span>
+      <div class="callout-body">With <strong>direnv</strong> (included in this config), the shell activates <em>automatically</em> when you enter the project directory. <code>fnew</code> and <code>finit</code> run <code>direnv allow</code> for you.</div>
+    </div>
+
+    <p style="margin-top:1.5rem;color:var(--subtext0);font-size:.875rem">All templates use <code>https://flakehub.com/f/NixOS/nixpkgs/0.1</code> (unstable nixpkgs) and support <strong>x86_64-linux · aarch64-linux · x86_64-darwin · aarch64-darwin</strong>.</p>
+  </div>
+</section>
+
+<!-- TEMPLATES -->
+<section class="section section-alt">
+  <div class="section-inner">
+
+    <div class="filter-bar">
+      <h2 class="section-sm-title" style="margin-bottom:0">All 43 Templates</h2>
+      <div class="search-wrap">
+        <svg class="search-ico" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="shell-search" class="search" placeholder="Search templates…" aria-label="Search templates" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="ftags" role="group" aria-label="Filter by category">
+      <button class="ftag on" data-filter="all">All</button>
+      <button class="ftag" data-filter="systems">Systems</button>
+      <button class="ftag" data-filter="web">Web</button>
+      <button class="ftag" data-filter="functional">Functional</button>
+      <button class="ftag" data-filter="ml">ML / Data</button>
+      <button class="ftag" data-filter="infra">Infra</button>
+      <button class="ftag" data-filter="mobile">Mobile</button>
+      <button class="ftag" data-filter="docs">Docs</button>
+    </div>
+
+    <div class="shells-grid" id="shells-grid" aria-live="polite">
+
+      <!-- Systems / compiled -->
+      <article class="shell-card" data-name="rust" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">🦀</span><h3>Rust</h3></div>
+        <p>Stable toolchain via <strong>fenix</strong>: rustc · cargo · clippy · rustfmt · rust-src · rust-analyzer. Also includes openssl, pkg-config, cargo-deny/edit/watch.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#rust &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#rust myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="rust-toolchain rt" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">🦀</span><h3>Rust (toolchain file)</h3></div>
+        <p>Rust version pinned from a <code>rust-toolchain.toml</code> in the project root. Alias: <code>rt</code>.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#rust-toolchain &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#rust-toolchain myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="bevy rust game" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">🎮</span><h3>Bevy</h3></div>
+        <p>Rust + Bevy game engine. Includes all Wayland/X11/Vulkan system deps and the <strong>mold</strong> linker for fast incremental compiles.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#bevy &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#bevy myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="c cpp c-cpp" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">⚙️</span><h3>C / C++</h3></div>
+        <p>GCC/Clang, cmake, ninja, pkg-config, and standard debugging tools. Aliases: <code>c</code>, <code>cpp</code>.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#c-cpp &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#c-cpp myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="zig" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">⚡</span><h3>Zig</h3></div>
+        <p>Zig compiler and build toolchain for systems programming.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#zig &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#zig myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="nim" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">👑</span><h3>Nim</h3></div>
+        <p>Nim compiler and nimble package manager.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#nim &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#nim myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="odin" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">🔷</span><h3>Odin</h3></div>
+        <p>Odin programming language compiler and tools.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#odin &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#odin myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="vlang v" data-cat="systems">
+        <div class="shell-hd"><span class="shell-ico">🔻</span><h3>V (vlang)</h3></div>
+        <p>V language compiler.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#vlang &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#vlang myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Web / JVM / scripting -->
+      <article class="shell-card" data-name="node nodejs javascript typescript" data-cat="web">
+        <div class="shell-hd"><span class="shell-ico">🟢</span><h3>Node.js</h3></div>
+        <p>Node.js with pnpm, yarn (both linked to the same Node version via overlay), and node2nix.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#node &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#node myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="deno typescript" data-cat="web">
+        <div class="shell-hd"><span class="shell-ico">🦕</span><h3>Deno</h3></div>
+        <p>Deno runtime for TypeScript and JavaScript.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#deno &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#deno myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="bun javascript" data-cat="web">
+        <div class="shell-hd"><span class="shell-ico">🥟</span><h3>Bun</h3></div>
+        <p>Bun — fast all-in-one JavaScript runtime and toolkit.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#bun &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#bun myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="php" data-cat="web">
+        <div class="shell-hd"><span class="shell-ico">🐘</span><h3>PHP</h3></div>
+        <p>PHP interpreter with composer and common extensions.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#php &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#php myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="ruby" data-cat="web">
+        <div class="shell-hd"><span class="shell-ico">💎</span><h3>Ruby</h3></div>
+        <p>Ruby interpreter with bundler and gem tools.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#ruby &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#ruby myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="java jvm jdk maven gradle" data-cat="systems web">
+        <div class="shell-hd"><span class="shell-ico">☕</span><h3>Java</h3></div>
+        <p><strong>JDK 25</strong> with Maven and Gradle (all linked to the same JDK via overlay), Lombok agent auto-injected via <code>JAVA_TOOL_OPTIONS</code>, ncurses, patchelf, zlib.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#java &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#java myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="kotlin jvm android" data-cat="systems mobile">
+        <div class="shell-hd"><span class="shell-ico">🎯</span><h3>Kotlin</h3></div>
+        <p>Kotlin compiler and build tools on the JVM.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#kotlin &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#kotlin myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="scala jvm" data-cat="systems functional">
+        <div class="shell-hd"><span class="shell-ico">🔴</span><h3>Scala</h3></div>
+        <p>Scala compiler with sbt build tool.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#scala &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#scala myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="elm" data-cat="web functional">
+        <div class="shell-hd"><span class="shell-ico">🌳</span><h3>Elm</h3></div>
+        <p>Elm compiler and toolchain for functional front-end development.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#elm &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#elm myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="purescript" data-cat="web functional">
+        <div class="shell-hd"><span class="shell-ico">🔵</span><h3>PureScript</h3></div>
+        <p>PureScript compiler and spago build tool.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#purescript &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#purescript myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Functional -->
+      <article class="shell-card" data-name="haskell" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">λ</span><h3>Haskell</h3></div>
+        <p>GHC with cabal and stack for Haskell development.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#haskell &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#haskell myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="ocaml" data-cat="functional systems">
+        <div class="shell-hd"><span class="shell-ico">🐪</span><h3>OCaml</h3></div>
+        <p>OCaml with opam and dune build system.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#ocaml &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#ocaml myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="elixir erlang beam" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">💜</span><h3>Elixir</h3></div>
+        <p>Elixir with Erlang/OTP, mix, and hex package manager.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#elixir &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#elixir myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="gleam beam" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">✨</span><h3>Gleam</h3></div>
+        <p>Gleam type-safe language for the BEAM ecosystem.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#gleam &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#gleam myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="clojure lisp jvm" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">🟡</span><h3>Clojure</h3></div>
+        <p>Clojure with Leiningen and deps.edn tooling on the JVM.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#clojure &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#clojure myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="lean4 lean theorem proof math" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">🔬</span><h3>Lean 4</h3></div>
+        <p>Lean 4 theorem prover and programming language.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#lean4 &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#lean4 myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="swi-prolog prolog logic" data-cat="functional">
+        <div class="shell-hd"><span class="shell-ico">🧩</span><h3>SWI-Prolog</h3></div>
+        <p>SWI-Prolog logic programming environment.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#swi-prolog &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#swi-prolog myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="haxe" data-cat="systems web">
+        <div class="shell-hd"><span class="shell-ico">🌐</span><h3>Haxe</h3></div>
+        <p>Haxe cross-platform toolkit and haxelib package manager.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#haxe &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#haxe myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- ML / Data -->
+      <article class="shell-card" data-name="python data science ml ai" data-cat="ml systems web">
+        <div class="shell-hd"><span class="shell-ico">🐍</span><h3>Python 3.13</h3></div>
+        <p><strong>Python 3.13</strong> with auto-created <code>.venv</code> (venvShellHook), pip. Warns on version mismatch. Change <code>version = "3.13"</code> to pin a different release.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#python &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#python myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="jupyter notebook data science ml" data-cat="ml">
+        <div class="shell-hd"><span class="shell-ico">📓</span><h3>Jupyter</h3></div>
+        <p>Jupyter Lab/Notebook with Python kernel. Includes pyproject.toml for uv-based package management.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#jupyter &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#jupyter myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="r statistics data science" data-cat="ml">
+        <div class="shell-hd"><span class="shell-ico">📊</span><h3>R</h3></div>
+        <p>R language with tidyverse and common statistical packages.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#r &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#r myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Infra / DevOps -->
+      <article class="shell-card" data-name="go golang" data-cat="systems infra web">
+        <div class="shell-hd"><span class="shell-ico">🐹</span><h3>Go 1.24</h3></div>
+        <p><strong>Go 1.24</strong> pinned via overlay (<code>go_1_24</code>), gotools (goimports, godoc…), golangci-lint.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#go &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#go myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="hashi terraform hashicorp vault consul nomad" data-cat="infra">
+        <div class="shell-hd"><span class="shell-ico">🏗️</span><h3>HashiCorp</h3></div>
+        <p>Terraform, Vault, Consul, Nomad, and Packer for full HashiCorp DevOps workflows.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#hashi &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#hashi myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="pulumi infra cloud iac" data-cat="infra">
+        <div class="shell-hd"><span class="shell-ico">☁️</span><h3>Pulumi</h3></div>
+        <p>Pulumi infrastructure-as-code with multi-language support.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#pulumi &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#pulumi myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="opa policy open policy agent" data-cat="infra">
+        <div class="shell-hd"><span class="shell-ico">🛡️</span><h3>Open Policy Agent</h3></div>
+        <p>OPA policy engine for authorization and compliance.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#opa &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#opa myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="protobuf grpc proto" data-cat="infra systems">
+        <div class="shell-hd"><span class="shell-ico">🔗</span><h3>Protobuf</h3></div>
+        <p>Protocol Buffers compiler and gRPC tools.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#protobuf &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#protobuf myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="platformio embedded arduino microcontroller" data-cat="infra systems">
+        <div class="shell-hd"><span class="shell-ico">🔌</span><h3>PlatformIO</h3></div>
+        <p>PlatformIO for embedded systems and Arduino development.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#platformio &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#platformio myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="nix nixlang" data-cat="infra">
+        <div class="shell-hd"><span class="shell-ico">❄️</span><h3>Nix</h3></div>
+        <p>Nix language development with nixfmt, nil (LSP), and statix (linter).</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#nix &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#nix myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="shell bash script sh" data-cat="infra">
+        <div class="shell-hd"><span class="shell-ico">💻</span><h3>Shell</h3></div>
+        <p>Shell scripting with shellcheck, shfmt, and common bash utilities.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#shell &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#shell myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Config / Schema languages -->
+      <article class="shell-card" data-name="cue schema validation config" data-cat="infra docs">
+        <div class="shell-hd"><span class="shell-ico">✅</span><h3>CUE</h3></div>
+        <p>CUE language for configuration, data validation, and schema definition.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#cue &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#cue myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="dhall config functional" data-cat="infra docs">
+        <div class="shell-hd"><span class="shell-ico">🌀</span><h3>Dhall</h3></div>
+        <p>Dhall typed configuration language with type checking.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#dhall &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#dhall myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="nickel config schema gradual" data-cat="infra docs">
+        <div class="shell-hd"><span class="shell-ico">🪙</span><h3>Nickel</h3></div>
+        <p>Nickel — gradual typing for configuration languages.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#nickel &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#nickel myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Mobile -->
+      <article class="shell-card" data-name="swift apple ios macos" data-cat="mobile systems">
+        <div class="shell-hd"><span class="shell-ico">🍎</span><h3>Swift</h3></div>
+        <p>Swift compiler and build tools.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#swift &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#swift myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Docs -->
+      <article class="shell-card" data-name="latex tex pdf typesetting" data-cat="docs">
+        <div class="shell-hd"><span class="shell-ico">📄</span><h3>LaTeX</h3></div>
+        <p>Full TeXLive distribution for document typesetting.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#latex &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#latex myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <article class="shell-card" data-name="typst document markup" data-cat="docs">
+        <div class="shell-hd"><span class="shell-ico">📝</span><h3>Typst</h3></div>
+        <p>Typst — modern, Rust-powered markup-based typesetting system.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#typst &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#typst myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+      <!-- Blank -->
+      <article class="shell-card" data-name="empty blank starter template" data-cat="systems infra web functional ml mobile docs">
+        <div class="shell-hd"><span class="shell-ico">📦</span><h3>Empty</h3></div>
+        <p>Blank shell with <code>mkShellNoCC</code>, empty packages list, empty env, empty shellHook. Customize freely. Supports all four platforms.</p>
+        <div class="shell-cmd"><code>nix flake new -t ~/NixOS#empty &lt;name&gt;</code><button class="copy-inline" data-copy="nix flake new -t ~/NixOS#empty myproject" aria-label="Copy">⧉</button></div>
+      </article>
+
+    </div><!-- /#shells-grid -->
+    <p class="empty-msg" id="shells-empty" hidden>No templates match your search.</p>
+  </div>
+</section>
+
+<!-- DIRENV -->
+<section class="section">
+  <div class="section-inner">
+    <h2 class="section-sm-title">direnv — Zero-friction shell activation</h2>
+    <p style="color:var(--subtext0);font-size:.9rem;margin-bottom:1.5rem">Every template ships with a pre-configured <code>.envrc</code>. Once allowed, the shell activates automatically on <code>cd</code>.</p>
+    <div class="cb">
+      <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+      <pre><code><span class="t-cmt"># one-time allow per project</span>
+<span class="t-prompt">$</span> nix flake new -t ~/NixOS#python myproject
+<span class="t-prompt">$</span> cd myproject
+<span class="t-prompt">$</span> direnv allow
+
+<span class="t-cmt"># every subsequent entry auto-activates</span>
+<span class="t-prompt">$</span> cd myproject
+<span class="t-out">direnv: loading .envrc</span>
+<span class="t-out">direnv: using flake</span>
+<span class="t-ok">✓ Python 3.13 · .venv created · pip ready</span></code></pre>
+    </div>
+    <div class="callout c-info" style="margin-top:1rem">
+      <span class="callout-ico">ℹ</span>
+      <div class="callout-body"><code>fnew &lt;template&gt; &lt;dir&gt;</code> creates the project <em>and</em> runs <code>direnv allow</code> in a single command. <code>finit &lt;template&gt;</code> does the same in the current directory.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><img src="assets/img/nix-snowflake.svg" width="18" height="18" alt="" aria-hidden="true" /> NixOS Config</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="index.html">Home</a><a href="docs.html">Docs</a>
+      <a href="dev-shells.html">Dev Shells</a><a href="keybindings.html">Keybindings</a>
+      <a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <p class="footer-copy">Made with ❄️ and Nix · MIT License</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

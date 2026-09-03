@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation — NixOS Config</title>
+  <meta name="description" content="Complete guide for installing, configuring, and managing the NixOS flake configuration." />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sijanthapa171.github.io/NixOS/docs.html" />
+  <meta property="og:title" content="Documentation — NixOS Config" />
+  <meta property="og:description" content="Complete guide for installing, configuring, and managing the NixOS flake configuration." />
+  <meta property="og:image" content="https://sijanthapa171.github.io/NixOS/assets/img/nix-snowflake.svg" />
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://sijanthapa171.github.io/NixOS/docs.html" />
+  <meta property="twitter:title" content="Documentation — NixOS Config" />
+  <meta property="twitter:description" content="Complete guide for installing, configuring, and managing the NixOS flake configuration." />
+  <meta property="twitter:image" content="https://sijanthapa171.github.io/NixOS/assets/img/nix-snowflake.svg" />
+  
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/nix-snowflake.svg" />
+</head>
+<body class="docs-layout">
+
+<header class="topnav" id="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-logo" href="index.html">
+      <img src="assets/img/nix-snowflake.svg" width="24" height="24" alt="NixOS" />
+      <span class="logo-text">NixOS<span class="logo-accent">Config</span></span>
+    </a>
+    <nav class="topnav-links" aria-label="Primary">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="docs.html" class="nav-link active">Docs</a>
+      <a href="dev-shells.html" class="nav-link">Dev Shells</a>
+      <a href="keybindings.html" class="nav-link">Keybindings</a>
+    </nav>
+    <div class="topnav-actions">
+      <a class="btn-ghost" href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.745 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        GitHub
+      </a>
+      <button class="topnav-toggle" id="topnav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="index.html" class="mobile-nav-link">Home</a>
+    <a href="docs.html" class="mobile-nav-link">Docs</a>
+    <a href="dev-shells.html" class="mobile-nav-link">Dev Shells</a>
+    <a href="keybindings.html" class="mobile-nav-link">Keybindings</a>
+    <a href="https://github.com/sijanthapa171/NixOS" class="mobile-nav-link" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<div class="docs-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="docs-sidebar" id="docs-sidebar" aria-label="Documentation navigation">
+    <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">✕</button>
+    <nav class="sb-nav">
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-start">
+          <span class="sb-arrow">▸</span>Getting Started
+        </button>
+        <ul id="sg-start" class="sb-items">
+          <li><a href="#prerequisites" class="sb-link">Prerequisites</a></li>
+          <li><a href="#installation" class="sb-link">Install (Running System)</a></li>
+          <li><a href="#live-iso" class="sb-link">Install (Live ISO)</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-config">
+          <span class="sb-arrow">▸</span>Configuration
+        </button>
+        <ul id="sg-config" class="sb-items">
+          <li><a href="#variables" class="sb-link">variables.nix</a></li>
+          <li><a href="#host-packages" class="sb-link">host-packages.nix</a></li>
+          <li><a href="#configuration-nix" class="sb-link">configuration.nix</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-hosts">
+          <span class="sb-arrow">▸</span>Host Management
+        </button>
+        <ul id="sg-hosts" class="sb-items">
+          <li><a href="#hosts" class="sb-link">Configured Hosts</a></li>
+          <li><a href="#new-host-auto" class="sb-link">New Host (Auto)</a></li>
+          <li><a href="#new-host-manual" class="sb-link">New Host (Manual)</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-ops">
+          <span class="sb-arrow">▸</span>Operations
+        </button>
+        <ul id="sg-ops" class="sb-items">
+          <li><a href="#rebuilding" class="sb-link">Rebuilding</a></li>
+          <li><a href="#rollbacks" class="sb-link">Rollbacks</a></li>
+          <li><a href="#updating" class="sb-link">Updating Inputs</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-modules">
+          <span class="sb-arrow">▸</span>Module Reference
+        </button>
+        <ul id="sg-modules" class="sb-items">
+          <li><a href="#core-modules" class="sb-link">Core Modules</a></li>
+          <li><a href="#desktops" class="sb-link">Desktop Environments</a></li>
+          <li><a href="#programs" class="sb-link">Programs</a></li>
+          <li><a href="#themes" class="sb-link">Themes &amp; Wallpapers</a></li>
+          <li><a href="#hardware" class="sb-link">Hardware</a></li>
+          <li><a href="#scripts" class="sb-link">Scripts</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-adv">
+          <span class="sb-arrow">▸</span>Advanced
+        </button>
+        <ul id="sg-adv" class="sb-items">
+          <li><a href="#gaming" class="sb-link">Gaming</a></li>
+          <li><a href="#flake-inputs" class="sb-link">Flake Inputs</a></li>
+          <li><a href="#architecture" class="sb-link">Architecture</a></li>
+        </ul>
+      </div>
+
+      <div class="sb-group">
+        <button class="sb-group-btn" aria-expanded="true" aria-controls="sg-community">
+          <span class="sb-arrow">▸</span>Community
+        </button>
+        <ul id="sg-community" class="sb-items">
+          <li><a href="#faq" class="sb-link">FAQ</a></li>
+          <li><a href="#contributing" class="sb-link">Contributing</a></li>
+        </ul>
+      </div>
+
+    </nav>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- MAIN -->
+  <main class="docs-main" id="docs-main">
+    <button class="sb-open-btn" id="sidebar-open" aria-label="Open navigation">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Menu
+    </button>
+
+    <div class="docs-content">
+      <div class="doc-pg-hd">
+        <h1 class="doc-pg-title">Documentation</h1>
+        <p class="doc-pg-sub">Complete guide for installing, configuring, and managing this NixOS flake configuration.</p>
+      </div>
+
+      <!-- Prerequisites -->
+      <section id="prerequisites" class="doc-sec">
+        <h2>Prerequisites</h2>
+        <ul>
+          <li>A machine running <strong>NixOS</strong>, or the NixOS minimal live ISO</li>
+          <li><strong>Git</strong> — use <code>nix-shell -p git</code> on the live ISO if needed</li>
+          <li>Internet connection for fetching flake inputs</li>
+        </ul>
+        <div class="callout c-info">
+          <span class="callout-ico">ℹ</span>
+          <div class="callout-body"><strong>NixOS only.</strong> <code>install.sh</code> checks for NixOS via <code>/etc/os-release</code> and exits on any other distro.</div>
+        </div>
+      </section>
+
+      <!-- Installation -->
+      <section id="installation" class="doc-sec">
+        <h2>Install — Running NixOS System</h2>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-prompt">$</span> git clone https://github.com/sijanthapa171/NixOS.git ~/NixOS
+<span class="t-prompt">$</span> cd ~/NixOS
+<span class="t-prompt">$</span> ./install.sh</code></pre>
+        </div>
+        <p>The interactive installer will:</p>
+        <ol>
+          <li>Show existing hosts or let you create a new one (with template copy)</li>
+          <li>Prompt GPU driver selection — <code>nvidia</code> / <code>amdgpu</code> / <code>intel</code></li>
+          <li>Patch <code>username</code> in <code>variables.nix</code> to the current user</li>
+          <li>Open <code>variables.nix</code> for final customization</li>
+          <li>Copy or generate <code>hardware-configuration.nix</code></li>
+          <li>Run <code>nixos-rebuild boot --flake .#&lt;HOST&gt;</code></li>
+        </ol>
+        <div class="callout c-tip">
+          <span class="callout-ico">💡</span>
+          <div class="callout-body">After a successful build, <strong>reboot</strong> to apply the new configuration.</div>
+        </div>
+      </section>
+
+      <!-- Live ISO -->
+      <section id="live-iso" class="doc-sec">
+        <h2>Install — Live ISO</h2>
+        <p>Download the <a href="https://nixos.org/download/#nixos-iso" target="_blank" rel="noopener">NixOS Minimal ISO</a>, boot it, connect to the internet, then:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-prompt">$</span> nix-shell -p git
+<span class="t-prompt">$</span> git clone https://github.com/sijanthapa171/NixOS.git ~/NixOS
+<span class="t-prompt">$</span> cd ~/NixOS &amp;&amp; ./install.sh</code></pre>
+        </div>
+        <p><code>install.sh</code> detects the live environment and launches <code>live-install.sh</code>, which handles full interactive disk setup:</p>
+        <ul>
+          <li>Host selection and creation</li>
+          <li>Username + password setup</li>
+          <li>GPU driver selection</li>
+          <li>Partitioning: <strong>automatic</strong> (512 MB EFI + configurable swap + root) or <strong>manual</strong> (cfdisk)</li>
+          <li>Filesystem choice: <code>ext4</code> or <code>btrfs</code></li>
+          <li>Optional <strong>LUKS encryption</strong> for root and home partitions</li>
+          <li>Hardware config generation, <code>nixos-install</code>, user directories, ownership</li>
+        </ul>
+        <div class="callout c-danger">
+          <span class="callout-ico">⚠</span>
+          <div class="callout-body"><strong>Caution:</strong> The live installer will <strong>format disks</strong>. Back up data before proceeding.</div>
+        </div>
+      </section>
+
+      <!-- variables.nix -->
+      <section id="variables" class="doc-sec">
+        <h2><code>variables.nix</code> — The Control Center</h2>
+        <p>The single source of truth for all per-host preferences. Every value here is imported at Nix eval time and used to select modules dynamically.</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">nix</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>{
+  username = <span class="t-str">"yourname"</span>;          <span class="t-cmt"># set automatically by install.sh</span>
+
+  <span class="t-cmt"># Desktop Environment</span>
+  desktop = <span class="t-str">"hyprland"</span>;           <span class="t-cmt"># hyprland | gnome | plasma6 | i3</span>
+
+  <span class="t-cmt"># Theme &amp; Appearance</span>
+  bar = <span class="t-str">"noctalia"</span>;              <span class="t-cmt"># waybar | hyprpanel | noctalia | wayle | caelestia</span>
+  waybarTheme = <span class="t-str">"minimal"</span>;       <span class="t-cmt"># stylish | minimal  (waybar only)</span>
+  sddmTheme = <span class="t-str">"astronaut"</span>;       <span class="t-cmt"># astronaut | black_hole | purple_leaves</span>
+                                  <span class="t-cmt">#   jake_the_dog | hyprland_kath</span>
+  defaultWallpaper = <span class="t-str">"galaxy.webp"</span>;
+  hyprlockWallpaper = <span class="t-str">"galaxy.webp"</span>;
+
+  <span class="t-cmt"># Default Applications</span>
+  terminal = <span class="t-str">"kitty"</span>;            <span class="t-cmt"># kitty | alacritty | wezterm</span>
+  editor = <span class="t-str">"nixvim"</span>;             <span class="t-cmt"># nixvim | vscode | helix | doom-emacs | nvchad | neovim</span>
+  browser = <span class="t-str">"firefox"</span>;           <span class="t-cmt"># firefox | zen-beta | floorp</span>
+  fileManager = <span class="t-str">"thunar"</span>;        <span class="t-cmt"># yazi | lf | thunar</span>
+  shell = <span class="t-str">"zsh"</span>;                 <span class="t-cmt"># zsh | bash</span>
+  games = <span class="t-kw">false</span>;                 <span class="t-cmt"># true | false  → toggles entire gaming module</span>
+
+  <span class="t-cmt"># Hardware</span>
+  hostname = <span class="t-str">"NixOS"</span>;
+  videoDriver = <span class="t-str">"intel"</span>;         <span class="t-cmt"># nvidia | amdgpu | intel</span>
+  nvidiaChannel = <span class="t-str">"stable"</span>;      <span class="t-cmt"># stable | latest | beta | legacy_xxx  (nvidia only)</span>
+  bluetoothSupport = <span class="t-kw">true</span>;
+  batterySupport = <span class="t-kw">true</span>;
+
+  <span class="t-cmt"># Localization</span>
+  timezone = <span class="t-str">"Asia/Kathmandu"</span>;
+  locale = <span class="t-str">"en_US.UTF-8"</span>;
+  clock24h = <span class="t-kw">true</span>;
+  kbdLayout = <span class="t-str">"us"</span>;
+  kbdVariant = <span class="t-str">""</span>;
+  consoleKeymap = <span class="t-str">"us"</span>;
+  capslockAsESC = <span class="t-kw">false</span>;        <span class="t-cmt"># swap Capslock ↔ Escape (udev + XKB)</span>
+}</code></pre>
+        </div>
+        <div class="callout c-warn">
+          <span class="callout-ico">⚠</span>
+          <div class="callout-body">After editing <code>variables.nix</code>, run <code>rebuild</code> or press <kbd>Super</kbd>+<kbd>U</kbd> for changes to take effect.</div>
+        </div>
+      </section>
+
+      <!-- host-packages.nix -->
+      <section id="host-packages" class="doc-sec">
+        <h2><code>host-packages.nix</code></h2>
+        <p>Machine-specific packages go here. The <code>Default</code> laptop host includes, for example:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">nix</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>{ pkgs, ... }: {
+  environment.systemPackages = with pkgs; [
+    obsidian          <span class="t-cmt"># notes</span>
+    godot             <span class="t-cmt"># game development</span>
+    ludusavi          <span class="t-cmt"># game save backups</span>
+    proton-vpn        <span class="t-cmt"># VPN client</span>
+    github-desktop
+    vscode
+    kiro              <span class="t-cmt"># AI IDE</span>
+    brave
+    telegram-desktop
+    google-chrome
+    (retroarch.withCores (cores: with cores; [
+      dolphin mgba melonds pcsx2 ppsspp snes9x
+      mupen64plus swanstation mame flycast <span class="t-cmt"># …and more</span>
+    ]))
+  ];
+}</code></pre>
+        </div>
+        <p>The <code>vega</code> (WSL) host includes Java 21, Maven, glib/gtk3/Mesa, Node.js, pnpm, and bun.</p>
+      </section>
+
+      <!-- configuration.nix -->
+      <section id="configuration-nix" class="doc-sec">
+        <h2><code>configuration.nix</code></h2>
+        <p>Entry point per host. Module selection is entirely driven by <code>variables.nix</code> via string interpolation in import paths and <code>lib.optional</code>:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">nix</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-cmt"># Dynamic module paths from variables</span>
+../../modules/desktop/<span class="t-var">${vars.desktop}</span>
+../../modules/programs/browser/<span class="t-var">${vars.browser}</span>
+../../modules/programs/terminal/<span class="t-var">${vars.terminal}</span>
+../../modules/programs/editor/<span class="t-var">${vars.editor}</span>
+../../modules/programs/file-manager/<span class="t-var">${vars.fileManager}</span>
+../../modules/hardware/video/<span class="t-var">${vars.videoDriver}</span>.nix
+
+<span class="t-cmt"># Boolean-conditional module</span>
+++ lib.optional (vars.games == <span class="t-kw">true</span>) ../../modules/core/games.nix</code></pre>
+        </div>
+      </section>
+
+      <!-- Hosts -->
+      <section id="hosts" class="doc-sec">
+        <h2>Configured Hosts</h2>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Hostname</th><th>Hardware</th><th>Purpose / Notes</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><code>Default</code></td>
+                <td>Asus Zephyrus G15 · Ryzen 9 5900HS · 16 GB · RTX 3060</td>
+                <td>Full Hyprland desktop, TLP, battery, OBS, Discord, Spicetify, RetroArch</td>
+              </tr>
+              <tr>
+                <td><code>vega</code></td>
+                <td>Gigabyte Z890M · Intel i9-13900F · 32 GB 6000 MHz · RTX 4070 OC</td>
+                <td>NixOS-WSL; headless; no DE or GPU drivers; dev-focused (Java/Node/Python)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- New host auto -->
+      <section id="new-host-auto" class="doc-sec">
+        <h2>New Host — Automatic</h2>
+        <p>Run the installer and type <kbd>n</kbd> when prompted to create a new host:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-prompt">$</span> cd ~/NixOS &amp;&amp; ./install.sh</code></pre>
+        </div>
+        <p>The script: enters the new host name → selects a template → <code>cp -r hosts/&lt;template&gt; hosts/&lt;new&gt;</code> → patches <code>hostname</code> in <code>variables.nix</code> → appends the host to <code>flake.nix</code> → builds.</p>
+      </section>
+
+      <!-- New host manual -->
+      <section id="new-host-manual" class="doc-sec">
+        <h2>New Host — Manual</h2>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-prompt">$</span> cp -r hosts/Default hosts/Laptop
+<span class="t-prompt">$</span> nano hosts/Laptop/variables.nix</code></pre>
+        </div>
+        <p>Add the host to <code>flake.nix</code>:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">nix</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>nixosConfigurations = {
+  Default = mkHost <span class="t-str">"Default"</span>;
+  vega    = mkHost <span class="t-str">"vega"</span>;
+  Laptop  = mkHost <span class="t-str">"Laptop"</span>;  <span class="t-cmt"># ← new</span>
+};</code></pre>
+        </div>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-prompt">$</span> sudo nixos-rebuild switch --flake ~/NixOS#Laptop</code></pre>
+        </div>
+      </section>
+
+      <!-- Rebuilding -->
+      <section id="rebuilding" class="doc-sec">
+        <h2>Rebuilding</h2>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Method</th><th>Command</th></tr></thead>
+            <tbody>
+              <tr><td>Keyboard shortcut</td><td><kbd>Super</kbd> + <kbd>U</kbd></td></tr>
+              <tr><td>Built-in script</td><td><code>rebuild</code></td></tr>
+              <tr><td>nixos-rebuild</td><td><code>sudo nixos-rebuild switch --flake ~/NixOS#&lt;HOST&gt;</code></td></tr>
+              <tr><td>nh helper</td><td><code>nh os switch --hostname &lt;HOST&gt;</code></td></tr>
+              <tr><td>Update + rebuild</td><td><code>sysup</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The <code>rebuild</code> script auto-detects your hostname, refreshes <code>hardware-configuration.nix</code>, patches the username, and runs <code>nixos-rebuild switch</code>.</p>
+      </section>
+
+      <!-- Rollbacks -->
+      <section id="rollbacks" class="doc-sec">
+        <h2>Rollbacks</h2>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-cmt"># list all system generations</span>
+<span class="t-prompt">$</span> list-gens
+
+<span class="t-cmt"># roll back to generation N (uses nh if available, else direct switch)</span>
+<span class="t-prompt">$</span> rollback N</code></pre>
+        </div>
+        <div class="callout c-tip">
+          <span class="callout-ico">💡</span>
+          <div class="callout-body">You can also select a previous generation from the <strong>GRUB boot menu</strong> — no commands needed.</div>
+        </div>
+      </section>
+
+      <!-- Updating -->
+      <section id="updating" class="doc-sec">
+        <h2>Updating Flake Inputs</h2>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">bash</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="t-cmt"># update all inputs AND rebuild in one shot</span>
+<span class="t-prompt">$</span> sysup
+
+<span class="t-cmt"># or individually</span>
+<span class="t-prompt">$</span> nix flake update --flake ~/NixOS
+<span class="t-prompt">$</span> rebuild</code></pre>
+        </div>
+        <p><code>nh</code> handles garbage collection automatically — it keeps the last 3 generations and anything from the past 7 days.</p>
+      </section>
+
+      <!-- Core Modules -->
+      <section id="core-modules" class="doc-sec">
+        <h2>Core Modules</h2>
+        <p>Located at <code>modules/core/</code>. System-level foundations — change only if you know what you're doing.</p>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Module</th><th>What it does</th></tr></thead>
+            <tbody>
+              <tr><td><code>boot.nix</code></td><td>GRUB with NixOS theme (AdisonCavani/distro-grub-themes), <code>linuxPackages_latest</code>, <code>preempt=full</code>, NTFS/btrfs/exfat/ext4, AppImage binfmt, clean <code>/tmp</code> on boot</td></tr>
+              <tr><td><code>system.nix</code></td><td>Nix flakes, binary caches (Hyprland cachix, noctalia cachix), XKB, locale, timezone, XDG env vars, <code>auto-optimise-store</code>, <code>stateVersion = "26.05"</code></td></tr>
+              <tr><td><code>users.nix</code></td><td>home-manager integration, user creation with wheel/docker/libvirtd/adbusers/audio/video groups, <code>$EDITOR</code>/<code>$BROWSER</code>/<code>$TERMINAL</code> from variables</td></tr>
+              <tr><td><code>packages.nix</code></td><td>fzf · fd · git · gh · ripgrep · zoxide · jq · bibata-cursors · microfetch · tldr · unrar · unzip · appimage-run · lm_sensors · gnome-disk-utility · rclone · nix-prefetch-scripts</td></tr>
+              <tr><td><code>network.nix</code></td><td>NetworkManager, BBR congestion control, TCP ECN, 1 Gbps buffer tuning, kernel security sysctls (kptr_restrict, dmesg_restrict, yama.ptrace_scope, BPF JIT hardening)</td></tr>
+              <tr><td><code>dns.nix</code></td><td>Unbound (port 5335, DNS-over-TLS via Quad9/Cloudflare) + AdGuardHome (port 3005) with hagezi/oisd blocklists</td></tr>
+              <tr><td><code>fonts.nix</code></td><td>JetBrainsMono Nerd Font · Maple Mono NF · Noto (sans/serif/mono/color-emoji), fontconfig with antialiasing</td></tr>
+              <tr><td><code>services.nix</code></td><td>Pipewire (48 kHz, quantum 256), OpenSSH, Blueman, tumbler, fstrim, udisks2</td></tr>
+              <tr><td><code>security.nix</code></td><td>rtkit, polkit, gnome-keyring, protectKernelImage</td></tr>
+              <tr><td><code>hardware.nix</code></td><td>Bluetooth (fast-connectable, experimental), SANE scanning, QMK keyboard, Logitech Solaar</td></tr>
+              <tr><td><code>sddm.nix</code></td><td>sddm-astronaut theme (embedded theme from <code>sddmTheme</code> variable, per-theme config patches), HiDPI, Wayland, Bibata cursor, autoNumlock</td></tr>
+              <tr><td><code>bash.nix</code> / <code>zsh.nix</code></td><td>eza aliases (ls/ll/l/ld/tree) · zoxide · fzf (Catppuccin colors) · lazygit · <code>fnew</code>/<code>finit</code> dev-shell shortcuts · <code>sysup</code> · <code>list-gens</code> · Pokémon fetch · zsh-defer for lazy plugin loading</td></tr>
+              <tr><td><code>starship.nix</code></td><td>Compact format: username · hostname · directory · git branch/state/status · cmd_duration · python venv · nix_shell (❄️) · character (❯/❮)</td></tr>
+              <tr><td><code>nh.nix</code></td><td><a href="https://github.com/viperML/nh" target="_blank" rel="noopener">nh</a> Nix helper, flake = <code>~/NixOS</code>, auto-clean (keep-since 7d, keep 3 gens)</td></tr>
+              <tr><td><code>games.nix</code></td><td>Steam + Proton-GE, Lutris, Heroic, stable.Bottles, gamescope, gamemode, MangoHud (hidden by default, <kbd>Shift_R+F12</kbd> to show, FPS cycles 60/0/144/165/240)</td></tr>
+              <tr><td><code>virtualisation.nix</code></td><td>Docker, libvirtd (QEMU/KVM + SPICE), GPU passthrough hook for <code>win11-passthrough</code> VM</td></tr>
+              <tr><td><code>syncthing.nix</code></td><td>Syncthing file sync service</td></tr>
+              <tr><td><code>ssh.nix</code></td><td>SSH client/server settings</td></tr>
+              <tr><td><code>printing.nix</code></td><td>CUPS printing</td></tr>
+              <tr><td><code>flatpak.nix</code></td><td>Declarative Flatpak support (opt-in, uncomment in <code>configuration.nix</code>)</td></tr>
+              <tr><td><code>dlna.nix</code></td><td>DLNA media server (opt-in)</td></tr>
+              <tr><td><code>jellyfin.nix</code></td><td>Jellyfin media server</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Desktops -->
+      <section id="desktops" class="doc-sec">
+        <h2>Desktop Environments</h2>
+        <p>Set <code>desktop</code> in <code>variables.nix</code>. Located at <code>modules/desktop/</code>.</p>
+        <div class="desktop-grid">
+          <div class="desktop-card">
+            <h3>Hyprland</h3>
+            <p>Uses the upstream Hyprland flake. Config in pure <strong>Lua</strong> — 6 files. Variables baked in at build time via Nix string interpolation.</p>
+            <ul>
+              <li><strong>Bar:</strong> waybar · noctalia · hyprpanel · wayle · caelestia</li>
+              <li><strong>Companions:</strong> rofi · wlogout · hypridle · hyprlock · swaync · hyprpolkitagent</li>
+              <li><strong>Layout:</strong> dwindle · master · scrolling · monocle</li>
+              <li>VRR (fullscreen-only), window swallowing (kitty/alacritty), cliphist, awww wallpaper</li>
+              <li>20+ Hyprland-specific scripts in <code>modules/desktop/hyprland/scripts/</code></li>
+            </ul>
+          </div>
+          <div class="desktop-card">
+            <h3>GNOME</h3>
+            <p>Bloat removed, Catppuccin applied, quality-of-life extensions included.</p>
+            <ul>
+              <li>Includes: gnome-tweaks, Vitals extension, ArcMenu</li>
+              <li>Excludes: maps, music, tour, text-editor, contacts, gedit, epiphany, cheese</li>
+              <li>TLP disabled (GNOME handles power management itself)</li>
+            </ul>
+          </div>
+          <div class="desktop-card">
+            <h3>KDE Plasma 6</h3>
+            <p>Fully declarative via <code>plasma-manager</code>. Catppuccin Mocha Mauve global theme.</p>
+            <ul>
+              <li>5 virtual desktops, cube effect, NixOS snowflake kickoff icon</li>
+              <li>Custom panel: pager · kickoff · icon tasks · system tray · clock</li>
+              <li>PowerDevil AC/battery profiles, charge thresholds, lid-close behavior</li>
+              <li>Baloo indexer disabled, kscreenlocker configured</li>
+            </ul>
+          </div>
+          <div class="desktop-card">
+            <h3>i3</h3>
+            <p>Classic tiling WM with Polybar, Dunst, Picom compositing, and Rofi.</p>
+            <ul>
+              <li>Catppuccin-colored borders, inner/outer gaps = 4</li>
+              <li>10 workspaces mapped to DP-0, HDMI-0, HDMI-1</li>
+              <li>Feh for wallpaper, Cava audio visualizer, xrandr</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Programs -->
+      <section id="programs" class="doc-sec">
+        <h2>Programs</h2>
+        <p>Located at <code>modules/programs/</code>. All selections driven by <code>variables.nix</code>.</p>
+
+        <h3>Browsers — <code>programs/browser/</code></h3>
+        <ul>
+          <li><strong>firefox</strong> — with <code>firefox-addons</code> flake, betterfox user.js (Fastfox + Peskyfox + Securefox + Smoothfox), custom bookmarks, search engines, privacy lockprefs</li>
+          <li><strong>zen-beta</strong> — Zen Browser via dedicated flake</li>
+          <li><strong>floorp</strong> — Firefox-based privacy browser</li>
+          <li>Shared bookmarks and extensions in <code>browser/bookmarks.nix</code> and <code>browser/extensions.nix</code></li>
+        </ul>
+
+        <h3>Editors — <code>programs/editor/</code></h3>
+        <ul>
+          <li><strong>nixvim</strong> — installed from <a href="https://github.com/sijanthapa171/nixvim" target="_blank" rel="noopener">sijanthapa171/nixvim</a> flake; creates a <code>nvim</code> desktop entry that launches via the configured terminal</li>
+          <li><strong>vscode</strong> — Microsoft VS Code</li>
+          <li><strong>helix</strong> — modal editor written in Rust</li>
+          <li><strong>doom-emacs</strong>, <strong>nvchad</strong>, <strong>neovim</strong> — also available</li>
+        </ul>
+
+        <h3>Terminals — <code>programs/terminal/</code></h3>
+        <ul>
+          <li><strong>kitty</strong> — Catppuccin-Mocha theme, powerline round tabs (<code>active: #cba6f7</code>), <kbd>Ctrl</kbd>+<kbd>T</kbd> opens tmux-sessionizer overlay, copy-on-select, 10 000 scrollback lines</li>
+          <li><strong>alacritty</strong> — GPU-accelerated terminal</li>
+          <li><strong>wezterm</strong> — Lua-configured terminal</li>
+        </ul>
+
+        <h3>File Managers — <code>programs/file-manager/</code></h3>
+        <ul>
+          <li><strong>yazi</strong> — TUI, blazing fast, preview support</li>
+          <li><strong>lf</strong> — lightweight TUI; aliased with <code>cd</code>-on-quit behavior</li>
+          <li><strong>thunar</strong> — GTK GUI file manager</li>
+        </ul>
+
+        <h3>CLI Tools — <code>programs/cli/</code></h3>
+        <ul>
+          <li><strong>tmux</strong> — Catppuccin (dreamsofcode-io) theme, vi keymode, <kbd>Ctrl</kbd>+<kbd>A</kbd> prefix, <kbd>|</kbd>/<kbd>-</kbd> splits, HJKL pane nav, tmux-sessionizer bound to <kbd>Ctrl</kbd>+<kbd>A</kbd>+<kbd>f</kbd></li>
+          <li><strong>lazygit</strong> — Catppuccin Mocha Blue theme loaded from YAML via jc; aliased as <code>lg</code></li>
+          <li><strong>btop</strong> — ROCm + CUDA support, full Catppuccin Mocha theme, vim_keys, GPU stats, show_coretemp</li>
+          <li><strong>direnv</strong> — auto-activates dev shells, lazy-loaded in zsh</li>
+          <li><strong>cava</strong> — audio visualizer</li>
+          <li><strong>fastfetch</strong> — system fetch tool</li>
+        </ul>
+
+        <h3>Media — <code>programs/media/</code></h3>
+        <ul>
+          <li><strong>spicetify</strong> — Catppuccin Mocha theme, adblock + shuffle + keyboardShortcut + copyLyrics extensions</li>
+          <li><strong>discord</strong> — chat client</li>
+          <li><strong>mpv</strong> — minimal video player</li>
+          <li><strong>obs-studio</strong> — recording and streaming</li>
+          <li><strong>thunderbird</strong> — email client with Catppuccin theme from flake</li>
+          <li><strong>youtube-music</strong> — opt-in desktop client</li>
+          <li><strong>jellyfin</strong> — self-hosted media server</li>
+        </ul>
+
+        <h3>Misc — <code>programs/misc/</code></h3>
+        <ul>
+          <li><strong>tlp</strong> — laptop power management (charge thresholds: 82–95%)</li>
+          <li><strong>lact</strong> — GPU fan, clock, and power control (NVIDIA/AMD)</li>
+          <li><strong>cpufreq</strong> — CPU frequency scaling</li>
+        </ul>
+      </section>
+
+      <!-- Themes -->
+      <section id="themes" class="doc-sec">
+        <h2>Themes &amp; Wallpapers</h2>
+        <p>Located at <code>modules/themes/</code>. Applied via <code>home-manager.sharedModules</code> to GTK 2/3/4, Qt/Kvantum, cursors, and icons.</p>
+
+        <div class="theme-cards">
+          <div class="theme-card">
+            <h3>Catppuccin Mocha</h3>
+            <p>Warm pastel. Default — applied to all DEs. GTK via <code>catppuccin-gtk</code>, Qt via <code>catppuccin-kvantum</code>, both in <em>mocha/mauve</em>.</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#cba6f7" title="Mauve"></span>
+              <span class="swatch" style="background:#f38ba8" title="Red"></span>
+              <span class="swatch" style="background:#a6e3a1" title="Green"></span>
+              <span class="swatch" style="background:#89b4fa" title="Blue"></span>
+              <span class="swatch" style="background:#f9e2af" title="Yellow"></span>
+              <span class="swatch" style="background:#1e1e2e" title="Base"></span>
+            </div>
+          </div>
+          <div class="theme-card">
+            <h3>Dracula</h3>
+            <p>Dark purple-toned classic. Available as an alternative theme module.</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#bd93f9"></span>
+              <span class="swatch" style="background:#ff79c6"></span>
+              <span class="swatch" style="background:#50fa7b"></span>
+              <span class="swatch" style="background:#8be9fd"></span>
+              <span class="swatch" style="background:#f1fa8c"></span>
+              <span class="swatch" style="background:#282a36"></span>
+            </div>
+          </div>
+          <div class="theme-card">
+            <h3>Rosé Pine</h3>
+            <p>Soft, muted natural tones. An elegant and readable alternative.</p>
+            <div class="swatches">
+              <span class="swatch" style="background:#c4a7e7"></span>
+              <span class="swatch" style="background:#eb6f92"></span>
+              <span class="swatch" style="background:#9ccfd8"></span>
+              <span class="swatch" style="background:#f6c177"></span>
+              <span class="swatch" style="background:#31748f"></span>
+              <span class="swatch" style="background:#191724"></span>
+            </div>
+          </div>
+        </div>
+
+        <p><strong>Cursor:</strong> Bibata-Modern-Classic (24 px) · <strong>Icons:</strong> Papirus-Dark · <strong>Libadwaita:</strong> <code>ADW_COLOR_SCHEME = prefer-dark</code></p>
+
+        <h3>SDDM Themes</h3>
+        <p>Set via <code>sddmTheme</code>. Uses <code>sddm-astronaut</code> package with embedded theme selection and per-theme config patches:</p>
+        <div class="chips-row">
+          <span class="chip chip-accent">astronaut</span>
+          <span class="chip chip-accent">black_hole</span>
+          <span class="chip chip-accent">purple_leaves</span>
+          <span class="chip chip-accent">jake_the_dog</span>
+          <span class="chip chip-accent">hyprland_kath</span>
+        </div>
+
+        <h3>Wallpapers — 18 bundled</h3>
+        <p>Located at <code>modules/themes/wallpapers/</code>. Change with <kbd>Super</kbd>+<kbd>Shift</kbd>+<kbd>W</kbd> (rofi picker with ImageMagick thumbnails pre-generated at build time), or set <code>defaultWallpaper</code> in <code>variables.nix</code>.</p>
+        <div class="chips-row">
+          <span class="chip">bamboo</span><span class="chip">basement</span><span class="chip">cyberpunk</span>
+          <span class="chip">dark-forest</span><span class="chip">escape_velocity</span><span class="chip">evening-sky</span>
+          <span class="chip">galaxy</span><span class="chip">hollow-knight</span><span class="chip">kurzgesagt</span>
+          <span class="chip">kurzgesagt-galaxies</span><span class="chip">moon</span><span class="chip">north-dark</span>
+          <span class="chip">puffy-stars</span><span class="chip">python-dev</span><span class="chip">quasar</span>
+          <span class="chip">storm</span><span class="chip">train</span><span class="chip">train-sideview</span>
+        </div>
+      </section>
+
+      <!-- Hardware -->
+      <section id="hardware" class="doc-sec">
+        <h2>Hardware Modules</h2>
+
+        <h3>GPU Drivers — <code>modules/hardware/video/</code></h3>
+        <p>Set via <code>videoDriver</code> in <code>variables.nix</code>:</p>
+        <div class="chips-row">
+          <span class="chip chip-accent">nvidia</span>
+          <span class="chip chip-accent">amdgpu</span>
+          <span class="chip chip-accent">intel</span>
+        </div>
+        <p>The NVIDIA module sets full Wayland env vars (<code>GBM_BACKEND=nvidia-drm</code>, <code>__GLX_VENDOR_LIBRARY_NAME=nvidia</code>, G-Sync / VRR variables), kernel params (<code>nvidia-drm.modeset=1</code>, <code>nvidia_drm.fbdev=1</code>), and <code>powerManagement.enable = true</code>. Channel controlled by <code>nvidiaChannel</code>.</p>
+
+        <h3>Additional Drives</h3>
+        <p><code>modules/hardware/drives/</code> automatically mounts extra internal/external drives. Edit for your specific partition layout.</p>
+      </section>
+
+      <!-- Scripts -->
+      <section id="scripts" class="doc-sec">
+        <h2>Scripts</h2>
+        <p>All defined as <code>pkgs.writeShellScriptBin</code> in <code>modules/scripts/</code>. Available system-wide after rebuild.</p>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>rebuild</code></td><td>Auto-detects flake (<code>~/NixOS</code> or <code>/etc/nixos</code>), refreshes hardware config, patches username, runs <code>nixos-rebuild switch</code></td></tr>
+              <tr><td><code>rollback N</code></td><td>Switches to generation N via <code>nh os rollback</code> or direct switch</td></tr>
+              <tr><td><code>list-gens</code></td><td><code>nixos-rebuild list-generations</code> alias</td></tr>
+              <tr><td><code>sysup</code></td><td><code>nix flake update --flake ~/NixOS &amp;&amp; rebuild</code></td></tr>
+              <tr><td><code>network</code></td><td>fzf-based Wi-Fi scanner/connector via nmcli</td></tr>
+              <tr><td><code>ex &lt;file&gt;</code></td><td>Universal archive extractor (tar, zip, rar, 7z, bz2…) with <code>$EX_PASSWORD</code> support</td></tr>
+              <tr><td><code>driverinfo</code></td><td>Shows Vulkan device name and driver ID via <code>vulkaninfo</code></td></tr>
+              <tr><td><code>tmux-sessionizer</code></td><td>fzf-based tmux session picker scanning <code>~/</code>, <code>~/Documents/</code>, <code>/mnt/*/Projects/</code></td></tr>
+              <tr><td><code>launcher &lt;mode&gt;</code></td><td>Rofi launcher: <code>drun</code> · <code>window</code> · <code>file</code> · <code>tmux</code> · <code>wallpaper</code> · <code>emoji</code> · <code>games</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Zsh / Bash Aliases (selection)</h3>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Alias</th><th>Expands to</th></tr></thead>
+            <tbody>
+              <tr><td><code>fnew &lt;template&gt; &lt;dir&gt;</code></td><td><code>nix flake new $dir --template ~/NixOS#$1 &amp;&amp; cd $dir &amp;&amp; direnv allow</code></td></tr>
+              <tr><td><code>finit &lt;template&gt;</code></td><td><code>nix flake init --template ~/NixOS#$1 &amp;&amp; direnv allow</code></td></tr>
+              <tr><td><code>ls</code> / <code>ll</code> / <code>l</code> / <code>tree</code></td><td>eza variants with icons</td></tr>
+              <tr><td><code>lg</code></td><td>lazygit</td></tr>
+              <tr><td><code>nv</code></td><td>nvim</td></tr>
+              <tr><td><code>nf</code></td><td>microfetch</td></tr>
+              <tr><td><code>tp</code> / <code>tpr</code></td><td>trash-put / trash-restore</td></tr>
+              <tr><td><code>pokemon</code></td><td><code>pokego --random 1-8 --no-title</code></td></tr>
+              <tr><td><code>dots</code></td><td><code>cd ~/NixOS/</code></td></tr>
+              <tr><td><code>tma</code> / <code>tms</code></td><td>tmux attach / fzf tmux session picker</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Gaming -->
+      <section id="gaming" class="doc-sec">
+        <h2>Gaming</h2>
+        <p>Toggle the entire gaming module with one boolean:</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">nix</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>games = <span class="t-kw">true</span>;  <span class="t-cmt"># enables Steam, Lutris, MangoHud, gamescope, gamemode…</span></code></pre>
+        </div>
+        <p>This enables:</p>
+        <ul>
+          <li><strong>Steam</strong> + <code>proton-ge-bin</code> extra compat, gamescope session (<code>--rt --expose-wayland</code>)</li>
+          <li><strong>Lutris</strong>, <strong>Heroic</strong>, <strong>stable.Bottles</strong> — game launchers</li>
+          <li><strong>gamescope</strong> + <strong>gamemode</strong> — compositor/optimization daemon</li>
+          <li><strong>wineWow64Packages.staging</strong>, <strong>steam-run</strong></li>
+          <li><strong>MangoHud</strong> — hidden by default (<kbd>Shift_R</kbd>+<kbd>F12</kbd> to toggle), FPS limit cycles with <kbd>Shift_R</kbd>+<kbd>F1</kbd> (60 / unlimited / 144 / 165 / 240), disabled in MPV</li>
+        </ul>
+      </section>
+
+      <!-- Flake Inputs -->
+      <section id="flake-inputs" class="doc-sec">
+        <h2>Flake Inputs</h2>
+        <div class="tbl-wrap">
+          <table class="tbl">
+            <thead><tr><th>Input</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td><code>nixpkgs</code> (unstable)</td><td>Primary package source</td></tr>
+              <tr><td><code>nixpkgs-stable</code> (25.11)</td><td>Stable fallback, exposed as <code>pkgs.stable</code> via overlay</td></tr>
+              <tr><td><code>home-manager</code></td><td>Per-user configuration management</td></tr>
+              <tr><td><code>hyprland</code></td><td>Upstream Hyprland flake (bleeding edge)</td></tr>
+              <tr><td><code>nixos-wsl</code></td><td>WSL module for the <code>vega</code> host</td></tr>
+              <tr><td><code>nix-index-database</code></td><td>Fast <code>nix-locate</code> + <code>comma</code> integration</td></tr>
+              <tr><td><code>nix-flatpak</code></td><td>Declarative Flatpak support</td></tr>
+              <tr><td><code>nixvim</code></td><td>Custom Nixvim config (sijanthapa171/nixvim)</td></tr>
+              <tr><td><code>plasma-manager</code></td><td>Declarative KDE Plasma configuration</td></tr>
+              <tr><td><code>spicetify-nix</code></td><td>Spotify theming</td></tr>
+              <tr><td><code>zen-browser</code></td><td>Zen browser flake</td></tr>
+              <tr><td><code>noctalia</code></td><td>Noctalia shell / status bar (noctalia-dev/noctalia-shell)</td></tr>
+              <tr><td><code>firefox-addons</code></td><td>Firefox extensions from NUR (rycee)</td></tr>
+              <tr><td><code>betterfox</code></td><td>Firefox user.js hardening (non-flake source)</td></tr>
+              <tr><td><code>thunderbird-catppuccin</code></td><td>Catppuccin theme for Thunderbird (non-flake source)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Architecture -->
+      <section id="architecture" class="doc-sec">
+        <h2>Architecture</h2>
+        <p>Module-per-feature pattern. Home-manager config is colocated with the NixOS module that owns the feature via <code>home-manager.sharedModules</code>.</p>
+        <div class="cb">
+          <div class="cb-head"><span class="cb-lang">text</span><button class="copy-btn" aria-label="Copy">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>flake.nix
+  └─ mkHost "Default" / "vega"
+       └─ hosts/&lt;HOST&gt;/configuration.nix
+            ├─ hardware-configuration.nix  (machine-specific)
+            ├─ host-packages.nix           (machine-specific packages)
+            ├─ modules/scripts/            (helper scripts)
+            ├─ modules/core/*.nix          (system foundations)
+            ├─ modules/hardware/video/&lt;driver&gt;.nix
+            ├─ modules/desktop/&lt;de&gt;/       (from variables)
+            ├─ modules/programs/*/         (from variables)
+            └─ modules/core/users.nix
+                 └─ home-manager (sharedModules pattern)
+                      └─ each module injects its own home config</code></pre>
+        </div>
+        <p><strong>Key decisions:</strong></p>
+        <ul>
+          <li><strong>No separate home.nix</strong> — all home-manager config lives alongside the NixOS module that owns it</li>
+          <li><strong>Variables as eval-time imports</strong> — <code>inherit (import ../../hosts/${host}/variables.nix) ...;</code> drives all module selection</li>
+          <li><strong>Hyprland Lua config</strong> — <code>variables.lua</code> is generated at build time by Nix string interpolation; config files are symlinked via <code>xdg.configFile</code></li>
+          <li><strong>Wallpaper thumbnails built by Nix</strong> — <code>pkgs.runCommand</code> + ImageMagick generates 320×180 thumbnails at build time for the rofi wallpaper picker</li>
+          <li><strong>Overlays:</strong> <code>additions</code> (custom pkgs like <code>pokego</code>, <code>sddm-astronaut</code>) + <code>modifications</code> (<code>pkgs.stable</code> from nixpkgs-stable)</li>
+          <li><strong>Dev shells are standalone flakes</strong> — each has its own <code>flake.lock</code> (gitignored), reachable as <code>flake.templates</code></li>
+        </ul>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="doc-sec">
+        <h2>FAQ</h2>
+
+        <details class="faq">
+          <summary>How do I add a package system-wide?</summary>
+          <div class="faq-body">Add it to <code>hosts/&lt;HOST&gt;/host-packages.nix</code> for one machine, or <code>modules/core/packages.nix</code> for all hosts. Then rebuild.</div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I switch desktop environments?</summary>
+          <div class="faq-body">
+            <p>Edit <code>desktop</code> in <code>variables.nix</code>:</p>
+            <div class="cb" style="margin-top:.5rem"><div class="cb-head"><span class="cb-lang">nix</span></div><pre><code>desktop = <span class="t-str">"gnome"</span>;  <span class="t-cmt"># hyprland | gnome | plasma6 | i3</span></code></pre></div>
+            Then run <code>rebuild</code> or press <kbd>Super</kbd>+<kbd>U</kbd>.
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I change my GPU driver?</summary>
+          <div class="faq-body">
+            <div class="cb"><div class="cb-head"><span class="cb-lang">nix</span></div><pre><code>videoDriver = <span class="t-str">"nvidia"</span>;       <span class="t-cmt"># nvidia | amdgpu | intel</span>
+nvidiaChannel = <span class="t-str">"stable"</span>;     <span class="t-cmt"># stable | latest | beta | legacy_xxx</span></code></pre></div>
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I enable gaming?</summary>
+          <div class="faq-body">Set <code>games = true;</code> in <code>variables.nix</code>. This enables Steam, Lutris, Heroic, Bottles, MangoHud, gamescope, and gamemode.</div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I use the dev shell templates?</summary>
+          <div class="faq-body">
+            <div class="cb"><div class="cb-head"><span class="cb-lang">bash</span></div><pre><code><span class="t-cmt"># shell alias (creates dir + direnv allow)</span>
+<span class="t-prompt">$</span> fnew rust myproject
+
+<span class="t-cmt"># or manually</span>
+<span class="t-prompt">$</span> nix flake new -t ~/NixOS#rust myproject
+<span class="t-prompt">$</span> cd myproject &amp;&amp; nix develop</code></pre></div>
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>Where are all keybindings?</summary>
+          <div class="faq-body">Press <kbd>Super</kbd>+<kbd>?</kbd> or <kbd>Super</kbd>+<kbd>Ctrl</kbd>+<kbd>K</kbd> in Hyprland to open the yad keybindings help menu. Or see the <a href="keybindings.html">Keybindings page</a>.</div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I change the login screen theme?</summary>
+          <div class="faq-body">
+            <div class="cb"><div class="cb-head"><span class="cb-lang">nix</span></div><pre><code>sddmTheme = <span class="t-str">"black_hole"</span>;
+<span class="t-cmt"># astronaut | black_hole | purple_leaves | jake_the_dog | hyprland_kath</span></code></pre></div>
+          </div>
+        </details>
+
+        <details class="faq">
+          <summary>How do I set up LUKS encryption?</summary>
+          <div class="faq-body">When installing from the live ISO (<code>./install.sh</code>), the installer asks whether to enable LUKS for the root partition (and optionally the home partition). It walks through password setup, <code>cryptsetup luksFormat</code>, and <code>luksOpen</code> before mounting. If using the same password for both root and home, there's a prompt to confirm.</div>
+        </details>
+      </section>
+
+      <!-- Contributing -->
+      <section id="contributing" class="doc-sec">
+        <h2>Contributing</h2>
+        <p>PRs are welcome. Please follow these guidelines:</p>
+        <ul>
+          <li>Use <strong>conventional commit</strong> format</li>
+          <li>Update documentation if behavior changes</li>
+          <li>Ensure no new Nix warnings are introduced</li>
+        </ul>
+        <p>PR types:</p>
+        <div class="chips-row">
+          <span class="chip chip-accent">Bug fix</span>
+          <span class="chip chip-accent">New feature</span>
+          <span class="chip chip-accent">Breaking change</span>
+          <span class="chip chip-accent">Documentation update</span>
+        </div>
+        <div class="callout c-info" style="margin-top:1.25rem">
+          <span class="callout-ico">ℹ</span>
+          <div class="callout-body"><a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">Open an issue or PR on GitHub →</a></div>
+        </div>
+      </section>
+
+    </div><!-- /.docs-content -->
+  </main>
+
+  <!-- TOC -->
+  <aside class="docs-toc" aria-label="Table of contents">
+    <p class="toc-title">On this page</p>
+    <nav><ul class="toc-list">
+      <li><a href="#prerequisites" class="toc-link">Prerequisites</a></li>
+      <li><a href="#installation" class="toc-link">Install (Running System)</a></li>
+      <li><a href="#live-iso" class="toc-link">Install (Live ISO)</a></li>
+      <li><a href="#variables" class="toc-link">variables.nix</a></li>
+      <li><a href="#host-packages" class="toc-link">host-packages.nix</a></li>
+      <li><a href="#configuration-nix" class="toc-link">configuration.nix</a></li>
+      <li><a href="#hosts" class="toc-link">Configured Hosts</a></li>
+      <li><a href="#new-host-auto" class="toc-link">New Host (Auto)</a></li>
+      <li><a href="#new-host-manual" class="toc-link">New Host (Manual)</a></li>
+      <li><a href="#rebuilding" class="toc-link">Rebuilding</a></li>
+      <li><a href="#rollbacks" class="toc-link">Rollbacks</a></li>
+      <li><a href="#updating" class="toc-link">Updating Inputs</a></li>
+      <li><a href="#core-modules" class="toc-link">Core Modules</a></li>
+      <li><a href="#desktops" class="toc-link">Desktop Environments</a></li>
+      <li><a href="#programs" class="toc-link">Programs</a></li>
+      <li><a href="#themes" class="toc-link">Themes &amp; Wallpapers</a></li>
+      <li><a href="#hardware" class="toc-link">Hardware</a></li>
+      <li><a href="#scripts" class="toc-link">Scripts</a></li>
+      <li><a href="#gaming" class="toc-link">Gaming</a></li>
+      <li><a href="#flake-inputs" class="toc-link">Flake Inputs</a></li>
+      <li><a href="#architecture" class="toc-link">Architecture</a></li>
+      <li><a href="#faq" class="toc-link">FAQ</a></li>
+      <li><a href="#contributing" class="toc-link">Contributing</a></li>
+    </ul></nav>
+  </aside>
+
+</div><!-- /.docs-wrap -->
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand"><img src="assets/img/nix-snowflake.svg" width="18" height="18" alt="" aria-hidden="true" /> NixOS Config</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="index.html">Home</a><a href="docs.html">Docs</a>
+      <a href="dev-shells.html">Dev Shells</a><a href="keybindings.html">Keybindings</a>
+      <a href="https://github.com/sijanthapa171/NixOS" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <p class="footer-copy">Made with ❄️ and Nix · MIT License</p>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
