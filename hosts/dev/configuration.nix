@@ -27,9 +27,9 @@ in
     ../../modules/core/system.nix
     ../../modules/core/users.nix
     ../../modules/programs/media/jellyfin
-    # ../../modules/core/flatpak.nix
-    # ../../modules/core/virtualisation.nix
-    # ../../modules/core/dlna.nix
+    ../../modules/core/flatpak.nix
+    ../../modules/core/virtualisation.nix
+    ../../modules/core/dlna.nix
 
     # Optional
     ../../modules/hardware/drives # Automatically mount extra external/internal drives
@@ -43,12 +43,12 @@ in
     ../../modules/programs/cli/direnv
     ../../modules/programs/cli/lazygit
     ../../modules/programs/cli/cava
-    # ../../modules/programs/cli/fastfetch
+    ../../modules/programs/cli/fastfetch
     ../../modules/programs/cli/btop
     ../../modules/programs/media/discord
     ../../modules/programs/media/spicetify
-    # ../../modules/programs/media/youtube-music
-    # ../../modules/programs/media/thunderbird
+    ../../modules/programs/media/youtube-music
+    ../../modules/programs/media/thunderbird
     ../../modules/programs/media/obs-studio
     ../../modules/programs/media/mpv
     ../../modules/programs/misc/tlp
