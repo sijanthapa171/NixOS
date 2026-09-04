@@ -92,6 +92,7 @@
       formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       nixosConfigurations = {
         Default = mkHost "Default";
+        dev = mkHost "dev";
         vega = mkHost "vega";
       };
     };
