@@ -28,7 +28,7 @@ in
     ../../modules/core/users.nix
     ../../modules/programs/media/jellyfin
     # ../../modules/core/flatpak.nix
-    # ../../modules/core/virtualisation.nix
+    ../../modules/core/virtualisation.nix
     # ../../modules/core/dlna.nix
 
     # Optional
