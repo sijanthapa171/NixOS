@@ -15,10 +15,8 @@
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
-        ovmf = {
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
+        # ovmf is no longer a submodule — all OVMF images bundled with QEMU
+        # are available by default since NixOS 25.05+
       };
       hooks.qemu = {
         "passthrough" = lib.getExe (
@@ -79,7 +77,7 @@
     spice-gtk
     spice-protocol
     spice-vdagent
-    win-virtio
+    virtio-win
     win-spice
 
     lazydocker
