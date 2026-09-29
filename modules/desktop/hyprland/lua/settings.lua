@@ -44,7 +44,7 @@ hl.config({
 			follow_mouse = 1,
 
 			touchpad = {
-				natural_scroll = true,
+				natural_scroll = false,
 			},
 
 			tablet = {
@@ -62,8 +62,8 @@ hl.config({
 		return t
 	end)(),
 	general = {
-		gaps_in = 4,
-		gaps_out = 9,
+		gaps_in = 5,
+		gaps_out = 8, -- Use 8 for perfect multiple of cell size
 		border_size = 2,
 		col = {
 			active_border = {
