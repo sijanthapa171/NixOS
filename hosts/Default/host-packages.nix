@@ -6,6 +6,7 @@
     godot # For game development
     proton-vpn # VPN
     github-desktop
+    antigravity-cli
     # pokego # Overlayed
     vscode
     kiro
