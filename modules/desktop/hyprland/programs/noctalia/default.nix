@@ -6,7 +6,12 @@
   ...
 }:
 let
-  inherit (import ../../../../../hosts/${host}/variables.nix) timezone clock24h bluetoothSupport;
+  inherit (import ../../../../../hosts/${host}/variables.nix)
+    timezone
+    clock24h
+    bluetoothSupport
+    batterySupport
+    ;
 in
 {
   # Optional Dependencies
@@ -176,16 +181,17 @@ in
               };
               screen-off = {
                 action = "screen_off";
-                enabled = true;
+                enabled = batterySupport;
                 timeout = 660.0;
               };
             };
           };
           location = {
-            address = "Pokhara, Nepal";
+            address = timezone;
             auto_locate = false;
           };
           lockscreen = {
+            wallpaper = "${../../../../themes/wallpapers/quasar.webp}";
             allow_empty_password = false;
             blur_intensity = 0.5;
             blurred_desktop = false;
@@ -194,7 +200,15 @@ in
             lock_before_suspend = true;
             monitors = [ ];
             tint_intensity = 0.30000001192092896;
-            wallpaper = "${../../../../themes/wallpapers/quasar.webp}";
+            transition_duration = 800;
+            transition = [
+              "disc"
+              "honeycomb"
+              "wipe"
+              # "fade"
+              # "zoom"
+              # "stripes"
+            ];
           };
           lockscreen_widgets = {
             enabled = true;
@@ -320,7 +334,7 @@ in
             screenshot.directory = "~/Pictures/Screenshots";
             setup_wizard_enabled = false;
             clipboard_enabled = true;
-            mpris.blacklist = [];
+            mpris.blacklist = [ "firefox" ];
           };
           theme = {
             builtin = "Catppuccin";
