@@ -13,6 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    nitch # Incredibly fast system fetch
     scrcpy # Display and control Android devices over USB or TCP/IP
     appimage-run # Needed For AppImage Support
     killall # For Killing All Instances Of Programs
