@@ -17,7 +17,6 @@
     # dev temp
     nodejs
     bun 
-    pnpm
     python3
 
     # All-in-one front-end for emulators 

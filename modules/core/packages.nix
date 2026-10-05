@@ -13,6 +13,7 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
+    subfinder # subdomain descovery tool
     nitch # Incredibly fast system fetch
     scrcpy # Display and control Android devices over USB or TCP/IP
     appimage-run # Needed For AppImage Support
