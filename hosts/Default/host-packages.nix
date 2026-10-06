@@ -16,8 +16,10 @@
 
     # dev temp
     nodejs
+    pnpm 
     bun 
     python3
+    dotnet-sdk
 
     # All-in-one front-end for emulators 
     (retroarch.withCores (cores: with cores; [
