@@ -87,7 +87,7 @@ hl.window_rule({
 })
 hl.window_rule({
 	match = { class = "^(nvim-wrapper)$" },
-	opacity = "0.80 0.70",
+	opacity = "0.70 0.70",
 })
 hl.window_rule({
 	match = { class = "^(gnome-disks)$" },

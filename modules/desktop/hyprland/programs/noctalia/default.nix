@@ -33,7 +33,7 @@ in
           bar.default = {
             enabled = true;
             auto_hide = false;
-            background_opacity = 1.0;
+            background_opacity = 0.7;
             thickness = 38;
             border = "outline";
             border_width = 0.5;
