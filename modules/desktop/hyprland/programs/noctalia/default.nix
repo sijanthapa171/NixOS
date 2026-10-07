@@ -224,7 +224,7 @@ in
             auto_locate = false;
           };
           lockscreen = {
-            wallpaper = "${../../../../themes/wallpapers/ruri-rocks.webp}";
+            wallpaper = "${../../../../themes/wallpapers/firefly-honkai-star.webp}";
             allow_empty_password = false;
             blur_intensity = 0.5;
             blurred_desktop = false;
