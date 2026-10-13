@@ -94,6 +94,7 @@
         Default = mkHost "Default";
         dev = mkHost "dev";
         vega = mkHost "vega";
+        server = mkHost "server";
       };
     };
 }
