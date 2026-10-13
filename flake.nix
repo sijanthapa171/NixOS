@@ -95,6 +95,7 @@
         dev = mkHost "dev";
         vega = mkHost "vega";
         server = mkHost "server";
+        minecraft = mkHost "minecraft";
       };
     };
 }
