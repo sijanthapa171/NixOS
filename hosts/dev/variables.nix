@@ -8,8 +8,8 @@
   bar = "noctalia"; # waybar, wayle, hyprpanel, noctalia-shell, caelestia-shell
   waybarTheme = "minimal"; # stylish, minimal
   sddmTheme = "astronaut"; # astronaut, black_hole, purple_leaves, jake_the_dog, hyprland_kath
-  defaultWallpaper = "galaxy.webp"; # Change with SUPER + SHIFT + W (Hyprland)
-  hyprlockWallpaper = "galaxy.webp";
+  defaultWallpaper = "firefly-honkai-star.webp"; # Change with SUPER + SHIFT + W (Hyprland)
+  hyprlockWallpaper = "firefly-honkai-star.webp";
 
   # Default Applications
   terminal = "kitty"; # kitty, alacritty, wezterm
