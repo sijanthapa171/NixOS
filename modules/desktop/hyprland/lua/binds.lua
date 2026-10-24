@@ -68,6 +68,7 @@ hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(term))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManagerScript .. " " .. fileManager))
 hl.bind(mainMod .. " + C", hl.dsp.exec_cmd(editor))
 hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(browser))
+hl.bind("ALT + B", hl.dsp.exec_cmd("brave"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("spotify"))
 hl.bind(mainMod .. " + SHIFT + Y", hl.dsp.exec_cmd("youtube-music"))
 hl.bind("CONTROL + ALT + DELETE", hl.dsp.exec_cmd(term .. " -e btop")) -- System Monitor
