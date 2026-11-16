@@ -170,7 +170,8 @@
             find-store-path = ''function { nix-shell -p $1 --command "nix eval -f \"<nixpkgs>\" --raw $1" }'';
             update-input = "nix flake update $@";
             sysup = "nix flake update --flake ~/NixOS && rebuild";
-
+            sub = "subfinder";
+    
             # Directory Shortcuts.
             dots = "cd ~/NixOS/";
             games = "cd /mnt/games/";
