@@ -171,6 +171,7 @@
             update-input = "nix flake update $@";
             sysup = "nix flake update --flake ~/NixOS && rebuild";
             sub = "subfinder";
+            erase = "sudo nix-collect-garbage -d && nix-collect-garbage -d && sudo nix-store --optimise"
     
             # Directory Shortcuts.
             dots = "cd ~/NixOS/";
