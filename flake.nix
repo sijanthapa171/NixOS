@@ -54,6 +54,10 @@
         home-manager.follows = "home-manager";
       };
     };
+    artcraft = {
+      url = "github:ipeglin/artcraft-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

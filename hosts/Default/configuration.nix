@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, inputs, ... }:
 let
   vars = import ./variables.nix;
 in
@@ -6,6 +6,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./host-packages.nix
+    inputs.artcraft.nixosModules.default
 
     # Core Modules (Don't change unless you know what you're doing)
     ../../modules/scripts
@@ -55,4 +56,6 @@ in
     ../../modules/programs/misc/lact # GPU fan, clock and power configuration
   ]
   ++ lib.optional (vars.games == true) ../../modules/core/games.nix;
+
+  programs.artcraft.enable = true;
 }

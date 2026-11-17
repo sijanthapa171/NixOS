@@ -33,6 +33,26 @@
         "type": "github"
       }
     },
+    "artcraft": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794834411,
+        "narHash": "sha256-4pzTt9UTUyzjEzvz5lvkSmDJVce+fq/r0LFInmsCOCQ=",
+        "owner": "ipeglin",
+        "repo": "artcraft-nix",
+        "rev": "74e7d74b849d457b9c9af496d2b682c804a64c9a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipeglin",
+        "repo": "artcraft-nix",
+        "type": "github"
+      }
+    },
     "betterfox": {
       "flake": false,
       "locked": {
@@ -724,6 +744,7 @@
     },
     "root": {
       "inputs": {
+        "artcraft": "artcraft",
         "betterfox": "betterfox",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
