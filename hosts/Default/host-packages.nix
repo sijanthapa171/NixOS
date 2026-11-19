@@ -20,6 +20,7 @@
     bun 
     python3
     dotnet-sdk
+    deckcraft
 
     # All-in-one front-end for emulators 
     (retroarch.withCores (cores: with cores; [
